@@ -55,11 +55,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="JeremyAnsel.DirectX.GameWindow, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e44e0987e5e0cc94, processorArchitecture=MSIL">
-      <HintPath>..\packages\JeremyAnsel.DirectX.GameWindow.1.0.2\lib\net45\JeremyAnsel.DirectX.GameWindow.dll</HintPath>
+      <HintPath>..\packages\JeremyAnsel.DirectX.GameWindow.1.0.3\lib\net45\JeremyAnsel.DirectX.GameWindow.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="JeremyAnsel.DirectX.Window, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d95f71c343c8419c, processorArchitecture=MSIL">
-      <HintPath>..\packages\JeremyAnsel.DirectX.Window.1.0.2\lib\net45\JeremyAnsel.DirectX.Window.dll</HintPath>
+      <HintPath>..\packages\JeremyAnsel.DirectX.Window.1.0.3\lib\net45\JeremyAnsel.DirectX.Window.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
