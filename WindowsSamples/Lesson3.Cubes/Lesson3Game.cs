@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using BasicMaths;
 using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.Dxgi;
