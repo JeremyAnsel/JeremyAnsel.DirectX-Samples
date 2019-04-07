@@ -211,6 +211,7 @@ namespace Lesson4.Textures
             D3D11Utils.DisposeAndNull(ref this.indexBuffer);
             D3D11Utils.DisposeAndNull(ref this.constantBuffer);
             D3D11Utils.DisposeAndNull(ref this.textureView);
+            D3D11Utils.DisposeAndNull(ref this.sampler);
         }
 
         protected override void CreateWindowSizeDependentResources()
