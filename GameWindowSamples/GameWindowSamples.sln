@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPUProfiler", "GPUProfiler\GPUProfiler.csproj", "{08EA440A-2174-4F2C-BC44-09ED5B3C10A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Direct2DAndDWrite", "Direct2DAndDWrite\Direct2DAndDWrite.csproj", "{FA36FE3D-026B-486E-97EB-5DA71F1B3567}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHost", "WpfHost\WpfHost.csproj", "{88D33E02-67DB-4DB5-A443-4FC74912864C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08EA440A-2174-4F2C-BC44-09ED5B3C10A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08EA440A-2174-4F2C-BC44-09ED5B3C10A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08EA440A-2174-4F2C-BC44-09ED5B3C10A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08EA440A-2174-4F2C-BC44-09ED5B3C10A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA36FE3D-026B-486E-97EB-5DA71F1B3567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA36FE3D-026B-486E-97EB-5DA71F1B3567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA36FE3D-026B-486E-97EB-5DA71F1B3567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA36FE3D-026B-486E-97EB-5DA71F1B3567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88D33E02-67DB-4DB5-A443-4FC74912864C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D33E02-67DB-4DB5-A443-4FC74912864C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D33E02-67DB-4DB5-A443-4FC74912864C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D33E02-67DB-4DB5-A443-4FC74912864C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
