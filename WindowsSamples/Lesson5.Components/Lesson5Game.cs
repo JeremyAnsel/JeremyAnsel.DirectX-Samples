@@ -63,7 +63,7 @@ namespace Lesson5.Components
             loader.LoadShader(Lesson5Game.ShadersDirectory + "Components.VertexShader.cso", null, out this.vertexShader, out this.inputLayout);
 
             var shapes = new BasicShapes(this.DeviceResources.D3DDevice);
-            shapes.CreateCube(out this.vertexBuffer, out this.indexBuffer, out this.vertexCount, out this.indexCount);
+            shapes.CreateReferenceAxis(out this.vertexBuffer, out this.indexBuffer, out this.vertexCount, out this.indexCount);
 
             var constantBufferDesc = new D3D11BufferDesc(ConstantBufferData.Size, D3D11BindOptions.ConstantBuffer);
             this.constantBuffer = this.DeviceResources.D3DDevice.CreateBuffer(constantBufferDesc);
