@@ -74,6 +74,18 @@ namespace Direct2DAndDWrite
             }
         }
 
+        protected override void ReleaseWindowSizeDependentResources()
+        {
+            base.ReleaseWindowSizeDependentResources();
+
+            D2D1Utils.DisposeAndNull(ref this.bitmap);
+            D2D1Utils.DisposeAndNull(ref this.bitmapBrush);
+
+            D2D1Utils.DisposeAndNull(ref this.textBrush);
+            DWriteUtils.DisposeAndNull(ref this.textFormat);
+            DWriteUtils.DisposeAndNull(ref this.textLayout);
+        }
+
         protected override void Update()
         {
             base.Update();

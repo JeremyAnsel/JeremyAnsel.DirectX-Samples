@@ -29,6 +29,11 @@ namespace Lesson1.Basics
             base.CreateWindowSizeDependentResources();
         }
 
+        protected override void ReleaseWindowSizeDependentResources()
+        {
+            base.ReleaseWindowSizeDependentResources();
+        }
+
         protected override void Update()
         {
             base.Update();

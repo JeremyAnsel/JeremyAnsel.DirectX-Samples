@@ -240,6 +240,11 @@ namespace Lesson4.Textures
                 );
         }
 
+        protected override void ReleaseWindowSizeDependentResources()
+        {
+            base.ReleaseWindowSizeDependentResources();
+        }
+
         protected override void Update()
         {
             base.Update();

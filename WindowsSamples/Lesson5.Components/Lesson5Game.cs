@@ -112,6 +112,11 @@ namespace Lesson5.Components
             this.constantBufferData.Projection = this.camera.GetProjectionMatrix();
         }
 
+        protected override void ReleaseWindowSizeDependentResources()
+        {
+            base.ReleaseWindowSizeDependentResources();
+        }
+
         protected override void Update()
         {
             base.Update();
