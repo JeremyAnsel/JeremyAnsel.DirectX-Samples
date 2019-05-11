@@ -28,8 +28,11 @@ namespace GPUProfiler
                 context.Begin(queryDisjoint);
                 context.End(queryStart);
 
-                context.OutputMergerSetRenderTargets(new[] { deviceResources.D3DRenderTargetView }, null);
-                context.ClearRenderTargetView(deviceResources.D3DRenderTargetView, new float[] { 0.0f, 1.0f, 0.0f, 1.0f });
+                var mainGameComponent = new MainGameComponent();
+                mainGameComponent.CreateDeviceDependentResources(deviceResources);
+                mainGameComponent.CreateWindowSizeDependentResources();
+                mainGameComponent.Update(null);
+                mainGameComponent.Render();
 
                 deviceResources.Present();
 
