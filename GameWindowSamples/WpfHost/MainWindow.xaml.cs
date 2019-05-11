@@ -33,12 +33,12 @@ namespace WpfHost
 
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
-            this.game.clearColor = new float[] { 1.0f, 0.0f, 0.0f, 1.0f };
+            this.game.MainComponent.ClearColor = new float[] { 1.0f, 0.0f, 0.0f, 1.0f };
         }
 
         private void btn2_Click(object sender, RoutedEventArgs e)
         {
-            this.game.clearColor = new float[] { 0.0f, 1.0f, 0.0f, 1.0f };
+            this.game.MainComponent.ClearColor = new float[] { 0.0f, 1.0f, 0.0f, 1.0f };
         }
     }
 }
