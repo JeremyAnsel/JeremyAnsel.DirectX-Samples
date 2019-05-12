@@ -77,6 +77,7 @@
     <Compile Include="BasicVertex.cs" />
     <Compile Include="ConstantBufferData.cs" />
     <Compile Include="Lesson4Game.cs" />
+    <Compile Include="MainGameComponent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
