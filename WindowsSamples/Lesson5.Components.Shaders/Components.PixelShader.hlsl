@@ -12,5 +12,6 @@ struct PixelShaderInput
 float4 main(PixelShaderInput input) : SV_TARGET
 {
 	float3 lightDirection = normalize(float3(1, -1, 0));
-	return simpleTexture.Sample(simpleSampler, input.tex) * (0.8f * saturate(dot(input.norm, -lightDirection)) + 0.2f);
+	float4 color =  simpleTexture.Sample(simpleSampler, input.tex) * (0.8f * saturate(dot(input.norm, -lightDirection)) + 0.2f);
+	return float4(color.xyz, 1.0f);
 }

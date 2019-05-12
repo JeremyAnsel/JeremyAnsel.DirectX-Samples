@@ -81,6 +81,7 @@
     <Compile Include="BasicVertex.cs" />
     <Compile Include="ConstantBufferData.cs" />
     <Compile Include="Lesson5Game.cs" />
+    <Compile Include="MainGameComponent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TangentVertex.cs" />
