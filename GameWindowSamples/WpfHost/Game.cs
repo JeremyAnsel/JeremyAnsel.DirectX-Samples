@@ -23,14 +23,10 @@ namespace WpfHost
         {
             this.mainGameComponent = new MainGameComponent();
 
-            D3D11FeatureLevel minimalFeatureLevel = this.RequestedD3DFeatureLevel;
-
-            if (this.mainGameComponent.MinimalFeatureLevel > minimalFeatureLevel)
+            if (this.mainGameComponent.MinimalFeatureLevel > this.RequestedD3DFeatureLevel)
             {
-                minimalFeatureLevel = this.mainGameComponent.MinimalFeatureLevel;
+                this.RequestedD3DFeatureLevel = this.mainGameComponent.MinimalFeatureLevel;
             }
-
-            this.RequestedD3DFeatureLevel = minimalFeatureLevel;
 
             base.Init();
         }

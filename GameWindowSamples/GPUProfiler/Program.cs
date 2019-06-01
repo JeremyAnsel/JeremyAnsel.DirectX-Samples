@@ -14,7 +14,9 @@ namespace GPUProfiler
         {
             try
             {
-                var deviceResources = new RenderTargetDeviceResources(1920, 1080);
+                var mainGameComponent = new MainGameComponent();
+
+                var deviceResources = new RenderTargetDeviceResources(1920, 1080, mainGameComponent.MinimalFeatureLevel, true, false);
                 var device = deviceResources.D3DDevice;
                 var context = deviceResources.D3DContext;
 
@@ -28,7 +30,6 @@ namespace GPUProfiler
                 context.Begin(queryDisjoint);
                 context.End(queryStart);
 
-                var mainGameComponent = new MainGameComponent();
                 mainGameComponent.CreateDeviceDependentResources(deviceResources);
                 mainGameComponent.CreateWindowSizeDependentResources();
                 mainGameComponent.Update(null);
