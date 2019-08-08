@@ -16,7 +16,7 @@ namespace GPUProfiler
             {
                 var mainGameComponent = new MainGameComponent();
 
-                var deviceResources = new RenderTargetDeviceResources(1920, 1080, mainGameComponent.MinimalFeatureLevel, true, false);
+                var deviceResources = new RenderTargetDeviceResources(1920, 1080, mainGameComponent.MinimalFeatureLevel, null);
                 var device = deviceResources.D3DDevice;
                 var context = deviceResources.D3DContext;
 

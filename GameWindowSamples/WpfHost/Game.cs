@@ -74,11 +74,6 @@ namespace WpfHost
         protected override void OnKeyboardEvent(VirtualKey key, int repeatCount, bool wasDown, bool isDown)
         {
             base.OnKeyboardEvent(key, repeatCount, wasDown, isDown);
-
-            if (isDown && !wasDown && key == VirtualKey.F12)
-            {
-                this.FpsTextRenderer.IsEnabled = !this.FpsTextRenderer.IsEnabled;
-            }
         }
     }
 }
