@@ -10,6 +10,9 @@ namespace Lesson2.Triangles
 
         public Lesson2Game()
         {
+#if DEBUG
+            this.DeviceResourcesOptions.Debug = true;
+#endif
         }
 
         protected override void Init()

@@ -15,6 +15,9 @@ namespace WpfHost
 
         public Game()
         {
+#if DEBUG
+            this.DeviceResourcesOptions.Debug = true;
+#endif
         }
 
         internal MainGameComponent MainComponent { get { return this.mainGameComponent; } }

@@ -10,6 +10,9 @@ namespace Lesson5.Components
 
         public Lesson5Game()
         {
+#if DEBUG
+            this.DeviceResourcesOptions.Debug = true;
+#endif
         }
 
         protected override void Init()

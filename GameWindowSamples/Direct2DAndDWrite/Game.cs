@@ -16,6 +16,9 @@ namespace Direct2DAndDWrite
 
         public Game()
         {
+#if DEBUG
+            this.DeviceResourcesOptions.Debug = true;
+#endif
         }
 
         protected override void Init()

@@ -10,6 +10,9 @@ namespace Lesson3.Cubes
 
         public Lesson3Game()
         {
+#if DEBUG
+            this.DeviceResourcesOptions.Debug = true;
+#endif
         }
 
         protected override void Init()

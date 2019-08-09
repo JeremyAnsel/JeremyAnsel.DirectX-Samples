@@ -10,6 +10,9 @@ namespace Lesson4.Textures
 
         public Lesson4Game()
         {
+#if DEBUG
+            this.DeviceResourcesOptions.Debug = true;
+#endif
         }
 
         protected override void Init()
