@@ -1,6 +1,8 @@
-using JeremyAnsel.DirectX.D3D11;
-using JeremyAnsel.DirectX.GameWindow;
+﻿using JeremyAnsel.DirectX.GameWindow;
 using JeremyAnsel.DirectX.Window;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Lesson3.Cubes
 {

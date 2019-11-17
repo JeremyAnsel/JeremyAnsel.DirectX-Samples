@@ -1,4 +1,6 @@
-﻿namespace Lesson4.Textures
+﻿using System;
+
+namespace Lesson4.Textures
 {
     class Program
     {

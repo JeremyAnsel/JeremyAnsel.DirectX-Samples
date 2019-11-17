@@ -2,20 +2,17 @@
 using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.GameWindow;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Lesson2.Triangles
 {
     class MainGameComponent : IGameComponent
     {
         private DeviceResources deviceResources;
-
-#if DEBUG
-        private const string ShadersDirectory = "../../../Lesson2.Triangles.Shaders/Data/Debug/";
-#else
-        private const string ShadersDirectory = "../../../Lesson2.Triangles.Shaders/Data/Release/";
-#endif
 
         private D3D11VertexShader vertexShader;
 
@@ -27,14 +24,14 @@ namespace Lesson2.Triangles
 
         private D3D11Buffer indexBuffer;
 
-        private Float2[] triangleVertices = new Float2[]
+        private readonly Float2[] triangleVertices = new Float2[]
         {
             new Float2(-0.5f, -0.5f),
             new Float2( 0.0f,  0.5f),
             new Float2( 0.5f, -0.5f),
         };
 
-        private ushort[] triangleIndices = new ushort[]
+        private readonly ushort[] triangleIndices = new ushort[]
         {
             0, 1, 2,
         };
@@ -55,7 +52,7 @@ namespace Lesson2.Triangles
         {
             this.deviceResources = resources;
 
-            byte[] vertexShaderBytecode = File.ReadAllBytes(MainGameComponent.ShadersDirectory + "Triangles.VertexShader.cso");
+            byte[] vertexShaderBytecode = File.ReadAllBytes("Triangles.VertexShader.cso");
             this.vertexShader = this.deviceResources.D3DDevice.CreateVertexShader(vertexShaderBytecode, null);
 
             D3D11InputElementDesc[] basicVertexLayoutDesc = new D3D11InputElementDesc[]
@@ -74,7 +71,7 @@ namespace Lesson2.Triangles
 
             this.inputLayout = this.deviceResources.D3DDevice.CreateInputLayout(basicVertexLayoutDesc, vertexShaderBytecode);
 
-            byte[] pixelShaderBytecode = File.ReadAllBytes(MainGameComponent.ShadersDirectory + "Triangles.PixelShader.cso");
+            byte[] pixelShaderBytecode = File.ReadAllBytes("Triangles.PixelShader.cso");
             this.pixelShader = this.deviceResources.D3DDevice.CreatePixelShader(pixelShaderBytecode, null);
 
             var vertexBufferDesc = D3D11BufferDesc.From(triangleVertices, D3D11BindOptions.VertexBuffer);
@@ -117,7 +114,7 @@ namespace Lesson2.Triangles
             context.InputAssemblerSetVertexBuffers(
                 0,
                 new[] { this.vertexBuffer },
-                new uint[] { (uint)Marshal.SizeOf(typeof(Float2)) },
+                new uint[] { (uint)Marshal.SizeOf<Float2>() },
                 new uint[] { 0 });
 
             context.InputAssemblerSetIndexBuffer(this.indexBuffer, DxgiFormat.R16UInt, 0);

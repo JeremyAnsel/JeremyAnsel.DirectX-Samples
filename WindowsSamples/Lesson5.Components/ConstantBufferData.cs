@@ -1,10 +1,8 @@
 ﻿using BasicMaths;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Lesson5.Components
 {
@@ -17,6 +15,6 @@ namespace Lesson5.Components
 
         public Float4X4 Projection;
 
-        public static uint Size = (uint)Marshal.SizeOf(typeof(ConstantBufferData));
+        public static uint Size = (uint)Marshal.SizeOf<ConstantBufferData>();
     }
 }

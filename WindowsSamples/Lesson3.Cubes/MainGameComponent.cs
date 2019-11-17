@@ -2,19 +2,16 @@
 using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.GameWindow;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace Lesson3.Cubes
 {
     class MainGameComponent : IGameComponent
     {
         private DeviceResources deviceResources;
-
-#if DEBUG
-        private const string ShadersDirectory = "../../../Lesson3.Cubes.Shaders/Data/Debug/";
-#else
-        private const string ShadersDirectory = "../../../Lesson3.Cubes.Shaders/Data/Release/";
-#endif
 
         private D3D11VertexShader vertexShader;
 
@@ -32,7 +29,7 @@ namespace Lesson3.Cubes
 
         private float degree;
 
-        private BasicVertex[] cubeVertices = new BasicVertex[]
+        private readonly BasicVertex[] cubeVertices = new BasicVertex[]
         {
             new BasicVertex(new Float3(-0.5f, 0.5f, -0.5f), new Float3(0.0f, 1.0f, 0.0f)), // +Y (top face)
             new BasicVertex(new Float3( 0.5f, 0.5f, -0.5f), new Float3(1.0f, 1.0f, 0.0f)),
@@ -45,7 +42,7 @@ namespace Lesson3.Cubes
             new BasicVertex(new Float3(-0.5f, -0.5f, -0.5f), new Float3(0.0f, 0.0f, 0.0f)),
         };
 
-        private ushort[] cubeIndices = new ushort[]
+        private readonly ushort[] cubeIndices = new ushort[]
         {
             0, 1, 2,
             0, 2, 3,
@@ -82,7 +79,7 @@ namespace Lesson3.Cubes
         {
             this.deviceResources = resources;
 
-            byte[] vertexShaderBytecode = File.ReadAllBytes(MainGameComponent.ShadersDirectory + "Cubes.VertexShader.cso");
+            byte[] vertexShaderBytecode = File.ReadAllBytes("Cubes.VertexShader.cso");
             this.vertexShader = this.deviceResources.D3DDevice.CreateVertexShader(vertexShaderBytecode, null);
 
             D3D11InputElementDesc[] basicVertexLayoutDesc = new D3D11InputElementDesc[]
@@ -111,7 +108,7 @@ namespace Lesson3.Cubes
 
             this.inputLayout = this.deviceResources.D3DDevice.CreateInputLayout(basicVertexLayoutDesc, vertexShaderBytecode);
 
-            byte[] pixelShaderBytecode = File.ReadAllBytes(MainGameComponent.ShadersDirectory + "Cubes.PixelShader.cso");
+            byte[] pixelShaderBytecode = File.ReadAllBytes("Cubes.PixelShader.cso");
             this.pixelShader = this.deviceResources.D3DDevice.CreatePixelShader(pixelShaderBytecode, null);
 
             var vertexBufferDesc = D3D11BufferDesc.From(cubeVertices, D3D11BindOptions.VertexBuffer);

@@ -1,5 +1,8 @@
-﻿using System.Runtime.InteropServices;
-using BasicMaths;
+﻿using BasicMaths;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Lesson4.Textures
 {
@@ -12,7 +15,7 @@ namespace Lesson4.Textures
 
         public Float2 TextureCoordinates;
 
-        public static uint Size = (uint)Marshal.SizeOf(typeof(BasicVertex));
+        public static uint Size = (uint)Marshal.SizeOf<BasicVertex>();
 
         public BasicVertex(Float3 position, Float3 normal, Float2 textureCoordinates)
         {

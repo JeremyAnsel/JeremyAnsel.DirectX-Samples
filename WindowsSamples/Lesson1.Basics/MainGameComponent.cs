@@ -1,5 +1,8 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.GameWindow;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Lesson1.Basics
 {

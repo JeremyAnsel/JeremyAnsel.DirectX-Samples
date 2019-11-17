@@ -2,19 +2,16 @@
 using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.GameWindow;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace Lesson4.Textures
 {
     class MainGameComponent : IGameComponent
     {
         private DeviceResources deviceResources;
-
-#if DEBUG
-        private const string ShadersDirectory = "../../../Lesson4.Textures.Shaders/Data/Debug/";
-#else
-        private const string ShadersDirectory = "../../../Lesson4.Textures.Shaders/Data/Release/";
-#endif
 
         private D3D11VertexShader vertexShader;
 
@@ -36,7 +33,7 @@ namespace Lesson4.Textures
 
         private float degree;
 
-        private BasicVertex[] cubeVertices = new BasicVertex[]
+        private readonly BasicVertex[] cubeVertices = new BasicVertex[]
         {
             new BasicVertex( new Float3(-0.5f, 0.5f, -0.5f), new Float3(0.0f, 1.0f, 0.0f), new Float2(0.0f, 0.0f) ), // +Y (top face)
             new BasicVertex( new Float3( 0.5f, 0.5f, -0.5f), new Float3(0.0f, 1.0f, 0.0f), new Float2(1.0f, 0.0f) ),
@@ -69,7 +66,7 @@ namespace Lesson4.Textures
             new BasicVertex( new Float3( 0.5f, -0.5f, -0.5f), new Float3(0.0f, 0.0f, -1.0f), new Float2(0.0f, 1.0f) ),
         };
 
-        private ushort[] cubeIndices = new ushort[]
+        private readonly ushort[] cubeIndices = new ushort[]
         {
             0, 1, 2,
             0, 2, 3,
@@ -106,7 +103,7 @@ namespace Lesson4.Textures
         {
             this.deviceResources = resources;
 
-            byte[] vertexShaderBytecode = File.ReadAllBytes(MainGameComponent.ShadersDirectory + "Textures.VertexShader.cso");
+            byte[] vertexShaderBytecode = File.ReadAllBytes("Textures.VertexShader.cso");
             this.vertexShader = this.deviceResources.D3DDevice.CreateVertexShader(vertexShaderBytecode, null);
 
             D3D11InputElementDesc[] basicVertexLayoutDesc = new D3D11InputElementDesc[]
@@ -145,7 +142,7 @@ namespace Lesson4.Textures
 
             this.inputLayout = this.deviceResources.D3DDevice.CreateInputLayout(basicVertexLayoutDesc, vertexShaderBytecode);
 
-            byte[] pixelShaderBytecode = File.ReadAllBytes(MainGameComponent.ShadersDirectory + "Textures.PixelShader.cso");
+            byte[] pixelShaderBytecode = File.ReadAllBytes("Textures.PixelShader.cso");
             this.pixelShader = this.deviceResources.D3DDevice.CreatePixelShader(pixelShaderBytecode, null);
 
             var vertexBufferDesc = D3D11BufferDesc.From(cubeVertices, D3D11BindOptions.VertexBuffer);
@@ -164,7 +161,7 @@ namespace Lesson4.Textures
                  0.00000000f, 0.00000000f, 0.00000000f, 1.00000000f
                  );
 
-            byte[] textureData = File.ReadAllBytes("../../texturedata.bin");
+            byte[] textureData = File.ReadAllBytes("texturedata.bin");
 
             D3D11Texture2DDesc textureDesc = new D3D11Texture2DDesc(DxgiFormat.R8G8B8A8UNorm, 256, 256, 1, 1);
 

@@ -1,12 +1,8 @@
-﻿using JeremyAnsel.DirectX.D3D11;
-using JeremyAnsel.DirectX.GameWindow;
+﻿using JeremyAnsel.DirectX.GameWindow;
 using JeremyAnsel.DirectX.Window;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Direct2DAndDWrite
 {

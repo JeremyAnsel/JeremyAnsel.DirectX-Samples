@@ -1,10 +1,8 @@
 ﻿using BasicMaths;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Lesson5.Components
 {
@@ -19,7 +17,7 @@ namespace Lesson5.Components
 
         public Float3 VTangent;
 
-        public static uint Size = (uint)Marshal.SizeOf(typeof(TangentVertex));
+        public static uint Size = (uint)Marshal.SizeOf<TangentVertex>();
 
         public TangentVertex(Float3 position, Float2 textureCoordinates, Float3 uTangent, Float3 vTangent)
         {

@@ -3,24 +3,17 @@ using JeremyAnsel.DirectX.Dxgi;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Lesson5.Components
 {
     class BasicLoader
     {
-        private D3D11Device d3dDevice;
+        private readonly D3D11Device d3dDevice;
 
         public BasicLoader(D3D11Device d3dDevice)
         {
-            if (d3dDevice == null)
-            {
-                throw new ArgumentNullException("d3dDevice");
-            }
-
-            this.d3dDevice = d3dDevice;
+            this.d3dDevice = d3dDevice ?? throw new ArgumentNullException(nameof(d3dDevice));
         }
 
         public void LoadTexture(string filename, uint width, uint height, out D3D11Texture2D texture, out D3D11ShaderResourceView textureView)

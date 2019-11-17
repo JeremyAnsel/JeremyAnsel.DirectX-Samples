@@ -2,24 +2,17 @@
 using JeremyAnsel.DirectX.D3D11;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Lesson5.Components
 {
     class BasicShapes
     {
-        private D3D11Device d3dDevice;
+        private readonly D3D11Device d3dDevice;
 
         public BasicShapes(D3D11Device d3dDevice)
         {
-            if (d3dDevice == null)
-            {
-                throw new ArgumentNullException("d3dDevice");
-            }
-
-            this.d3dDevice = d3dDevice;
+            this.d3dDevice = d3dDevice ?? throw new ArgumentNullException(nameof(d3dDevice));
         }
 
         public void CreateCube(out D3D11Buffer vertexBuffer, out D3D11Buffer indexBuffer, out int vertexCount, out int indexCount)

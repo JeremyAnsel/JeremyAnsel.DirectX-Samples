@@ -1,4 +1,6 @@
-﻿namespace Lesson1.Basics
+﻿using System;
+
+namespace Lesson1.Basics
 {
     class Program
     {

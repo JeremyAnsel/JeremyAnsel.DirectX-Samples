@@ -6,9 +6,7 @@ using JeremyAnsel.DirectX.GameWindow;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Direct2DAndDWrite
 {
@@ -57,7 +55,7 @@ namespace Direct2DAndDWrite
             var dwriteFactory = this.deviceResources.DWriteFactory;
             string text = "Hello, World!";
 
-            byte[] bitmapBytes = File.ReadAllBytes(@"..\..\texturedata.bin");
+            byte[] bitmapBytes = File.ReadAllBytes(@"texturedata.bin");
             this.bitmap = context.CreateBitmap(new D2D1SizeU(256, 256), bitmapBytes, 256 * 4, new D2D1BitmapProperties(new D2D1PixelFormat(DxgiFormat.R8G8B8A8UNorm, D2D1AlphaMode.Premultiplied), 96.0f, 96.0f));
             this.bitmapBrush = context.CreateBitmapBrush(this.bitmap, new D2D1BitmapBrushProperties(D2D1ExtendMode.Wrap, D2D1ExtendMode.Wrap, D2D1BitmapInterpolationMode.Linear));
 

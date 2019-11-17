@@ -1,4 +1,6 @@
-﻿namespace Lesson2.Triangles
+﻿using System;
+
+namespace Lesson2.Triangles
 {
     class Program
     {

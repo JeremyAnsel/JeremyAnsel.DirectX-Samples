@@ -1,5 +1,8 @@
-﻿using System.Runtime.InteropServices;
-using BasicMaths;
+﻿using BasicMaths;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Lesson3.Cubes
 {
@@ -10,7 +13,7 @@ namespace Lesson3.Cubes
 
         public Float3 Color;
 
-        public static uint Size = (uint)Marshal.SizeOf(typeof(BasicVertex));
+        public static uint Size = (uint)Marshal.SizeOf<BasicVertex>();
 
         public BasicVertex(Float3 position, Float3 color)
         {

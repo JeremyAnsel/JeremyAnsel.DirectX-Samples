@@ -1,4 +1,6 @@
-﻿namespace Lesson3.Cubes
+﻿using System;
+
+namespace Lesson3.Cubes
 {
     class Program
     {

@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace WpfHost
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Game game;
+        private readonly Game game;
 
         public MainWindow()
         {

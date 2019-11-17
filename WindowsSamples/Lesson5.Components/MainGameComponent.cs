@@ -2,18 +2,15 @@
 using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.GameWindow;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Lesson5.Components
 {
     class MainGameComponent : IGameComponent
     {
         private DeviceResources deviceResources;
-
-#if DEBUG
-        private const string ShadersDirectory = "../../../Lesson5.Components.Shaders/Data/Debug/";
-#else
-        private const string ShadersDirectory = "../../../Lesson5.Components.Shaders/Data/Release/";
-#endif
 
         private D3D11InputLayout inputLayout;
 
@@ -59,7 +56,7 @@ namespace Lesson5.Components
 
             var loader = new BasicLoader(this.deviceResources.D3DDevice);
 
-            loader.LoadShader(MainGameComponent.ShadersDirectory + "Components.VertexShader.cso", null, out this.vertexShader, out this.inputLayout);
+            loader.LoadShader("Components.VertexShader.cso", null, out this.vertexShader, out this.inputLayout);
 
             var shapes = new BasicShapes(this.deviceResources.D3DDevice);
             shapes.CreateReferenceAxis(out this.vertexBuffer, out this.indexBuffer, out this.vertexCount, out this.indexCount);
@@ -67,9 +64,9 @@ namespace Lesson5.Components
             var constantBufferDesc = new D3D11BufferDesc(ConstantBufferData.Size, D3D11BindOptions.ConstantBuffer);
             this.constantBuffer = this.deviceResources.D3DDevice.CreateBuffer(constantBufferDesc);
 
-            loader.LoadShader(MainGameComponent.ShadersDirectory + "Components.PixelShader.cso", out this.pixelShader);
+            loader.LoadShader("Components.PixelShader.cso", out this.pixelShader);
 
-            loader.LoadTexture("../../texturedata.bin", 256, 256, out this.texture, out this.textureView);
+            loader.LoadTexture("texturedata.bin", 256, 256, out this.texture, out this.textureView);
 
             D3D11SamplerDesc samplerDesc = new D3D11SamplerDesc(
                 D3D11Filter.Anisotropic,
