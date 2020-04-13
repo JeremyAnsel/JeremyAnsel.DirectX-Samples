@@ -19,12 +19,7 @@ namespace Lesson3.Cubes
 
         protected override void Init()
         {
-            this.mainGameComponent = new MainGameComponent();
-
-            if (this.mainGameComponent.MinimalFeatureLevel > this.RequestedD3DFeatureLevel)
-            {
-                this.RequestedD3DFeatureLevel = this.mainGameComponent.MinimalFeatureLevel;
-            }
+            this.mainGameComponent = this.CheckMinimalFeatureLevel(new MainGameComponent());
 
             base.Init();
         }
