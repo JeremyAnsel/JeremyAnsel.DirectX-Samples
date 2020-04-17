@@ -15,6 +15,6 @@ namespace Lesson3.Cubes
 
         public Float4X4 Projection;
 
-        public static uint Size = (uint)Marshal.SizeOf<ConstantBufferData>();
+        public static readonly uint Size = (uint)Marshal.SizeOf<ConstantBufferData>();
     }
 }

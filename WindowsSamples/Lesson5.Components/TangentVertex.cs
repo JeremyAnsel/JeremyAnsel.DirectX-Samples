@@ -17,7 +17,7 @@ namespace Lesson5.Components
 
         public Float3 VTangent;
 
-        public static uint Size = (uint)Marshal.SizeOf<TangentVertex>();
+        public static readonly uint Size = (uint)Marshal.SizeOf<TangentVertex>();
 
         public TangentVertex(Float3 position, Float2 textureCoordinates, Float3 uTangent, Float3 vTangent)
         {

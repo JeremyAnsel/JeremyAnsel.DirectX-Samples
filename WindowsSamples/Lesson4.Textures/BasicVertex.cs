@@ -15,7 +15,7 @@ namespace Lesson4.Textures
 
         public Float2 TextureCoordinates;
 
-        public static uint Size = (uint)Marshal.SizeOf<BasicVertex>();
+        public static readonly uint Size = (uint)Marshal.SizeOf<BasicVertex>();
 
         public BasicVertex(Float3 position, Float3 normal, Float2 textureCoordinates)
         {

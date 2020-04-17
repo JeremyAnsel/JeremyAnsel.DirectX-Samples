@@ -13,7 +13,7 @@ namespace Lesson3.Cubes
 
         public Float3 Color;
 
-        public static uint Size = (uint)Marshal.SizeOf<BasicVertex>();
+        public static readonly uint Size = (uint)Marshal.SizeOf<BasicVertex>();
 
         public BasicVertex(Float3 position, Float3 color)
         {
