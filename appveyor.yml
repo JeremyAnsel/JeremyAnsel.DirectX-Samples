@@ -27,6 +27,7 @@ build_script:
 
 after_build:
   - DirectXRenderTargetScreenshot\DirectXRenderTargetScreenshot\bin\Release\netcoreapp3.1\DirectXRenderTargetScreenshot.exe
+  - if not defined APPVEYOR_PULL_REQUEST_NUMBER appveyor PushArtifact README.md
 
 after_test:
 - if "%DEPLOY%" == "True" git config core.safecrlf false
