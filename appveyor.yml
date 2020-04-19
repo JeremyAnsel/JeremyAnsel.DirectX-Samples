@@ -24,3 +24,6 @@ before_build:
 build_script:
   - echo /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" >> msbuild.rsp
   - for /R %%F in (*.sln) do msbuild "%%F"
+
+after_build:
+  - echo after_build
