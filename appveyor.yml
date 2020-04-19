@@ -19,7 +19,7 @@ nuget:
   disable_publish_on_pr: true
 
 before_build:
-  - for /R %%F in (*.sln) do nuget restore "%%F"
+  - for /R %%F in (*.sln) do nuget restore "%%F" -Verbosity quiet
 
 build_script:
   - echo /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" >> msbuild.rsp
