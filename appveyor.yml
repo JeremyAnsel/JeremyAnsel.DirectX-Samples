@@ -33,7 +33,7 @@ after_build:
   - DirectXRenderTargetScreenshot\DirectXRenderTargetScreenshot\bin\Release\netcoreapp3.1\DirectXRenderTargetScreenshot.exe
 
 after_test:
-- if "%DEPLOY%" == "True" git checkout -qf master
+- if "%DEPLOY%" == "True" git checkout -q master
 - if "%DEPLOY%" == "True" git config core.safecrlf false
 - if "%DEPLOY%" == "True" git config push.default simple
 - if "%DEPLOY%" == "True" git config user.name \"Jérémy Ansel\""
