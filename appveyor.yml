@@ -1,0 +1,26 @@
+image: Visual Studio 2019
+version: 1.0.{build}
+configuration: Release
+
+skip_commits:
+  files:
+    - `Images/*`
+    - 'README.md'
+
+init:
+- if "%APPVEYOR_REPO_NAME%" == "JeremyAnsel/JeremyAnsel.DirectX-Samples" if "%APPVEYOR_REPO_BRANCH%"=="master" if not defined APPVEYOR_PULL_REQUEST_NUMBER set DEPLOY=True
+
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+
+nuget:
+  disable_publish_on_pr: true
+
+before_build:
+  - for /R %%F in (*.sln) do nuget restore "%%F"
+
+build_script:
+  - echo /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" >> msbuild.rsp
+  - for /R %%F in (*.sln) do msbuild "%%F"
