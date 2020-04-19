@@ -113,11 +113,17 @@ namespace DirectXRenderTargetScreenshot
 
             foreach (var sample in samples)
             {
-                lines.Add(string.Format(CultureInfo.InvariantCulture, "<p style=\"float:left; width:{0}px; height:{1}px; margin:5px\">", ScreenshotImageWidth, ScreenshotImageHeight * 5 / 3));
-                lines.Add(sample.Category + " - " + sample.Title + "<br />");
-                lines.Add(string.Format(CultureInfo.InvariantCulture, "<img src=\"Images/{0}\" /><br />", sample.Category + "-" + sample.Name + ".jpg"));
-                lines.Add(sample.Description + "<br />");
-                lines.Add("</p>");
+                //lines.Add(string.Format(CultureInfo.InvariantCulture, "<p style=\"float:left; width:{0}px; height:{1}px; margin:5px\">", ScreenshotImageWidth, ScreenshotImageHeight * 5 / 3));
+                //lines.Add(sample.Category + " - " + sample.Title + "<br />");
+                //lines.Add(string.Format(CultureInfo.InvariantCulture, "<img src=\"Images/{0}\" /><br />", sample.Category + "-" + sample.Name + ".jpg"));
+                //lines.Add(sample.Description + "<br />");
+                //lines.Add("</p>");
+
+                lines.Add($"<img align=left src=\"Images/{sample.Category}-{sample.Name}.jpg\" />");
+                lines.Add($"{sample.Category} - {sample.Title}<br />");
+                lines.Add($"{sample.MinimalFeatureLevel}<br />");
+                lines.Add($"{sample.Description}<br />");
+                lines.Add($"<br clear=both />");
             }
 
             File.WriteAllLines(indexFilename, lines);
