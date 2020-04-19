@@ -18,18 +18,19 @@ namespace DirectXRenderTargetScreenshot
         {
             Console.WriteLine("DirectXRenderTargetScreenshot");
 
-            string rootDirectory = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\..\.."));
+            string exeDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string rootDirectory = Path.GetFullPath(Path.Combine(exeDirectory, @"..\..\..\..\.."));
             Console.WriteLine(rootDirectory);
 
-            //string imagesDirectory = Path.Combine(rootDirectory, "Images");
-            //Directory.CreateDirectory(imagesDirectory);
+            string imagesDirectory = Path.Combine(rootDirectory, "Images");
+            Directory.CreateDirectory(imagesDirectory);
 
-            //var samples = new List<Sample>();
+            var samples = new List<Sample>();
 
-            //TakeScreenshotRepository(samples, rootDirectory, imagesDirectory);
+            TakeScreenshotRepository(samples, rootDirectory, imagesDirectory);
 
-            //Directory.SetCurrentDirectory(rootDirectory);
-            //WriteSamplesList(samples);
+            Directory.SetCurrentDirectory(rootDirectory);
+            WriteSamplesList(samples);
         }
 
         static void TakeScreenshotRepository(List<Sample> samples, string repository, string imagesDirectory)
