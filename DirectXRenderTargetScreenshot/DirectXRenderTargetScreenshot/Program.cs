@@ -18,7 +18,7 @@ namespace DirectXRenderTargetScreenshot
         {
             Console.WriteLine("DirectXRenderTargetScreenshot");
 
-            string rootDirectory = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\.."));
+            string rootDirectory = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\..\.."));
             Console.WriteLine(rootDirectory);
 
             //string imagesDirectory = Path.Combine(rootDirectory, "Images");
