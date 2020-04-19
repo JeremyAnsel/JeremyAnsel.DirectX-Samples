@@ -23,7 +23,7 @@ before_build:
 
 build_script:
   - echo /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" >> msbuild.rsp
-  - for /R %%F in (*.sln) do msbuild "%%F"
+  - for /R %%F in (*.sln) do msbuild /verbosity:minimal "%%F"
 
 after_build:
   - echo after_build
