@@ -4,7 +4,7 @@ configuration: Release
 
 skip_commits:
   files:
-    - `Images/*`
+    - 'Images/*'
     - 'README.md'
 
 init:
