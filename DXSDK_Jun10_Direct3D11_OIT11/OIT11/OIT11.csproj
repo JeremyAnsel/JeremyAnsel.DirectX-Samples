@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HLSLShader Include="CreatePrefixSumPass0CS.hlsl">
+      <ShaderProfile>cs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="CreatePrefixSumPass1CS.hlsl">
+      <ShaderProfile>cs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="FillDeepBufferPS.hlsl">
+      <ShaderProfile>ps_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="FragmentCountPS.hlsl">
+      <ShaderProfile>ps_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="ScenePS.hlsl">
+      <ShaderProfile>ps_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="SceneVS.hlsl">
+      <ShaderProfile>vs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="SortAndRenderCS.hlsl">
+      <ShaderProfile>cs_5_0</ShaderProfile>
+    </HLSLShader>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="2.0.19" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.31" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.9" />
+  </ItemGroup>
+
+</Project>
