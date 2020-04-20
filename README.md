@@ -3,6 +3,12 @@
 JeremyAnsel.DirectX-Samples contains samples for JeremyAnsel.DirectX.* APIs.
 
 # Screenshots
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_OIT11-OIT11.jpg" />
+DXSDK_Jun10_Direct3D11_OIT11 - OIT11<br />
+FeatureLevel110<br />
+Demonstrates an Order Independent Transparency algorithm in D3D11 using Compute Shaders and scattered writes.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_Tutorials-Tutorial01.jpg" />
 DXSDK_Jun10_Direct3D11_Tutorials - Tutorial01<br />
 FeatureLevel91<br />
