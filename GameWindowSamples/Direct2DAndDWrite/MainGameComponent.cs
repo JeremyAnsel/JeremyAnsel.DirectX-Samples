@@ -85,7 +85,7 @@ namespace Direct2DAndDWrite
             DWriteUtils.DisposeAndNull(ref this.textLayout);
         }
 
-        public void Update(StepTimer timer)
+        public void Update(ITimer timer)
         {
         }
 

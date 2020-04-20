@@ -39,7 +39,7 @@ namespace Lesson1.Basics
         {
         }
 
-        public void Update(StepTimer timer)
+        public void Update(ITimer timer)
         {
         }
 

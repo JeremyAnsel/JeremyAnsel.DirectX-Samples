@@ -143,7 +143,7 @@ namespace OIT11
         {
         }
 
-        public void Update(StepTimer timer)
+        public void Update(ITimer timer)
         {
         }
 

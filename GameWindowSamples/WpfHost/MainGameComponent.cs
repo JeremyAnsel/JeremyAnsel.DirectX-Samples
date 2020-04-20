@@ -41,7 +41,7 @@ namespace WpfHost
         {
         }
 
-        public void Update(StepTimer timer)
+        public void Update(ITimer timer)
         {
         }
 

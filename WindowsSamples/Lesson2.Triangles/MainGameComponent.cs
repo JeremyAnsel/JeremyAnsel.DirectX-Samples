@@ -98,7 +98,7 @@ namespace Lesson2.Triangles
         {
         }
 
-        public void Update(StepTimer timer)
+        public void Update(ITimer timer)
         {
         }
 

@@ -215,7 +215,7 @@ namespace Tutorial07
         {
         }
 
-        public void Update(StepTimer timer)
+        public void Update(ITimer timer)
         {
             float t = timer == null ? 0.0f : (float)timer.TotalSeconds;
 

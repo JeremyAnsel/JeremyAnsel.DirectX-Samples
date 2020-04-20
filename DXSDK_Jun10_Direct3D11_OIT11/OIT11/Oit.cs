@@ -252,7 +252,7 @@ namespace OIT11
             D3D11Utils.DisposeAndNull(ref this.screenTextureUAV);
         }
 
-        public void Update(StepTimer timer)
+        public void Update(ITimer timer)
         {
         }
 

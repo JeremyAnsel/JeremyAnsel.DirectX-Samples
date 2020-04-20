@@ -70,7 +70,7 @@ namespace OIT11
             this.oit.ReleaseWindowSizeDependentResources();
         }
 
-        public void Update(StepTimer timer)
+        public void Update(ITimer timer)
         {
             this.scene.Update(timer);
             this.oit.Update(timer);

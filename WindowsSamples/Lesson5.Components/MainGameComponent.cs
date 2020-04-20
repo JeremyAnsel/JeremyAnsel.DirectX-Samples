@@ -108,7 +108,7 @@ namespace Lesson5.Components
         {
         }
 
-        public void Update(StepTimer timer)
+        public void Update(ITimer timer)
         {
             this.constantBufferData.Model = Float4X4.RotationY((float)(-(timer?.TotalSeconds ?? 0.0) * 60.0f));
 

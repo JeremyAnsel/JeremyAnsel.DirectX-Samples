@@ -83,7 +83,7 @@ namespace Tutorial02
         {
         }
 
-        public void Update(StepTimer timer)
+        public void Update(ITimer timer)
         {
         }
 

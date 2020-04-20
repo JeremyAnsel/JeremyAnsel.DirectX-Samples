@@ -166,7 +166,7 @@ namespace Lesson3.Cubes
         {
         }
 
-        public void Update(StepTimer timer)
+        public void Update(ITimer timer)
         {
             this.constantBufferData.Model = Float4X4.RotationY(-this.degree);
             this.degree += 1.0f;

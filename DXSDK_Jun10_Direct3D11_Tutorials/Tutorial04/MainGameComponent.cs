@@ -145,7 +145,7 @@ namespace Tutorial04
         {
         }
 
-        public void Update(StepTimer timer)
+        public void Update(ITimer timer)
         {
             float t = timer == null ? 0.0f : (float)timer.TotalSeconds;
             this.worldMatrix = XMMatrix.RotationY(t);
