@@ -16,9 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.Dds" Version="1.0.2" />
+    <PackageReference Include="JeremyAnsel.DirectX.Dds" Version="1.0.3" />
     <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="2.0.19" />
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.32" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.33" />
     <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.9" />
   </ItemGroup>
 
