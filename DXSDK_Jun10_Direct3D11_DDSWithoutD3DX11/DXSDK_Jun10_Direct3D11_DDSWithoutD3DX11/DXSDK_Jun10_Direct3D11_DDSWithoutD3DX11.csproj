@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HLSLShader Include="PixelShader.hlsl">
+      <ShaderProfile>ps_4_0_level_9_1</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="VertexShader.hlsl">
+      <ShaderProfile>vs_4_0_level_9_1</ShaderProfile>
+    </HLSLShader>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JeremyAnsel.DirectX.Dds" Version="1.0.3" />
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="2.0.19" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.33" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="1.0.1" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkMesh" Version="1.0.2" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ball.dds">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ball.sdkmesh">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="seafloor.dds">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
