@@ -76,7 +76,7 @@ namespace DXSDK_Jun10_Direct3D11_DDSWithoutD3DX11
             this.mainGameComponent.Update(this.Timer);
 
             // Update the camera's position based on user input 
-            camera.FrameMove((float)this.Timer.ElapsedSeconds);
+            camera.FrameMove(this.Timer.ElapsedSeconds);
         }
 
         protected override void Render()

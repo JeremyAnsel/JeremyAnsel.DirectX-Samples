@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.33" />
-    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.9" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.37" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.10" />
   </ItemGroup>
 
   <ItemGroup>
