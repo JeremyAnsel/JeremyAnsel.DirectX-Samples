@@ -1,0 +1,30 @@
+﻿<Window x:Class="ContactHardeningShadows11.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ContactHardeningShadows11"
+        mc:Ignorable="d"
+        Title="Contact Hardening Shadows - Direct3D 11"
+        Height="450" Width="800">
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="{Binding Child.Window.Title, ElementName=ControlHostElement}" />
+        </StatusBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="1" Grid.Row="0">
+                <TextBlock Text="{Binding Child.Window.SunWidth, ElementName=ControlHostElement, StringFormat='Sun Width = {0:F2}', FallbackValue='Sun Width'}" />
+                <Slider Minimum="0" Maximum="3" SmallChange="0.02" Value="{Binding Child.Window.SunWidth, ElementName=ControlHostElement, UpdateSourceTrigger=PropertyChanged}" />
+
+            </StackPanel>
+            <Border x:Name="ControlHostElement" Grid.Column="0" Grid.Row="0" />
+        </Grid>
+    </DockPanel>
+</Window>

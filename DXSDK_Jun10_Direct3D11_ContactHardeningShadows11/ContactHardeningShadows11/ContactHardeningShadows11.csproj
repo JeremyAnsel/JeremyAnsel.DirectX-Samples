@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HLSLShader Include="RenderScenePixelShader.hlsl">
+      <ShaderProfile>ps_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="RenderSceneShadowMapVertexShader.hlsl">
+      <ShaderProfile>vs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="RenderSceneVertexShader.hlsl">
+      <ShaderProfile>vs_5_0</ShaderProfile>
+    </HLSLShader>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="2.0.20" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.37" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="1.0.3" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkMesh" Version="1.0.3" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="2.0.37" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ColumnScene\Column.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ColumnScene\Floor.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ColumnScene\Poles.sdkmesh">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ColumnScene\scene.sdkmesh">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
