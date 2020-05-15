@@ -3,6 +3,12 @@
 JeremyAnsel.DirectX-Samples contains samples for JeremyAnsel.DirectX.* APIs.
 
 # Screenshots
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_ContactHardeningShadows11-ContactHardeningShadows11.jpg" />
+DXSDK_Jun10_Direct3D11_ContactHardeningShadows11 - ContactHardeningShadows11<br />
+FeatureLevel110<br />
+Contact hardening shadows technique which uses sm5.0 instructions.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_DDSWithoutD3DX11-DDSWithoutD3DX11.jpg" />
 DXSDK_Jun10_Direct3D11_DDSWithoutD3DX11 - DDSWithoutD3DX11<br />
 FeatureLevel92<br />
