@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DXSDK_Jun10_Direct3D11_DDSWithoutD3DX11
+namespace DDSWithoutD3DX11
 {
     class MainGameWindow : GameWindowBase
     {
@@ -39,7 +39,7 @@ namespace DXSDK_Jun10_Direct3D11_DDSWithoutD3DX11
             // Setup the camera's view parameters
             XMFloat3 vecEye = new XMFloat3(0.0f, 0.0f, -5.0f);
             XMFloat3 vecAt = new XMFloat3(0.0f, 0.0f, -0.0f);
-            camera.SetViewParams(vecEye, vecAt);
+            this.camera.SetViewParams(vecEye, vecAt);
         }
 
         protected override void ReleaseDeviceDependentResources()
@@ -57,9 +57,9 @@ namespace DXSDK_Jun10_Direct3D11_DDSWithoutD3DX11
 
             // Setup the camera's projection parameters
             float fAspectRatio = (float)this.DeviceResources.BackBufferWidth / (float)this.DeviceResources.BackBufferHeight;
-            camera.SetProjParams(XMMath.PIDivFour, fAspectRatio, 0.1f, 1000.0f);
-            camera.SetWindow((int)this.DeviceResources.BackBufferWidth, (int)this.DeviceResources.BackBufferHeight);
-            camera.SetButtonMasks(SdkCameraMouseKeys.LeftButton, SdkCameraMouseKeys.Wheel, SdkCameraMouseKeys.MiddleButton);
+            this.camera.SetProjParams(XMMath.PIDivFour, fAspectRatio, 0.1f, 1000.0f);
+            this.camera.SetWindow((int)this.DeviceResources.BackBufferWidth, (int)this.DeviceResources.BackBufferHeight);
+            this.camera.SetButtonMasks(SdkCameraMouseKeys.LeftButton, SdkCameraMouseKeys.Wheel, SdkCameraMouseKeys.MiddleButton);
         }
 
         protected override void ReleaseWindowSizeDependentResources()
@@ -76,7 +76,7 @@ namespace DXSDK_Jun10_Direct3D11_DDSWithoutD3DX11
             this.mainGameComponent.Update(this.Timer);
 
             // Update the camera's position based on user input 
-            camera.FrameMove(this.Timer.ElapsedSeconds);
+            this.camera.FrameMove(this.Timer.ElapsedSeconds);
         }
 
         protected override void Render()
@@ -93,7 +93,7 @@ namespace DXSDK_Jun10_Direct3D11_DDSWithoutD3DX11
             base.OnEvent(msg, wParam, lParam);
 
             // Pass all remaining windows messages to camera so it can respond to user input
-            camera?.HandleMessages(this.Handle, msg, wParam, lParam);
+            this.camera?.HandleMessages(this.Handle, msg, wParam, lParam);
         }
 
         protected override void OnKeyboardEvent(VirtualKey key, int repeatCount, bool wasDown, bool isDown)
