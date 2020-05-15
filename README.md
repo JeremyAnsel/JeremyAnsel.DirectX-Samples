@@ -3,10 +3,10 @@
 JeremyAnsel.DirectX-Samples contains samples for JeremyAnsel.DirectX.* APIs.
 
 # Screenshots
-<img align=left src="Images/DXSDK_Jun10_Direct3D11_DDSWithoutD3DX11-DXSDK_Jun10_Direct3D11_DDSWithoutD3DX11.jpg" />
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_DDSWithoutD3DX11-DDSWithoutD3DX11.jpg" />
 DXSDK_Jun10_Direct3D11_DDSWithoutD3DX11 - DDSWithoutD3DX11<br />
 FeatureLevel92<br />
-Illustrates loading a DDS file without using D3DX.<br />
+Description of DDSWithoutD3DX11.<br />
 <br clear=both />
 
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_OIT11-OIT11.jpg" />
