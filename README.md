@@ -15,6 +15,12 @@ FeatureLevel92<br />
 Illustrates loading a DDS file without using D3DX.<br />
 <br clear=both />
 
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_NBodyGravityCS11-NBodyGravityCS11.jpg" />
+DXSDK_Jun10_Direct3D11_NBodyGravityCS11 - NBodyGravityCS11<br />
+FeatureLevel110<br />
+Demonstrates how to use Compute Shader to do n-body gravity computation<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_OIT11-OIT11.jpg" />
 DXSDK_Jun10_Direct3D11_OIT11 - OIT11<br />
 FeatureLevel110<br />
