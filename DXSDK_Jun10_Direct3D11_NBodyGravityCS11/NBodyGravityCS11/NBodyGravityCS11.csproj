@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HLSLShader Include="NBodyGravityCS.hlsl">
+      <ShaderProfile>cs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="ParticleDrawGS.hlsl">
+      <ShaderProfile>gs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="ParticleDrawPS.hlsl">
+      <ShaderProfile>ps_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="ParticleDrawVS.hlsl">
+      <ShaderProfile>vs_5_0</ShaderProfile>
+    </HLSLShader>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JeremyAnsel.DirectX.Dds" Version="1.0.4" />
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="2.0.20" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.37" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="1.0.3" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="particle.dds">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
