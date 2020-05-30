@@ -18,7 +18,7 @@ namespace ComputeShaderSort11
         {
             get
             {
-                return D3D11FeatureLevel.FeatureLevel91;
+                return D3D11FeatureLevel.FeatureLevel110;
             }
         }
 
