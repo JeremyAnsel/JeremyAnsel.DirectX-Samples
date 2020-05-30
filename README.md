@@ -5,7 +5,7 @@ JeremyAnsel.DirectX-Samples contains samples for JeremyAnsel.DirectX.* APIs.
 # Screenshots
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_ComputeShaderSort11-ComputeShaderSort11.jpg" />
 DXSDK_Jun10_Direct3D11_ComputeShaderSort11 - ComputeShaderSort11<br />
-FeatureLevel91<br />
+FeatureLevel110<br />
 Demonstrates how to use compute shaders to perform sorting on the GPU with DirectX 11.<br />
 <br clear=both />
 
