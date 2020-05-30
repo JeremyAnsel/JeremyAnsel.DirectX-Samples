@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HLSLShader Include="CSSortBitonic.hlsl">
+      <ShaderProfile>cs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="CSSortTranspose.hlsl">
+      <ShaderProfile>cs_5_0</ShaderProfile>
+    </HLSLShader>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.37" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.10" />
+  </ItemGroup>
+
+</Project>
