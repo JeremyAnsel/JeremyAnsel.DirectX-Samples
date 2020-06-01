@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HLSLShader Include="DomainShader.hlsl">
+      <ShaderProfile>ds_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="HullShaderFracEven.hlsl">
+      <ShaderProfile>hs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="HullShaderFracOdd.hlsl">
+      <ShaderProfile>hs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="HullShaderInteger.hlsl">
+      <ShaderProfile>hs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="PixelShader.hlsl">
+      <ShaderProfile>ps_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="SolidColorPS.hlsl">
+      <ShaderProfile>ps_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="VertexShader.hlsl">
+      <ShaderProfile>vs_5_0</ShaderProfile>
+    </HLSLShader>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="2.0.20" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.37" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="1.0.3" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="2.0.37" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.10" />
+  </ItemGroup>
+
+</Project>
