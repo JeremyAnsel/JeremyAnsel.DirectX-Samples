@@ -33,6 +33,12 @@ FeatureLevel110<br />
 Demonstrates an Order Independent Transparency algorithm in D3D11 using Compute Shaders and scattered writes.<br />
 <br clear=both />
 
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_SimpleBezier11-SimpleBezier11.jpg" />
+DXSDK_Jun10_Direct3D11_SimpleBezier11 - SimpleBezier11<br />
+FeatureLevel110<br />
+This sample shows an simple implementation of the DirectX 11 Hardware Tessellator for rendering a Bezier Patch.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_Tutorials-Tutorial01.jpg" />
 DXSDK_Jun10_Direct3D11_Tutorials - Tutorial01<br />
 FeatureLevel91<br />
