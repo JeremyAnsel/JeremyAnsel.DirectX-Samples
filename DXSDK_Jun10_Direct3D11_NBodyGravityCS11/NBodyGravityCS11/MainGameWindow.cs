@@ -24,6 +24,7 @@ namespace NBodyGravityCS11
         protected override void Init()
         {
             this.mainGameComponent = this.CheckMinimalFeatureLevel(new MainGameComponent());
+            this.mainGameComponent.Random = new Random();
 
             this.camera = new SdkModelViewerCamera();
 

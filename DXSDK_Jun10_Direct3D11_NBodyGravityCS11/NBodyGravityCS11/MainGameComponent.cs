@@ -65,6 +65,8 @@ namespace NBodyGravityCS11
 
         public XMMatrix ProjectionMatrix { get; set; }
 
+        public Random Random { get; set; }
+
         public D3D11FeatureLevel MinimalFeatureLevel
         {
             get
@@ -187,7 +189,7 @@ namespace NBodyGravityCS11
             // Initialize the data in the buffers
             Particle[] pData1 = new Particle[MaxParticles];
 
-            Random rand = new Random();
+            Random rand = this.Random ?? new Random(0);
 
             if (this.DiskGalaxyFormationType == 0)
             {
