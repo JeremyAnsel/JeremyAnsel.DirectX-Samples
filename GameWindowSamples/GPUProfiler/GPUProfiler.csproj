@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.37" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.39" />
   </ItemGroup>
 
 </Project>

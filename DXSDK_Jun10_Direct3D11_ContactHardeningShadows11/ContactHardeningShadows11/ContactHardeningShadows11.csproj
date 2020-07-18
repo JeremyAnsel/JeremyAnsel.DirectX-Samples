@@ -19,11 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="2.0.20" />
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.37" />
-    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="1.0.3" />
-    <PackageReference Include="JeremyAnsel.DirectX.SdkMesh" Version="1.0.3" />
-    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="2.0.37" />
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="2.0.22" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.39" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="1.0.5" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkMesh" Version="1.0.5" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="2.0.39" />
     <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.10" />
   </ItemGroup>
 

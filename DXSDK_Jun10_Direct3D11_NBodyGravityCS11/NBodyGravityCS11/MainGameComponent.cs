@@ -429,15 +429,8 @@ namespace NBodyGravityCS11
             context.OutputMergerSetBlendState(pBlendState0, BlendFactor0, SampleMask0);
             context.OutputMergerSetDepthStencilState(pDepthStencilState0, StencilRef0);
 
-            if (pBlendState0)
-            {
-                D3D11Utils.DisposeAndNull(ref pBlendState0);
-            }
-
-            if (pDepthStencilState0)
-            {
-                D3D11Utils.DisposeAndNull(ref pDepthStencilState0);
-            }
+            D3D11Utils.DisposeAndNull(ref pBlendState0);
+            D3D11Utils.DisposeAndNull(ref pDepthStencilState0);
         }
 
         private static void Swap<T>(ref T x, ref T y)
