@@ -1,0 +1,114 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HLSLShader Include="RenderBaseVertexShader.hlsl">
+      <ShaderProfile>vs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="RenderPixelShader.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="RenderVertexShader.hlsl">
+      <ShaderProfile>vs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="ScanAddBucketResultComputeShader.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="ScanBucketResultComputeShader.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="ScanInBucketComputeShader.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_EdgeFactorCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_NumVerticesIndicesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)TessellatorCS40_NumVerticesIndicesCSInteger.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>g_partitioning=D3D11_TESSELLATOR_PARTITIONING_INTEGER</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_NumVerticesIndicesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)TessellatorCS40_NumVerticesIndicesCSPow2.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>g_partitioning=D3D11_TESSELLATOR_PARTITIONING_POW2</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_NumVerticesIndicesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)TessellatorCS40_NumVerticesIndicesCSFracOdd.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>g_partitioning=D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_NumVerticesIndicesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)TessellatorCS40_NumVerticesIndicesCSFracEven.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>g_partitioning=D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_ScatterIndexTriIDCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_ScatterVertexTriIDCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_TessellateIndicesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)TessellatorCS40_TessellateIndicesCSInteger.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>g_partitioning=D3D11_TESSELLATOR_PARTITIONING_INTEGER</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_TessellateIndicesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)TessellatorCS40_TessellateIndicesCSPow2.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>g_partitioning=D3D11_TESSELLATOR_PARTITIONING_POW2</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_TessellateIndicesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)TessellatorCS40_TessellateIndicesCSFracOdd.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>g_partitioning=D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_TessellateIndicesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)TessellatorCS40_TessellateIndicesCSFracEven.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>g_partitioning=D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_TessellateVerticesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)TessellatorCS40_TessellateVerticesCSInteger.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>g_partitioning=D3D11_TESSELLATOR_PARTITIONING_INTEGER</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_TessellateVerticesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)TessellatorCS40_TessellateVerticesCSPow2.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>g_partitioning=D3D11_TESSELLATOR_PARTITIONING_POW2</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_TessellateVerticesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)TessellatorCS40_TessellateVerticesCSFracOdd.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>g_partitioning=D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="TessellatorCS40_TessellateVerticesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)TessellatorCS40_TessellateVerticesCSFracEven.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>g_partitioning=D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN</PreprocessorDefinitions>
+    </HLSLShader>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="2.0.22" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.39" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="1.0.5" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="2.0.39" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.10" />
+    <PackageReference Include="JeremyAnsel.Media.WavefrontObj" Version="2.0.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="BaseMesh.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
