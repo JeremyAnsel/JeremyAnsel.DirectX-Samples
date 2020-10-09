@@ -3,6 +3,12 @@
 JeremyAnsel.DirectX-Samples contains samples for JeremyAnsel.DirectX.* APIs.
 
 # Screenshots
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_AdaptiveTessellationCS40-AdaptiveTessellationCS40.jpg" />
+DXSDK_Jun10_Direct3D11_AdaptiveTessellationCS40 - AdaptiveTessellationCS40<br />
+FeatureLevel100<br />
+This sample shows how to use Compute Shader 4.0 to do one simple adaptive tessellation scheme.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_ComputeShaderSort11-ComputeShaderSort11.jpg" />
 DXSDK_Jun10_Direct3D11_ComputeShaderSort11 - ComputeShaderSort11<br />
 FeatureLevel110<br />
