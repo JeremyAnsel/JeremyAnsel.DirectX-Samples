@@ -23,6 +23,7 @@ nuget:
   disable_publish_on_pr: true
 
 before_build:
+  - nuget update -self
   - for /R %%F in (*.sln) do nuget restore "%%F" -Verbosity quiet
 
 build_script:
@@ -30,7 +31,7 @@ build_script:
   - for /R %%F in (*.sln) do msbuild /verbosity:minimal "%%F"
 
 after_build:
-  - DirectXRenderTargetScreenshot\DirectXRenderTargetScreenshot\bin\Release\netcoreapp3.1\DirectXRenderTargetScreenshot.exe
+  - DirectXRenderTargetScreenshot\DirectXRenderTargetScreenshot\bin\Release\net5.0-windows\DirectXRenderTargetScreenshot.exe
   - build-dist.cmd
   - if not defined APPVEYOR_PULL_REQUEST_NUMBER 7z a -t7z bld\JeremyAnsel.DirectX-Samples.7z .\bld\dist\* > nul
   - if not defined APPVEYOR_PULL_REQUEST_NUMBER appveyor PushArtifact bld\JeremyAnsel.DirectX-Samples.7z
