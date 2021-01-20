@@ -9,6 +9,12 @@ FeatureLevel100<br />
 This sample shows how to use Compute Shader 4.0 to do one simple adaptive tessellation scheme.<br />
 <br clear=both />
 
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_BasicCompute11-BasicCompute11.jpg" />
+DXSDK_Jun10_Direct3D11_BasicCompute11 - BasicCompute11<br />
+FeatureLevel110<br />
+Demonstrates the basics to get DirectX 11 Compute Shader (aka DirectCompute) up and running by implementing Array A + Array B.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_ComputeShaderSort11-ComputeShaderSort11.jpg" />
 DXSDK_Jun10_Direct3D11_ComputeShaderSort11 - ComputeShaderSort11<br />
 FeatureLevel110<br />
