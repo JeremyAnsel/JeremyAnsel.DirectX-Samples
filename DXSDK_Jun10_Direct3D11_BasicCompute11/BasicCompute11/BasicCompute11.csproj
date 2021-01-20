@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HLSLShader Include="BasicCompute11.hlsl">
+      <ShaderProfile>cs_5_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)BasicCompute11_StructuredBuffer_Double.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>USE_STRUCTURED_BUFFERS;TEST_DOUBLE</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="BasicCompute11.hlsl">
+      <ShaderProfile>cs_5_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)BasicCompute11_StructuredBuffer_NoDouble.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>USE_STRUCTURED_BUFFERS</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="BasicCompute11.hlsl">
+      <ShaderProfile>cs_5_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)BasicCompute11_NoStructuredBuffer_Double.cso</ObjectFileOutput>
+      <PreprocessorDefinitions>TEST_DOUBLE</PreprocessorDefinitions>
+    </HLSLShader>
+    <HLSLShader Include="BasicCompute11.hlsl">
+      <ShaderProfile>cs_5_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)BasicCompute11_NoStructuredBuffer_NoDouble.cso</ObjectFileOutput>
+      <PreprocessorDefinitions></PreprocessorDefinitions>
+    </HLSLShader>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.39" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.10" />
+  </ItemGroup>
+
+</Project>
