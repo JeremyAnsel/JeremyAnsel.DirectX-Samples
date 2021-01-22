@@ -15,6 +15,12 @@ FeatureLevel110<br />
 Demonstrates the basics to get DirectX 11 Compute Shader (aka DirectCompute) up and running by implementing Array A + Array B.<br />
 <br clear=both />
 
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_BasicHLSL11-BasicHLSL11.jpg" />
+DXSDK_Jun10_Direct3D11_BasicHLSL11 - BasicHLSL11<br />
+FeatureLevel92<br />
+This sample shows a simple example of the Microsoft Direct3D's High-Level Shader Language (HLSL). <br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_ComputeShaderSort11-ComputeShaderSort11.jpg" />
 DXSDK_Jun10_Direct3D11_ComputeShaderSort11 - ComputeShaderSort11<br />
 FeatureLevel110<br />
