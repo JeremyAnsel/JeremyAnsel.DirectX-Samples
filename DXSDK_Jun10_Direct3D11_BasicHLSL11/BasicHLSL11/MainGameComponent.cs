@@ -43,7 +43,10 @@ namespace BasicHLSL11
             XMVector eye = new XMVector(0.0f, 0.0f, -100.0f, 0.0f);
             XMVector at = new XMVector(0.0f, 0.0f, -0.0f, 0.0f);
             XMVector up = new XMVector(0.0f, 1.0f, 0.0f, 0.0f);
-            this.ViewMatrix = XMMatrix.LookAtLH(eye, at, up);
+            float fObjectRadius = 378.15607f;
+            XMVector radius = XMVector3.Normalize(at - eye).Scale(fObjectRadius * 3.0f);
+            this.ViewMatrix = XMMatrix.LookAtLH(eye, at, up) * XMMatrix.TranslationFromVector(radius);
+
             this.WorldMatrix = XMMatrix.Identity;
         }
 
