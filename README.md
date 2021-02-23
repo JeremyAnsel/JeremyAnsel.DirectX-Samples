@@ -21,6 +21,12 @@ FeatureLevel92<br />
 This sample shows a simple example of the Microsoft Direct3D's High-Level Shader Language (HLSL). <br />
 <br clear=both />
 
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_CascadedShadowMaps11-CascadedShadowMaps11.jpg" />
+DXSDK_Jun10_Direct3D11_CascadedShadowMaps11 - CascadedShadowMaps11<br />
+FeatureLevel100<br />
+This sample demonstrates cascaded shadow maps.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_ComputeShaderSort11-ComputeShaderSort11.jpg" />
 DXSDK_Jun10_Direct3D11_ComputeShaderSort11 - ComputeShaderSort11<br />
 FeatureLevel110<br />
