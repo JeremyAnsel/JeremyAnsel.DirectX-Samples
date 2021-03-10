@@ -1,0 +1,40 @@
+﻿<Window x:Class="Collision.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+        xmlns:local="clr-namespace:Collision"
+        mc:Ignorable="d"
+        Title="Collision - Misc"
+        Height="450" Width="800">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="CollisionGroupValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:CollisionGroup" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="{Binding Child.Window.Title, ElementName=ControlHostElement}" />
+        </StatusBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="1" Grid.Row="0">
+                <TextBlock Text="Group:" />
+                <ListBox ItemsSource="{Binding Source={StaticResource CollisionGroupValues}}"
+                         SelectedValue="{Binding Child.Window.CollisionGroup, ElementName=ControlHostElement, FallbackValue={x:Static local:CollisionGroup.Frustum}}" />
+            </StackPanel>
+            <Border x:Name="ControlHostElement" Grid.Column="0" Grid.Row="0" />
+        </Grid>
+    </DockPanel>
+</Window>
