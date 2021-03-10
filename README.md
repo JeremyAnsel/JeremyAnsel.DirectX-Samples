@@ -105,6 +105,12 @@ FeatureLevel91<br />
 This application demonstrates texturing.<br />
 <br clear=both />
 
+<img align=left src="Images/DXSDK_Jun10_Misc_Collision-Collision.jpg" />
+DXSDK_Jun10_Misc_Collision - Collision<br />
+FeatureLevel91<br />
+This sample demonstrates collisions using the DXMath Collision API.<br />
+<br clear=both />
+
 <img align=left src="Images/GameWindowSamples-Direct2DAndDWrite.jpg" />
 GameWindowSamples - Direct2DAndDWrite<br />
 FeatureLevel91<br />
