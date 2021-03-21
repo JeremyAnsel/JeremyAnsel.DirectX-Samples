@@ -105,6 +105,12 @@ FeatureLevel91<br />
 This application demonstrates texturing.<br />
 <br clear=both />
 
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_VarianceShadows11-VarianceShadows11.jpg" />
+DXSDK_Jun10_Direct3D11_VarianceShadows11 - VarianceShadows11<br />
+FeatureLevel100<br />
+This sample demonstrates variance shadow maps.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Misc_Collision-Collision.jpg" />
 DXSDK_Jun10_Misc_Collision - Collision<br />
 FeatureLevel91<br />
