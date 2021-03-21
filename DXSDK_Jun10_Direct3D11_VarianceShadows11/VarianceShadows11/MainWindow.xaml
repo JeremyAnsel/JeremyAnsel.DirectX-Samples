@@ -1,0 +1,299 @@
+﻿<Window x:Class="VarianceShadows11.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+        xmlns:local="clr-namespace:VarianceShadows11"
+        mc:Ignorable="d"
+        Title="Variance Shadows - Direct3D 11"
+        Height="560" Width="900">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="DepthBufferFormatValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:DepthBufferFormat" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="SceneSelectionValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:SceneSelection" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="ShadowFilterValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:ShadowFilter" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="CameraSelectionValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:CameraSelection" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="FitProjectionValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:FitProjection" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="FitNearFarValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:FitNearFar" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="CascadeSelectionValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:CascadeSelection" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="{Binding Child.Window.Title, ElementName=ControlHostElement}" />
+        </StatusBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Column="1" Grid.Row="0">
+                <StackPanel>
+                    <CheckBox Content="Visualize Cascades"
+                              IsChecked="{Binding Child.Window.VisualizeCascades, ElementName=ControlHostElement, FallbackValue=false}" />
+                    <TextBlock Text="Depth Buffer Format:" />
+                    <ComboBox ItemsSource="{Binding Source={StaticResource DepthBufferFormatValues}}"
+                              SelectedValue="{Binding Child.Window.ShadowBufferFormat, ElementName=ControlHostElement, FallbackValue={x:Static local:DepthBufferFormat.R32G32}}" />
+                    <TextBlock Text="{Binding Child.Window.BufferSize, ElementName=ControlHostElement, StringFormat='Texture Size: {0}', FallbackValue='Texture Size:'}" />
+                    <Slider Value="{Binding Child.Window.BufferSize, ElementName=ControlHostElement, FallbackValue=1024}"
+                            Minimum="32"
+                            Maximum="4096"
+                            IsSnapToTickEnabled="True"
+                            TickFrequency="32" />
+                    <TextBlock Text="{Binding Child.Window.ShadowBlurSize, ElementName=ControlHostElement, StringFormat='Shadow Blur: {0}', FallbackValue='Shadow Blur:'}" />
+                    <Slider Value="{Binding Child.Window.ShadowBlurSize, ElementName=ControlHostElement, FallbackValue=3}"
+                            Minimum="1"
+                            Maximum="15"
+                            IsSnapToTickEnabled="True"
+                            TickFrequency="2" />
+                    <CheckBox IsChecked="{Binding Child.Window.BlurBetweenCascades, ElementName=ControlHostElement, FallbackValue=false}">
+                        <TextBlock Text="{Binding Child.Window.BlurBetweenCascadesAmount, ElementName=ControlHostElement, StringFormat='Cascade Blur: {0:F3}', FallbackValue='Cascade Blur:'}" />
+                    </CheckBox>
+                    <Slider Value="{Binding Child.Window.BlurBetweenCascadesAmount, ElementName=ControlHostElement, FallbackValue=0.005}"
+                            Minimum="0"
+                            Maximum="0.5"
+                            IsSnapToTickEnabled="True"
+                            TickFrequency="0.005" />
+                    <ComboBox ItemsSource="{Binding Source={StaticResource SceneSelectionValues}}"
+                              SelectedValue="{Binding Child.Window.SceneSelection, ElementName=ControlHostElement, FallbackValue={x:Static local:SceneSelection.PowerPlantScene}}" />
+                    <ComboBox ItemsSource="{Binding Source={StaticResource ShadowFilterValues}}"
+                              SelectedValue="{Binding Child.Window.ShadowFilter, ElementName=ControlHostElement, FallbackValue={x:Static local:ShadowFilter.Anisotropic16x}}" />
+                    <ComboBox SelectedValue="{Binding Child.Window.SelectedCamera, ElementName=ControlHostElement, FallbackValue={x:Static local:CameraSelection.EyeCamera}}">
+                        <ComboBox.ItemsSource>
+                            <MultiBinding Converter="{x:Static local:ArrayIndexConverter.Default}">
+                                <MultiBinding.ConverterParameter>
+                                    <sys:Int32>2</sys:Int32>
+                                </MultiBinding.ConverterParameter>
+                                <Binding Source="{StaticResource CameraSelectionValues}" />
+                                <Binding Path="Child.Window.CascadeLevels" ElementName="ControlHostElement" />
+                            </MultiBinding>
+                        </ComboBox.ItemsSource>
+                    </ComboBox>
+                    <CheckBox Content="Fit Light to Texels"
+                              IsChecked="{Binding Child.Window.MoveLightTexelSize, ElementName=ControlHostElement, FallbackValue=true}" />
+                    <ComboBox ItemsSource="{Binding Source={StaticResource FitProjectionValues}}"
+                              SelectedValue="{Binding Child.Window.SelectedProjectionFit, ElementName=ControlHostElement, FallbackValue={x:Static local:FitProjection.ToScene}}" />
+                    <ComboBox ItemsSource="{Binding Source={StaticResource FitNearFarValues}}"
+                              SelectedValue="{Binding Child.Window.SelectedNearFarFit, ElementName=ControlHostElement, FallbackValue={x:Static local:FitNearFar.SceneAABB}}" />
+                    <ComboBox ItemsSource="{Binding Source={StaticResource CascadeSelectionValues}}"
+                              SelectedValue="{Binding Child.Window.SelectedCascadeSelection, ElementName=ControlHostElement, FallbackValue={x:Static local:CascadeSelection.Map}}" />
+                    <ComboBox SelectedIndex="{Binding Child.Window.SelectedCascadeLevels, ElementName=ControlHostElement, FallbackValue=2}">
+                        <ComboBoxItem>1 Level</ComboBoxItem>
+                        <ComboBoxItem>2 Levels</ComboBoxItem>
+                        <ComboBoxItem>3 Levels</ComboBoxItem>
+                        <ComboBoxItem>4 Levels</ComboBoxItem>
+                        <ComboBoxItem>5 Levels</ComboBoxItem>
+                        <ComboBoxItem>6 Levels</ComboBoxItem>
+                        <ComboBoxItem>7 Levels</ComboBoxItem>
+                        <ComboBoxItem>8 Levels</ComboBoxItem>
+                    </ComboBox>
+                    <DockPanel>
+                        <DockPanel.Visibility>
+                            <Binding Path="Child.Window.CascadeLevels"
+                                     ElementName="ControlHostElement"
+                                     Converter="{x:Static local:IndexVisibilityConverter.Default}">
+                                <Binding.ConverterParameter>
+                                    <sys:Int32>0</sys:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </DockPanel.Visibility>
+                        <TextBlock DockPanel.Dock="Left"
+                                   Width="40"
+                                   Text="{Binding Child.Window.CascadePartitionsZeroToOne[0], ElementName=ControlHostElement, StringFormat='L1: {0}', FallbackValue='L1:'}" />
+                        <Slider Background="#FF0000"
+                                Value="{Binding Child.Window.CascadePartitionsZeroToOne[0], ElementName=ControlHostElement, FallbackValue=0}"
+                                Minimum="0"
+                                Maximum="100"
+                                IsSnapToTickEnabled="True"
+                                TickFrequency="1" />
+                    </DockPanel>
+                    <DockPanel>
+                        <DockPanel.Visibility>
+                            <Binding Path="Child.Window.CascadeLevels"
+                                     ElementName="ControlHostElement"
+                                     Converter="{x:Static local:IndexVisibilityConverter.Default}">
+                                <Binding.ConverterParameter>
+                                    <sys:Int32>1</sys:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </DockPanel.Visibility>
+                        <TextBlock DockPanel.Dock="Left"
+                                   Width="40"
+                                   Text="{Binding Child.Window.CascadePartitionsZeroToOne[1], ElementName=ControlHostElement, StringFormat='L2: {0} ', FallbackValue='L2: '}" />
+                        <Slider Background="#00FF00"
+                                Value="{Binding Child.Window.CascadePartitionsZeroToOne[1], ElementName=ControlHostElement, FallbackValue=0}"
+                                Minimum="0"
+                                Maximum="100"
+                                IsSnapToTickEnabled="True"
+                                TickFrequency="1" />
+                    </DockPanel>
+                    <DockPanel>
+                        <DockPanel.Visibility>
+                            <Binding Path="Child.Window.CascadeLevels"
+                                     ElementName="ControlHostElement"
+                                     Converter="{x:Static local:IndexVisibilityConverter.Default}">
+                                <Binding.ConverterParameter>
+                                    <sys:Int32>2</sys:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </DockPanel.Visibility>
+                        <TextBlock DockPanel.Dock="Left"
+                                   Width="40"
+                                   Text="{Binding Child.Window.CascadePartitionsZeroToOne[2], ElementName=ControlHostElement, StringFormat='L3: {0} ', FallbackValue='L3: '}" />
+                        <Slider Background="#0000FF"
+                                Value="{Binding Child.Window.CascadePartitionsZeroToOne[2], ElementName=ControlHostElement, FallbackValue=0}"
+                                Minimum="0"
+                                Maximum="100"
+                                IsSnapToTickEnabled="True"
+                                TickFrequency="1" />
+                    </DockPanel>
+                    <DockPanel>
+                        <DockPanel.Visibility>
+                            <Binding Path="Child.Window.CascadeLevels"
+                                     ElementName="ControlHostElement"
+                                     Converter="{x:Static local:IndexVisibilityConverter.Default}">
+                                <Binding.ConverterParameter>
+                                    <sys:Int32>3</sys:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </DockPanel.Visibility>
+                        <TextBlock DockPanel.Dock="Left"
+                                   Width="40"
+                                   Text="{Binding Child.Window.CascadePartitionsZeroToOne[3], ElementName=ControlHostElement, StringFormat='L4: {0} ', FallbackValue='L4: '}" />
+                        <Slider Background="#FF00FF"
+                                Value="{Binding Child.Window.CascadePartitionsZeroToOne[3], ElementName=ControlHostElement, FallbackValue=0}"
+                                Minimum="0"
+                                Maximum="100"
+                                IsSnapToTickEnabled="True"
+                                TickFrequency="1" />
+                    </DockPanel>
+                    <DockPanel>
+                        <DockPanel.Visibility>
+                            <Binding Path="Child.Window.CascadeLevels"
+                                     ElementName="ControlHostElement"
+                                     Converter="{x:Static local:IndexVisibilityConverter.Default}">
+                                <Binding.ConverterParameter>
+                                    <sys:Int32>4</sys:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </DockPanel.Visibility>
+                        <TextBlock DockPanel.Dock="Left"
+                                   Width="40"
+                                   Text="{Binding Child.Window.CascadePartitionsZeroToOne[4], ElementName=ControlHostElement, StringFormat='L5: {0} ', FallbackValue='L5: '}" />
+                        <Slider Background="#FFFF00"
+                                Value="{Binding Child.Window.CascadePartitionsZeroToOne[4], ElementName=ControlHostElement, FallbackValue=0}"
+                                Minimum="0"
+                                Maximum="100"
+                                IsSnapToTickEnabled="True"
+                                TickFrequency="1" />
+                    </DockPanel>
+                    <DockPanel>
+                        <DockPanel.Visibility>
+                            <Binding Path="Child.Window.CascadeLevels"
+                                     ElementName="ControlHostElement"
+                                     Converter="{x:Static local:IndexVisibilityConverter.Default}">
+                                <Binding.ConverterParameter>
+                                    <sys:Int32>5</sys:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </DockPanel.Visibility>
+                        <TextBlock DockPanel.Dock="Left"
+                                   Width="40"
+                                   Text="{Binding Child.Window.CascadePartitionsZeroToOne[5], ElementName=ControlHostElement, StringFormat='L6: {0} ', FallbackValue='L6: '}" />
+                        <Slider Background="#FFFFFF"
+                                Value="{Binding Child.Window.CascadePartitionsZeroToOne[5], ElementName=ControlHostElement, FallbackValue=0}"
+                                Minimum="0"
+                                Maximum="100"
+                                IsSnapToTickEnabled="True"
+                                TickFrequency="1" />
+                    </DockPanel>
+                    <DockPanel>
+                        <DockPanel.Visibility>
+                            <Binding Path="Child.Window.CascadeLevels"
+                                     ElementName="ControlHostElement"
+                                     Converter="{x:Static local:IndexVisibilityConverter.Default}">
+                                <Binding.ConverterParameter>
+                                    <sys:Int32>6</sys:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </DockPanel.Visibility>
+                        <TextBlock DockPanel.Dock="Left"
+                                   Width="40"
+                                   Text="{Binding Child.Window.CascadePartitionsZeroToOne[6], ElementName=ControlHostElement, StringFormat='L7: {0} ', FallbackValue='L7: '}" />
+                        <Slider Background="#00AAFF"
+                                Value="{Binding Child.Window.CascadePartitionsZeroToOne[6], ElementName=ControlHostElement, FallbackValue=0}"
+                                Minimum="0"
+                                Maximum="100"
+                                IsSnapToTickEnabled="True"
+                                TickFrequency="1" />
+                    </DockPanel>
+                    <DockPanel>
+                        <DockPanel.Visibility>
+                            <Binding Path="Child.Window.CascadeLevels"
+                                     ElementName="ControlHostElement"
+                                     Converter="{x:Static local:IndexVisibilityConverter.Default}">
+                                <Binding.ConverterParameter>
+                                    <sys:Int32>7</sys:Int32>
+                                </Binding.ConverterParameter>
+                            </Binding>
+                        </DockPanel.Visibility>
+                        <TextBlock DockPanel.Dock="Left"
+                                   Width="40"
+                                   Text="{Binding Child.Window.CascadePartitionsZeroToOne[7], ElementName=ControlHostElement, StringFormat='L8: {0} ', FallbackValue='L8: '}" />
+                        <Slider Background="#AAFFAA"
+                                Value="{Binding Child.Window.CascadePartitionsZeroToOne[7], ElementName=ControlHostElement, FallbackValue=0}"
+                                Minimum="0"
+                                Maximum="100"
+                                IsSnapToTickEnabled="True"
+                                TickFrequency="1" />
+                    </DockPanel>
+                </StackPanel>
+            </ScrollViewer>
+            <Border x:Name="ControlHostElement" Grid.Column="0" Grid.Row="0" />
+        </Grid>
+    </DockPanel>
+</Window>
