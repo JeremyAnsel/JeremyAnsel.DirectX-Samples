@@ -69,6 +69,12 @@ FeatureLevel110<br />
 This sample shows an simple implementation of the DirectX 11 Hardware Tessellator for rendering a Bezier Patch.<br />
 <br clear=both />
 
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_SimpleSample11-SimpleSample11.jpg" />
+DXSDK_Jun10_Direct3D11_SimpleSample11 - SimpleSample11<br />
+FeatureLevel91<br />
+Starting point for new Direct3D 11 samples. For a more basic starting point, use the EmptyProject11 sample instead.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_Tutorials-Tutorial01.jpg" />
 DXSDK_Jun10_Direct3D11_Tutorials - Tutorial01<br />
 FeatureLevel91<br />
