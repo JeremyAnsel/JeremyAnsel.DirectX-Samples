@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleBezier11", "SimpleBezier11\SimpleBezier11.csproj", "{812A3157-FAC0-4FA0-951C-B2B6CDED3EA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleBezier11", "SimpleBezier11\SimpleBezier11.csproj", "{9FBEC0EA-76C0-4D44-9E40-E67D7322A369}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{812A3157-FAC0-4FA0-951C-B2B6CDED3EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{812A3157-FAC0-4FA0-951C-B2B6CDED3EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{812A3157-FAC0-4FA0-951C-B2B6CDED3EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{812A3157-FAC0-4FA0-951C-B2B6CDED3EA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FBEC0EA-76C0-4D44-9E40-E67D7322A369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FBEC0EA-76C0-4D44-9E40-E67D7322A369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FBEC0EA-76C0-4D44-9E40-E67D7322A369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FBEC0EA-76C0-4D44-9E40-E67D7322A369}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3BD6AFA0-C3D4-4A15-A6D2-02F964CB7650}
+		SolutionGuid = {90ED3E31-DB06-48B2-89A9-BF3A87C58B1A}
 	EndGlobalSection
 EndGlobal

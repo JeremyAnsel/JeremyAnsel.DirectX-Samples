@@ -1,14 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.39" />
-    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.10" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.40" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.15" />
   </ItemGroup>
 
   <ItemGroup>

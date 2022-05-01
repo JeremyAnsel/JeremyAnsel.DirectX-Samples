@@ -52,7 +52,7 @@ namespace BasicMaths
             {
                 if (index < 0 || index >= 2)
                 {
-                    throw new ArgumentOutOfRangeException("index");
+                    throw new ArgumentOutOfRangeException(nameof(index));
                 }
 
                 unsafe
@@ -69,7 +69,7 @@ namespace BasicMaths
             {
                 if (index < 0 || index >= 2)
                 {
-                    throw new ArgumentOutOfRangeException("index");
+                    throw new ArgumentOutOfRangeException(nameof(index));
                 }
 
                 unsafe

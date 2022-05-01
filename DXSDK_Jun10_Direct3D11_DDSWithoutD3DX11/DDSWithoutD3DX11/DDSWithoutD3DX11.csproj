@@ -1,8 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
@@ -16,12 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.Dds" Version="1.0.6" />
-    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="2.0.22" />
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="2.0.39" />
-    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="1.0.5" />
-    <PackageReference Include="JeremyAnsel.DirectX.SdkMesh" Version="1.0.7" />
-    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.10" />
+    <PackageReference Include="JeremyAnsel.DirectX.Dds" Version="2.0.7" />
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.23" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.40" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="2.0.6" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkMesh" Version="2.0.8" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.15" />
   </ItemGroup>
 
   <ItemGroup>

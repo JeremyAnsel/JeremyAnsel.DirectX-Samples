@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectXRenderTargetScreenshot", "DirectXRenderTargetScreenshot\DirectXRenderTargetScreenshot.csproj", "{DA25E392-2FA3-4EA1-94A1-DE40466124E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectXRenderTargetScreenshot", "DirectXRenderTargetScreenshot\DirectXRenderTargetScreenshot.csproj", "{843C4A06-7D18-4C6F-AD68-7ECB24CA74E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DA25E392-2FA3-4EA1-94A1-DE40466124E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA25E392-2FA3-4EA1-94A1-DE40466124E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA25E392-2FA3-4EA1-94A1-DE40466124E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA25E392-2FA3-4EA1-94A1-DE40466124E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{843C4A06-7D18-4C6F-AD68-7ECB24CA74E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{843C4A06-7D18-4C6F-AD68-7ECB24CA74E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{843C4A06-7D18-4C6F-AD68-7ECB24CA74E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{843C4A06-7D18-4C6F-AD68-7ECB24CA74E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B99BAA7D-4958-45CD-AFC2-956B1549436B}
+		SolutionGuid = {82DBFD6C-4C06-4EEE-818B-1C34FC04C1C1}
 	EndGlobalSection
 EndGlobal

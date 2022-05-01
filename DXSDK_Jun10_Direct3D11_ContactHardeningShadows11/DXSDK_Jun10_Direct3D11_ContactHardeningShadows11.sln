@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactHardeningShadows11", "ContactHardeningShadows11\ContactHardeningShadows11.csproj", "{204E0541-F147-4AD2-8F90-564152CADF74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactHardeningShadows11", "ContactHardeningShadows11\ContactHardeningShadows11.csproj", "{EC210E5E-A0F4-470C-96A7-256BD6C1676E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{204E0541-F147-4AD2-8F90-564152CADF74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{204E0541-F147-4AD2-8F90-564152CADF74}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{204E0541-F147-4AD2-8F90-564152CADF74}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{204E0541-F147-4AD2-8F90-564152CADF74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC210E5E-A0F4-470C-96A7-256BD6C1676E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC210E5E-A0F4-470C-96A7-256BD6C1676E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC210E5E-A0F4-470C-96A7-256BD6C1676E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC210E5E-A0F4-470C-96A7-256BD6C1676E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BE23D435-EB73-47C9-A629-3399814FEDB6}
+		SolutionGuid = {2FF53855-D12D-448A-AEA4-660C291DACC6}
 	EndGlobalSection
 EndGlobal

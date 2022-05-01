@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31019.35
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collision", "Collision\Collision.csproj", "{7188335F-7F54-4F4E-B4B5-156A299C632B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collision", "Collision\Collision.csproj", "{FC5E833E-0985-49C0-B3C6-EA2BB19740AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7188335F-7F54-4F4E-B4B5-156A299C632B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7188335F-7F54-4F4E-B4B5-156A299C632B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7188335F-7F54-4F4E-B4B5-156A299C632B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7188335F-7F54-4F4E-B4B5-156A299C632B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC5E833E-0985-49C0-B3C6-EA2BB19740AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC5E833E-0985-49C0-B3C6-EA2BB19740AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC5E833E-0985-49C0-B3C6-EA2BB19740AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC5E833E-0985-49C0-B3C6-EA2BB19740AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7EE71699-3652-4782-9224-9502302DD106}
+		SolutionGuid = {8CE55728-76C8-4B44-BFD2-5A0213E661E6}
 	EndGlobalSection
 EndGlobal

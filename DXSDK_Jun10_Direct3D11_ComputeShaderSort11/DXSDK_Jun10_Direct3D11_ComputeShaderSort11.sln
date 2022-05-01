@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputeShaderSort11", "ComputeShaderSort11\ComputeShaderSort11.csproj", "{B4843D2A-B90C-43CB-AF9E-4094DD793584}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputeShaderSort11", "ComputeShaderSort11\ComputeShaderSort11.csproj", "{A787407C-4487-45D9-A87A-920FE4610FAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B4843D2A-B90C-43CB-AF9E-4094DD793584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4843D2A-B90C-43CB-AF9E-4094DD793584}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4843D2A-B90C-43CB-AF9E-4094DD793584}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4843D2A-B90C-43CB-AF9E-4094DD793584}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A787407C-4487-45D9-A87A-920FE4610FAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A787407C-4487-45D9-A87A-920FE4610FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A787407C-4487-45D9-A87A-920FE4610FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A787407C-4487-45D9-A87A-920FE4610FAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F23B6A9A-0BCA-4F19-A220-D93BDC902859}
+		SolutionGuid = {574765E3-A239-4AF3-90B1-788CD2F40029}
 	EndGlobalSection
 EndGlobal

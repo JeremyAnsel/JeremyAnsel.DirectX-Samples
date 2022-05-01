@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CascadedShadowMaps11", "CascadedShadowMaps11\CascadedShadowMaps11.csproj", "{9F701291-A8B0-44A3-8308-246522D9D0BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CascadedShadowMaps11", "CascadedShadowMaps11\CascadedShadowMaps11.csproj", "{2717413C-4B9C-4E1E-87E4-0FAAD8EC6CA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9F701291-A8B0-44A3-8308-246522D9D0BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F701291-A8B0-44A3-8308-246522D9D0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F701291-A8B0-44A3-8308-246522D9D0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F701291-A8B0-44A3-8308-246522D9D0BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2717413C-4B9C-4E1E-87E4-0FAAD8EC6CA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2717413C-4B9C-4E1E-87E4-0FAAD8EC6CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2717413C-4B9C-4E1E-87E4-0FAAD8EC6CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2717413C-4B9C-4E1E-87E4-0FAAD8EC6CA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6BA49B1C-F555-47CA-8361-5EE4035C029E}
+		SolutionGuid = {65D92328-3708-4D60-B23A-B6A1E9160608}
 	EndGlobalSection
 EndGlobal

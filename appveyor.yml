@@ -1,5 +1,5 @@
-image: Visual Studio 2019
-version: 1.0.{build}
+image: Visual Studio 2022
+version: 2.0.{build}
 configuration: Release
 
 skip_commits:
@@ -31,7 +31,7 @@ build_script:
   - for /R %%F in (*.sln) do msbuild /verbosity:minimal "%%F"
 
 after_build:
-  - DirectXRenderTargetScreenshot\DirectXRenderTargetScreenshot\bin\Release\net5.0-windows\DirectXRenderTargetScreenshot.exe
+  - DirectXRenderTargetScreenshot\DirectXRenderTargetScreenshot\bin\Release\net6.0-windows\DirectXRenderTargetScreenshot.exe
   - build-dist.cmd
   - if not defined APPVEYOR_PULL_REQUEST_NUMBER 7z a -t7z bld\JeremyAnsel.DirectX-Samples-%APPVEYOR_BUILD_VERSION%.7z .\bld\dist\* > nul
   - if not defined APPVEYOR_PULL_REQUEST_NUMBER appveyor PushArtifact bld\JeremyAnsel.DirectX-Samples-%APPVEYOR_BUILD_VERSION%.7z
