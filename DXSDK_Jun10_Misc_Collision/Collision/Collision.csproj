@@ -18,9 +18,9 @@
 
   <ItemGroup>
     <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.24" />
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.41" />
-    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="2.0.7" />
-    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.41" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.42" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="2.0.8" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.42" />
     <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.16" />
   </ItemGroup>
 
