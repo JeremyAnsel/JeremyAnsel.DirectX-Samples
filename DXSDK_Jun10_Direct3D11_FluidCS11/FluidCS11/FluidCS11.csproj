@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HLSLShader Include="CSSortBitonic.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="CSSortTranspose.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="FluidRenderGS.hlsl">
+      <ShaderProfile>gs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="FluidRenderPS.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="FluidRenderVS.hlsl">
+      <ShaderProfile>vs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="Fluid_BuildGridCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="Fluid_BuildGridIndicesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="Fluid_ClearGridIndicesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="Fluid_DensityCS_Grid.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="Fluid_DensityCS_Shared.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="Fluid_DensityCS_Simple.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="Fluid_ForceCS_Grid.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="Fluid_ForceCS_Shared.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="Fluid_ForceCS_Simple.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="Fluid_IntegrateCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="Fluid_RearrangeParticlesCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.24" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.42" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.42" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.16" />
+  </ItemGroup>
+
+</Project>
