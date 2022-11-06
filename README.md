@@ -51,6 +51,12 @@ FeatureLevel91<br />
 Empty starting point for new Direct3D 11 applications.<br />
 <br clear=both />
 
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_FluidCS11-FluidCS11.jpg" />
+DXSDK_Jun10_Direct3D11_FluidCS11 - FluidCS11<br />
+FeatureLevel100<br />
+This sample shows a particle-based fluid simulation.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_NBodyGravityCS11-NBodyGravityCS11.jpg" />
 DXSDK_Jun10_Direct3D11_NBodyGravityCS11 - NBodyGravityCS11<br />
 FeatureLevel110<br />
