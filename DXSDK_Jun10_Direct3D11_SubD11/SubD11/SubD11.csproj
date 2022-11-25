@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HLSLShader Include="BezierEvalDS.hlsl">
+      <ShaderProfile>ds_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="MeshSkinningVS.hlsl">
+      <ShaderProfile>vs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="PatchSkinningVS.hlsl">
+      <ShaderProfile>vs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="SmoothPS.hlsl">
+      <ShaderProfile>ps_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="SolidColorPS.hlsl">
+      <ShaderProfile>ps_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="SubDToBezierHS.hlsl">
+      <ShaderProfile>hs_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="SubDToBezierHS4444.hlsl">
+      <ShaderProfile>hs_5_0</ShaderProfile>
+    </HLSLShader>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.24" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.42" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="2.0.9" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkMesh" Version="2.0.10" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.42" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SubD\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
