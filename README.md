@@ -81,6 +81,12 @@ FeatureLevel91<br />
 Starting point for new Direct3D 11 samples. For a more basic starting point, use the EmptyProject11 sample instead.<br />
 <br clear=both />
 
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_SubD11-SubD11.jpg" />
+DXSDK_Jun10_Direct3D11_SubD11 - SubD11<br />
+FeatureLevel110<br />
+This sample shows an implementation of Charles Loop's and Scott Schaefer's Approximate Catmull-Clark subdvision.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_Tutorials-Tutorial01.jpg" />
 DXSDK_Jun10_Direct3D11_Tutorials - Tutorial01<br />
 FeatureLevel91<br />
