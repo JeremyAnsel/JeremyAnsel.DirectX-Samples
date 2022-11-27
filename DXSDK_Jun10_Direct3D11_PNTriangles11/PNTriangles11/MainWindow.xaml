@@ -1,0 +1,102 @@
+﻿<Window x:Class="PNTriangles11.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+        xmlns:local="clr-namespace:PNTriangles11"
+        mc:Ignorable="d"
+        Title="PN-Triangles - Direct3D 11"
+        Height="600"
+        Width="900">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="MeshTypeValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:MeshType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="{Binding Child.Window.Title, ElementName=ControlHostElement}" />
+        </StatusBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="1"
+                        Grid.Row="0">
+                <TextBlock Text="-Render Settings-" />
+                <TextBlock Text="Mesh:" />
+                <ListBox ItemsSource="{Binding Source={StaticResource MeshTypeValues}}"
+                         SelectedValue="{Binding Child.Window.MeshType, ElementName=ControlHostElement, FallbackValue={x:Static local:MeshType.Tiny}}" />
+                <CheckBox IsChecked="{Binding Child.Window.IsWireframe, ElementName=ControlHostElement}"
+                          Content="Wireframe" />
+                <CheckBox IsChecked="{Binding Child.Window.IsTextured, ElementName=ControlHostElement}"
+                          Content="Textured" />
+                <CheckBox IsChecked="{Binding Child.Window.IsTessellation, ElementName=ControlHostElement}"
+                          Content="Tessellation" />
+                <TextBlock Text="{Binding Child.Window.TessFactor, ElementName=ControlHostElement, StringFormat='TessFactor: {0}', FallbackValue='TessFactor:'}" />
+                <Slider Value="{Binding Child.Window.TessFactor, ElementName=ControlHostElement}"
+                        Minimum="1"
+                        Maximum="199"
+                        SmallChange="1" />
+                <Separator Height="3" />
+                <TextBlock Text="-Culling Techniques-" />
+                <CheckBox IsChecked="{Binding Child.Window.IsBackFaceCull, ElementName=ControlHostElement}"
+                          Content="Back Face Cull" />
+                <TextBlock Text="{Binding Child.Window.BackFaceCullEpsilon, ElementName=ControlHostElement, StringFormat='BackFaceCullEpsilon: {0:F2}', FallbackValue='BackFaceCullEpsilon:'}" />
+                <Slider Value="{Binding Child.Window.BackFaceCullEpsilon, ElementName=ControlHostElement}"
+                        Minimum="0"
+                        Maximum="1"
+                        SmallChange="0.01" />
+                <CheckBox IsChecked="{Binding Child.Window.IsViewFrustumCull, ElementName=ControlHostElement}"
+                          Content="View Frustum Cull" />
+                <TextBlock Text="{Binding Child.Window.ViewFrustumCullEpsilon, ElementName=ControlHostElement, StringFormat='ViewFrustumCullEpsilon: {0:F2}', FallbackValue='ViewFrustumCullEpsilon:'}" />
+                <Slider Value="{Binding Child.Window.ViewFrustumCullEpsilon, ElementName=ControlHostElement}"
+                        Minimum="0"
+                        Maximum="1"
+                        SmallChange="0.01" />
+                <Separator Height="3" />
+                <TextBlock Text="-Adaptive Techniques-" />
+                <CheckBox IsChecked="{Binding Child.Window.IsScreenSpaceAdaptive, ElementName=ControlHostElement}"
+                          Content="Screen Space" />
+                <TextBlock Text="{Binding Child.Window.EdgeSize, ElementName=ControlHostElement, StringFormat='EdgeSize: {0}', FallbackValue='EdgeSize:'}" />
+                <Slider Value="{Binding Child.Window.EdgeSize, ElementName=ControlHostElement}"
+                        Minimum="0"
+                        Maximum="100"
+                        SmallChange="1" />
+                <CheckBox IsChecked="{Binding Child.Window.IsDistanceAdaptive, ElementName=ControlHostElement}"
+                          Content="Distance" />
+                <TextBlock Text="{Binding Child.Window.RangeScale, ElementName=ControlHostElement, StringFormat='RangeScale: {0:F2}', FallbackValue='RangeScale:'}" />
+                <Slider Value="{Binding Child.Window.RangeScale, ElementName=ControlHostElement}"
+                        Minimum="0"
+                        Maximum="2"
+                        SmallChange="0.01" />
+                <CheckBox IsChecked="{Binding Child.Window.IsScreenResolutionAdaptive, ElementName=ControlHostElement}"
+                          Content="Screen Resolution" />
+                <TextBlock Text="{Binding Child.Window.ResolutionScale, ElementName=ControlHostElement, StringFormat='ResolutionScale: {0:F2}', FallbackValue='ResolutionScale:'}" />
+                <Slider Value="{Binding Child.Window.ResolutionScale, ElementName=ControlHostElement}"
+                        Minimum="0"
+                        Maximum="2"
+                        SmallChange="0.01" />
+                <CheckBox IsChecked="{Binding Child.Window.IsOrientationAdaptive, ElementName=ControlHostElement}"
+                          Content="Orientation" />
+                <TextBlock Text="{Binding Child.Window.SilhoutteEpsilon, ElementName=ControlHostElement, StringFormat='SilhoutteEpsilon: {0:F2}', FallbackValue='SilhoutteEpsilon:'}" />
+                <Slider Value="{Binding Child.Window.SilhoutteEpsilon, ElementName=ControlHostElement}"
+                        Minimum="0"
+                        Maximum="1"
+                        SmallChange="0.01" />
+            </StackPanel>
+            <Border x:Name="ControlHostElement"
+                    Grid.Column="0"
+                    Grid.Row="0" />
+        </Grid>
+    </DockPanel>
+</Window>

@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HLSLShader Include="DS_PNTriangles.hlsl">
+      <ShaderProfile>ds_5_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="PS_RenderScene.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="PS_RenderSceneTextured.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="VS_RenderScene.hlsl">
+      <ShaderProfile>vs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="VS_RenderSceneWithTessellation.hlsl">
+      <ShaderProfile>vs_4_0</ShaderProfile>
+    </HLSLShader>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JeremyAnsel.DirectX.D3DCompiler" Version="3.0.24" />
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.24" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.42" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="2.0.9" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkMesh" Version="2.0.10" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.42" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Teapot\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tiger\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tiny\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AdaptiveTessellation.hlsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="HS_PNTriangles.hlsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
