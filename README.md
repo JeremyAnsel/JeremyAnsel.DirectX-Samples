@@ -69,6 +69,12 @@ FeatureLevel110<br />
 Demonstrates an Order Independent Transparency algorithm in D3D11 using Compute Shaders and scattered writes.<br />
 <br clear=both />
 
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_PNTriangles11-PNTriangles11.jpg" />
+DXSDK_Jun10_Direct3D11_PNTriangles11 - PNTriangles11<br />
+FeatureLevel110<br />
+This code sample demonstrates the use of DX11 Hull & Domain shaders to implement the PN-Triangles tessellation.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_SimpleBezier11-SimpleBezier11.jpg" />
 DXSDK_Jun10_Direct3D11_SimpleBezier11 - SimpleBezier11<br />
 FeatureLevel110<br />
