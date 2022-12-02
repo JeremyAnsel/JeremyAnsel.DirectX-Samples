@@ -57,6 +57,12 @@ FeatureLevel100<br />
 This sample shows a particle-based fluid simulation.<br />
 <br clear=both />
 
+<img align=left src="Images/DXSDK_Jun10_Direct3D11_HDRToneMappingCS11-HDRToneMappingCS11.jpg" />
+DXSDK_Jun10_Direct3D11_HDRToneMappingCS11 - HDRToneMappingCS11<br />
+FeatureLevel110<br />
+This sample demonstrates how to use Compute Shader to do post-processing.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D11_NBodyGravityCS11-NBodyGravityCS11.jpg" />
 DXSDK_Jun10_Direct3D11_NBodyGravityCS11 - NBodyGravityCS11<br />
 FeatureLevel110<br />
