@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HLSLShader Include="Bloom.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="BrightPassAndHorizFilterCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="CSHorizFilter.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="CSVerticalFilter.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="DownScale2x2_Lum.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="DownScale3x3.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="DownScale3x3_BrightPass.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="FinalPass.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="PSDump.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="PSFinalPass.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="PSFinalPassForCPUReduction.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="QuadVS.hlsl">
+      <ShaderProfile>vs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="ReduceTo1DCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="ReduceToSingleCS.hlsl">
+      <ShaderProfile>cs_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="SkyboxPS.hlsl">
+      <ShaderProfile>ps_4_0</ShaderProfile>
+    </HLSLShader>
+    <HLSLShader Include="SkyboxVS.hlsl">
+      <ShaderProfile>vs_4_0</ShaderProfile>
+    </HLSLShader>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JeremyAnsel.DirectX.Dds" Version="2.0.8" />
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.24" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.42" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="2.0.9" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.42" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="uffizi_cross.dds">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
