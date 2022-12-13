@@ -290,7 +290,7 @@ namespace SubD11
                 return;
             }
 
-            this.g_SubDMesh?.Update(XMMatrix.Identity, timer.ElapsedSeconds);
+            this.g_SubDMesh?.Update(XMMatrix.Identity, timer.TotalSeconds);
         }
 
         public void Render()
