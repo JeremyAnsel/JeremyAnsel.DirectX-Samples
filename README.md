@@ -3,6 +3,12 @@
 JeremyAnsel.DirectX-Samples contains samples for JeremyAnsel.DirectX.* APIs.
 
 # Screenshots
+<img align=left src="Images/DXSDK_Jun10_Direct3D10_FixedFuncEmu-FixedFuncEmu.jpg" />
+DXSDK_Jun10_Direct3D10_FixedFuncEmu - FixedFuncEmu<br />
+FeatureLevel100<br />
+This sample attempts to emulate certain aspects of the Direct3D 9 fixed function pipeline in a Direct3D 10 environment.<br />
+<br clear=both />
+
 <img align=left src="Images/DXSDK_Jun10_Direct3D10_ShadowVolume10-ShadowVolume10.jpg" />
 DXSDK_Jun10_Direct3D10_ShadowVolume10 - ShadowVolume10<br />
 FeatureLevel100<br />
