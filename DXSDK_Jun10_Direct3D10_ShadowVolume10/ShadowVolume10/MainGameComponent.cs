@@ -249,7 +249,7 @@ namespace ShadowVolume10
             this.AdditiveBlendingBlendState = device.CreateBlendState(AdditiveBlendingBlendDesc);
 
             var SrcAlphaBlendingBlendDesc = D3D11BlendDesc.Default;
-            AdditiveBlendingBlendDesc.IsAlphaToCoverageEnabled = false;
+            SrcAlphaBlendingBlendDesc.IsAlphaToCoverageEnabled = false;
             var SrcAlphaBlendingBlendDescRenderTargets = SrcAlphaBlendingBlendDesc.GetRenderTargets();
             SrcAlphaBlendingBlendDescRenderTargets[0].IsBlendEnabled = true;
             SrcAlphaBlendingBlendDescRenderTargets[0].SourceBlend = D3D11BlendValue.SourceAlpha;
