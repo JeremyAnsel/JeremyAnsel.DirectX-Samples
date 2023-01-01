@@ -124,13 +124,13 @@ namespace ShadowVolume10
                     {
                         int mouseX = (short)((ulong)lParam & 0xffffU);
                         int mouseY = (short)((ulong)lParam >> 16);
-                        ushort keys = (ushort)((ulong)lParam & 0xffffU);
+                        ushort keys = (ushort)((ulong)wParam & 0xffffU);
                         bool isLeftKey = (keys & 0x0001) != 0;
                         bool isRightKey = (keys & 0x0002) != 0;
                         bool isMiddleKey = (keys & 0x0010) != 0;
                         bool isX1Key = (keys & 0x0020) != 0;
                         bool isX2Key = (keys & 0x0040) != 0;
-                        int wheelDelta = msg == WindowMessageType.MouseWheel ? (short)((ulong)lParam >> 16) : 0;
+                        int wheelDelta = msg == WindowMessageType.MouseWheel ? (short)((ulong)wParam >> 16) : 0;
 
                         this.MouseProc(isLeftKey, isRightKey, isMiddleKey, isX1Key, isX2Key, wheelDelta, mouseX, mouseY);
                         break;
