@@ -125,6 +125,17 @@ namespace DeferredParticles
 
         public MainGameComponent()
         {
+            EyePosition = new(0.0f, 150.0f, 336.0f);
+
+            WorldMatrix = XMMatrix.Identity;
+            XMFloat3 vecEye = new(0.0f, 150.0f, 336.0f);
+            XMFloat3 vecAt = new(0.0f, 0.0f, 0.0f);
+            XMFloat3 vecUp = new(0.0f, 1.0f, 0.0f);
+            ViewMatrix = XMMatrix.LookAtLH(vecEye, vecAt, vecUp);
+
+            var vLightDir = new XMFloat3(1, 1, 0);
+            vLightDir = XMVector3.Normalize(vLightDir);
+            LightDirection = vLightDir;
         }
 
         public XMFloat3 EyePosition { get; set; }
@@ -570,6 +581,9 @@ namespace DeferredParticles
 
         public void CreateWindowSizeDependentResources()
         {
+            float fAspectRatio = (float)this.deviceResources.BackBufferWidth / (float)this.deviceResources.BackBufferHeight;
+            ProjectionMatrix = XMMatrix.PerspectiveFovLH(XMMath.PIDivFour, fAspectRatio, 2.0f, 4000.0f);
+
             var device = this.deviceResources.D3DDevice;
 
             // Create the offscreen particle buffer
