@@ -636,6 +636,11 @@ namespace DeferredParticles
 
         public void Update(ITimer timer)
         {
+            if (timer is null)
+            {
+                return;
+            }
+
             var device = deviceResources.D3DDevice;
             var context = deviceResources.D3DContext;
 
