@@ -26,13 +26,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.D3DCompiler" Version="3.0.24" />
-    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.24" />
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.42" />
+    <PackageReference Include="JeremyAnsel.DirectX.D3DCompiler" Version="3.0.27" />
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.27" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.44" />
     <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="2.0.9" />
     <PackageReference Include="JeremyAnsel.DirectX.SdkMesh" Version="2.0.10" />
-    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.42" />
-    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.16" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.44" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.17" />
   </ItemGroup>
 
   <ItemGroup>

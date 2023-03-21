@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.42" />
-    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.42" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.44" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.44" />
   </ItemGroup>
 
 </Project>
