@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.44" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.45" />
     <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.17" />
   </ItemGroup>
 
