@@ -7,5 +7,5 @@ cd "%~dp0"
 dotnet tool update dotnet-outdated-tool --tool-path packages
 
 @echo update dependencies
-for /r %%f in (*.sln) do echo update dependencies in %%~nf && packages\dotnet-outdated -u "%%f"
+packages\dotnet-outdated -r -u
 
