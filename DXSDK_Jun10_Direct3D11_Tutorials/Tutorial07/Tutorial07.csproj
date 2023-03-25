@@ -18,10 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.Dds" Version="2.0.8" />
-    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.28" />
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.46" />
-    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.17" />
+    <PackageReference Include="JeremyAnsel.DirectX.Dds" Version="2.0.9" />
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.30" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.47" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.18" />
   </ItemGroup>
 
   <ItemGroup>
