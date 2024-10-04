@@ -15,9 +15,9 @@ for /D %%a in ("*") do (
   ) else (
     echo process "%%a"
     for /D %%b in ("%%~a\*") do (
-      if exist "%%~b\bin\Release\net6.0-windows\" (
+      if exist "%%~b\bin\Release\net8.0-windows\" (
         echo "%%~b"
-        xcopy /s /d /q "%%~b\bin\Release\net6.0-windows" "bld\dist\%%~b\"
+        xcopy /s /d /q "%%~b\bin\Release\net8.0-windows" "bld\dist\%%~b\"
       )
     )
   )

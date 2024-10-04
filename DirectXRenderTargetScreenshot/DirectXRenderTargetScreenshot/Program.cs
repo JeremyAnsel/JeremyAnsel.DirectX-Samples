@@ -12,7 +12,7 @@ namespace DirectXRenderTargetScreenshot
     {
         const uint ScreenshotImageWidth = 320;
         const uint ScreenshotImageHeight = 180;
-        const string ExePath = @"bin\Release\net6.0-windows";
+        const string ExePath = @"bin\Release\net8.0-windows";
 
         static void Main(string[] args)
         {
