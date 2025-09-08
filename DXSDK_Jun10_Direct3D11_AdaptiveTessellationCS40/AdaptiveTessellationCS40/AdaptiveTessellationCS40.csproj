@@ -98,12 +98,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.33" />
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.50" />
-    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="2.0.13" />
-    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.50" />
-    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.26" />
-    <PackageReference Include="JeremyAnsel.Media.WavefrontObj" Version="3.0.39" />
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.37" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.56" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="2.0.17" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.56" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.29" />
+    <PackageReference Include="JeremyAnsel.Media.WavefrontObj" Version="3.0.58" />
   </ItemGroup>
 
   <ItemGroup>
