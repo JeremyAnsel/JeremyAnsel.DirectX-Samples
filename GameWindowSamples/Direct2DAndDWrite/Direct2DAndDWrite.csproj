@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.56" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.57" />
   </ItemGroup>
 
 </Project>

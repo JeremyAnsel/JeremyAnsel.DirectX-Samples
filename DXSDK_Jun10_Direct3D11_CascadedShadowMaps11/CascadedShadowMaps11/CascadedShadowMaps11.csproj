@@ -16,10 +16,10 @@
   <ItemGroup>
     <PackageReference Include="JeremyAnsel.DirectX.D3DCompiler" Version="3.0.37" />
     <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.37" />
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.56" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.57" />
     <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="2.0.17" />
     <PackageReference Include="JeremyAnsel.DirectX.SdkMesh" Version="2.0.17" />
-    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.56" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.57" />
     <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.29" />
   </ItemGroup>
 
