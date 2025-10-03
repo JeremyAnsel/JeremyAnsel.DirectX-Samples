@@ -22,7 +22,7 @@ namespace GPUProfiler
                 var device = deviceResources.D3DDevice;
                 var context = deviceResources.D3DContext;
 
-                Console.WriteLine(deviceResources.AdapterDescription.AdapterDescription);
+                Console.WriteLine(deviceResources.AdapterDescription?.AdapterDescription);
 
                 var queryDisjoint = device.CreateQuery(new D3D11QueryDesc(D3D11QueryType.TimestampDisjoint));
                 var queryStart = device.CreateQuery(new D3D11QueryDesc(D3D11QueryType.Timestamp));
