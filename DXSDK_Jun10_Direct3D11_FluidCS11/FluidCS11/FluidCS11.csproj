@@ -62,7 +62,7 @@
     <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.47" />
     <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.61" />
     <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.61" />
-    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.29" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.32" />
   </ItemGroup>
 
 </Project>
