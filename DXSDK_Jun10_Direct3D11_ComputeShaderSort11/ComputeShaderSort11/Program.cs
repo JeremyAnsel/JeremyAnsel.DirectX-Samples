@@ -7,6 +7,7 @@
 //--------------------------------------------------------------------------------------
 
 using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.GameWindow;
 using System;
@@ -258,16 +259,16 @@ namespace ComputeShaderSort11
 
         static void CleanupResources()
         {
-            D3D11Utils.ReleaseAndNull(ref g_pReadBackBuffer);
-            D3D11Utils.ReleaseAndNull(ref g_pBuffer2UAV);
-            D3D11Utils.ReleaseAndNull(ref g_pBuffer1UAV);
-            D3D11Utils.ReleaseAndNull(ref g_pBuffer2SRV);
-            D3D11Utils.ReleaseAndNull(ref g_pBuffer1SRV);
-            D3D11Utils.ReleaseAndNull(ref g_pBuffer2);
-            D3D11Utils.ReleaseAndNull(ref g_pBuffer1);
-            D3D11Utils.ReleaseAndNull(ref g_pCB);
-            D3D11Utils.ReleaseAndNull(ref g_pComputeShaderTranspose);
-            D3D11Utils.ReleaseAndNull(ref g_pComputeShaderBitonic);
+            DXUtils.DisposeAndNull(ref g_pReadBackBuffer);
+            DXUtils.DisposeAndNull(ref g_pBuffer2UAV);
+            DXUtils.DisposeAndNull(ref g_pBuffer1UAV);
+            DXUtils.DisposeAndNull(ref g_pBuffer2SRV);
+            DXUtils.DisposeAndNull(ref g_pBuffer1SRV);
+            DXUtils.DisposeAndNull(ref g_pBuffer2);
+            DXUtils.DisposeAndNull(ref g_pBuffer1);
+            DXUtils.DisposeAndNull(ref g_pCB);
+            DXUtils.DisposeAndNull(ref g_pComputeShaderTranspose);
+            DXUtils.DisposeAndNull(ref g_pComputeShaderBitonic);
 
             deviceResources.Release();
             deviceResources = null;

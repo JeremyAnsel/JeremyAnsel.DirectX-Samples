@@ -44,8 +44,8 @@ namespace EmptyProject11
         {
             var context = this.deviceResources.D3DContext;
 
-            context.OutputMergerSetRenderTargets(new[] { this.deviceResources.D3DRenderTargetView }, this.deviceResources.D3DDepthStencilView);
-            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, new float[] { 0.176f, 0.196f, 0.667f, 1.0f });
+            context.OutputMergerSetRenderTargets(this.deviceResources.D3DRenderTargetView, this.deviceResources.D3DDepthStencilView);
+            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, 0.176f, 0.196f, 0.667f, 1.0f);
             context.ClearDepthStencilView(this.deviceResources.D3DDepthStencilView, D3D11ClearOptions.Depth, 1.0f, 0);
         }
     }

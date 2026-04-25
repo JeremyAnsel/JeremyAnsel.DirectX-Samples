@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using JeremyAnsel.DirectX.D3D11;
 using System.IO;
 using JeremyAnsel.DirectX.Dxgi;
+using JeremyAnsel.DirectX.DXCommon;
 
 namespace OIT11
 {
@@ -128,14 +129,14 @@ namespace OIT11
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.fragmentCountPS);
-            D3D11Utils.DisposeAndNull(ref this.createPrefixSumPass0CS);
-            D3D11Utils.DisposeAndNull(ref this.createPrefixSumPass1CS);
-            D3D11Utils.DisposeAndNull(ref this.fillDeepBufferPS);
-            D3D11Utils.DisposeAndNull(ref this.sortAndRenderCS);
-            D3D11Utils.DisposeAndNull(ref this.depthStencilState);
-            D3D11Utils.DisposeAndNull(ref this.computeShaderConstantBuffer);
-            D3D11Utils.DisposeAndNull(ref this.pixelShaderConstantBuffer);
+            DXUtils.DisposeAndNull(ref this.fragmentCountPS);
+            DXUtils.DisposeAndNull(ref this.createPrefixSumPass0CS);
+            DXUtils.DisposeAndNull(ref this.createPrefixSumPass1CS);
+            DXUtils.DisposeAndNull(ref this.fillDeepBufferPS);
+            DXUtils.DisposeAndNull(ref this.sortAndRenderCS);
+            DXUtils.DisposeAndNull(ref this.depthStencilState);
+            DXUtils.DisposeAndNull(ref this.computeShaderConstantBuffer);
+            DXUtils.DisposeAndNull(ref this.pixelShaderConstantBuffer);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -238,18 +239,18 @@ namespace OIT11
 
         public void ReleaseWindowSizeDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.fragmentCountBuffer);
-            D3D11Utils.DisposeAndNull(ref this.prefixSum);
-            D3D11Utils.DisposeAndNull(ref this.deepBuffer);
-            D3D11Utils.DisposeAndNull(ref this.deepBufferColor);
-            D3D11Utils.DisposeAndNull(ref this.fragmentCountRV);
-            D3D11Utils.DisposeAndNull(ref this.fragmentCountUAV);
-            D3D11Utils.DisposeAndNull(ref this.prefixSumUAV);
-            D3D11Utils.DisposeAndNull(ref this.deepBufferUAV);
-            D3D11Utils.DisposeAndNull(ref this.deepBufferColorUAV);
-            D3D11Utils.DisposeAndNull(ref this.screenTexture);
-            D3D11Utils.DisposeAndNull(ref this.screenTextureRTV);
-            D3D11Utils.DisposeAndNull(ref this.screenTextureUAV);
+            DXUtils.DisposeAndNull(ref this.fragmentCountBuffer);
+            DXUtils.DisposeAndNull(ref this.prefixSum);
+            DXUtils.DisposeAndNull(ref this.deepBuffer);
+            DXUtils.DisposeAndNull(ref this.deepBufferColor);
+            DXUtils.DisposeAndNull(ref this.fragmentCountRV);
+            DXUtils.DisposeAndNull(ref this.fragmentCountUAV);
+            DXUtils.DisposeAndNull(ref this.prefixSumUAV);
+            DXUtils.DisposeAndNull(ref this.deepBufferUAV);
+            DXUtils.DisposeAndNull(ref this.deepBufferColorUAV);
+            DXUtils.DisposeAndNull(ref this.screenTexture);
+            DXUtils.DisposeAndNull(ref this.screenTextureRTV);
+            DXUtils.DisposeAndNull(ref this.screenTextureUAV);
         }
 
         public void Update(ITimer timer)
@@ -260,7 +261,7 @@ namespace OIT11
         {
             var context = this.deviceResources.D3DContext;
 
-            context.OutputMergerGetDepthStencilState(out D3D11DepthStencilState depthStencilStateStored, out uint stencilRef);
+            D3D11DepthStencilState depthStencilStateStored = context.OutputMergerGetDepthStencilState(out uint stencilRef);
 
             this.CreateFragmentCount();
             this.CreatePrefixSum();

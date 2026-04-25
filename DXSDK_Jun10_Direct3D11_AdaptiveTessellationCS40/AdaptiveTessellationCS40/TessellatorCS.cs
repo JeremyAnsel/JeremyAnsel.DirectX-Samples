@@ -1,6 +1,7 @@
 ﻿// Demos how to use Compute Shader 4.0 to do one simple adaptive tessellation scheme
 
 using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
@@ -252,45 +253,45 @@ namespace AdaptiveTessellationCS40
         {
             this.s_ScanCS.ReleaseDeviceDependentResources();
 
-            D3D11Utils.DisposeAndNull(ref this.s_pEdgeFactorCS);
-            D3D11Utils.DisposeAndNull(ref this.s_pScatterVertexTriIDIndexIDCS);
-            D3D11Utils.DisposeAndNull(ref this.s_pScatterIndexTriIDIndexIDCS);
-            D3D11Utils.DisposeAndNull(ref this.s_pNumVerticesIndicesCSs[0]);
-            D3D11Utils.DisposeAndNull(ref this.s_pNumVerticesIndicesCSs[1]);
-            D3D11Utils.DisposeAndNull(ref this.s_pNumVerticesIndicesCSs[2]);
-            D3D11Utils.DisposeAndNull(ref this.s_pNumVerticesIndicesCSs[3]);
-            D3D11Utils.DisposeAndNull(ref this.s_pTessVerticesCSs[0]);
-            D3D11Utils.DisposeAndNull(ref this.s_pTessVerticesCSs[1]);
-            D3D11Utils.DisposeAndNull(ref this.s_pTessVerticesCSs[2]);
-            D3D11Utils.DisposeAndNull(ref this.s_pTessVerticesCSs[3]);
-            D3D11Utils.DisposeAndNull(ref this.s_pTessIndicesCSs[0]);
-            D3D11Utils.DisposeAndNull(ref this.s_pTessIndicesCSs[1]);
-            D3D11Utils.DisposeAndNull(ref this.s_pTessIndicesCSs[2]);
-            D3D11Utils.DisposeAndNull(ref this.s_pTessIndicesCSs[3]);
-            D3D11Utils.DisposeAndNull(ref this.s_pEdgeFactorCSCB);
-            D3D11Utils.DisposeAndNull(ref this.s_pLookupTableCSCB);
-            D3D11Utils.DisposeAndNull(ref this.s_pCSCB);
-            D3D11Utils.DisposeAndNull(ref this.s_pCSReadBackBuf);
+            DXUtils.DisposeAndNull(ref this.s_pEdgeFactorCS);
+            DXUtils.DisposeAndNull(ref this.s_pScatterVertexTriIDIndexIDCS);
+            DXUtils.DisposeAndNull(ref this.s_pScatterIndexTriIDIndexIDCS);
+            DXUtils.DisposeAndNull(ref this.s_pNumVerticesIndicesCSs[0]);
+            DXUtils.DisposeAndNull(ref this.s_pNumVerticesIndicesCSs[1]);
+            DXUtils.DisposeAndNull(ref this.s_pNumVerticesIndicesCSs[2]);
+            DXUtils.DisposeAndNull(ref this.s_pNumVerticesIndicesCSs[3]);
+            DXUtils.DisposeAndNull(ref this.s_pTessVerticesCSs[0]);
+            DXUtils.DisposeAndNull(ref this.s_pTessVerticesCSs[1]);
+            DXUtils.DisposeAndNull(ref this.s_pTessVerticesCSs[2]);
+            DXUtils.DisposeAndNull(ref this.s_pTessVerticesCSs[3]);
+            DXUtils.DisposeAndNull(ref this.s_pTessIndicesCSs[0]);
+            DXUtils.DisposeAndNull(ref this.s_pTessIndicesCSs[1]);
+            DXUtils.DisposeAndNull(ref this.s_pTessIndicesCSs[2]);
+            DXUtils.DisposeAndNull(ref this.s_pTessIndicesCSs[3]);
+            DXUtils.DisposeAndNull(ref this.s_pEdgeFactorCSCB);
+            DXUtils.DisposeAndNull(ref this.s_pLookupTableCSCB);
+            DXUtils.DisposeAndNull(ref this.s_pCSCB);
+            DXUtils.DisposeAndNull(ref this.s_pCSReadBackBuf);
 
-            D3D11Utils.DisposeAndNull(ref this.m_pEdgeFactorBuf);
-            D3D11Utils.DisposeAndNull(ref this.m_pEdgeFactorBufSRV);
-            D3D11Utils.DisposeAndNull(ref this.m_pEdgeFactorBufUAV);
-            D3D11Utils.DisposeAndNull(ref this.m_pScanBuf0);
-            D3D11Utils.DisposeAndNull(ref this.m_pScanBuf1);
-            D3D11Utils.DisposeAndNull(ref this.m_pScanBuf0SRV);
-            D3D11Utils.DisposeAndNull(ref this.m_pScanBuf1SRV);
-            D3D11Utils.DisposeAndNull(ref this.m_pScanBuf0UAV);
-            D3D11Utils.DisposeAndNull(ref this.m_pScanBuf1UAV);
-            D3D11Utils.DisposeAndNull(ref this.m_pScatterVertexBuf);
-            D3D11Utils.DisposeAndNull(ref this.m_pScatterIndexBuf);
-            D3D11Utils.DisposeAndNull(ref this.m_pScatterVertexBufSRV);
-            D3D11Utils.DisposeAndNull(ref this.m_pScatterIndexBufSRV);
-            D3D11Utils.DisposeAndNull(ref this.m_pScatterVertexBufUAV);
-            D3D11Utils.DisposeAndNull(ref this.m_pScatterIndexBufUAV);
-            D3D11Utils.DisposeAndNull(ref this.m_pTessedVerticesBufSRV);
-            D3D11Utils.DisposeAndNull(ref this.m_pTessedVerticesBufUAV);
-            D3D11Utils.DisposeAndNull(ref this.m_pTessedIndicesBufUAV);
-            D3D11Utils.DisposeAndNull(ref this.m_pBaseVBSRV);
+            DXUtils.DisposeAndNull(ref this.m_pEdgeFactorBuf);
+            DXUtils.DisposeAndNull(ref this.m_pEdgeFactorBufSRV);
+            DXUtils.DisposeAndNull(ref this.m_pEdgeFactorBufUAV);
+            DXUtils.DisposeAndNull(ref this.m_pScanBuf0);
+            DXUtils.DisposeAndNull(ref this.m_pScanBuf1);
+            DXUtils.DisposeAndNull(ref this.m_pScanBuf0SRV);
+            DXUtils.DisposeAndNull(ref this.m_pScanBuf1SRV);
+            DXUtils.DisposeAndNull(ref this.m_pScanBuf0UAV);
+            DXUtils.DisposeAndNull(ref this.m_pScanBuf1UAV);
+            DXUtils.DisposeAndNull(ref this.m_pScatterVertexBuf);
+            DXUtils.DisposeAndNull(ref this.m_pScatterIndexBuf);
+            DXUtils.DisposeAndNull(ref this.m_pScatterVertexBufSRV);
+            DXUtils.DisposeAndNull(ref this.m_pScatterIndexBufSRV);
+            DXUtils.DisposeAndNull(ref this.m_pScatterVertexBufUAV);
+            DXUtils.DisposeAndNull(ref this.m_pScatterIndexBufUAV);
+            DXUtils.DisposeAndNull(ref this.m_pTessedVerticesBufSRV);
+            DXUtils.DisposeAndNull(ref this.m_pTessedVerticesBufUAV);
+            DXUtils.DisposeAndNull(ref this.m_pTessedIndicesBufUAV);
+            DXUtils.DisposeAndNull(ref this.m_pBaseVBSRV);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -511,7 +512,7 @@ namespace AdaptiveTessellationCS40
 
             d3dContext.ComputeShaderSetUnorderedAccessViews(0, new D3D11UnorderedAccessView[] { null }, new[] { 0U });
             d3dContext.ComputeShaderSetShaderResources(0, new D3D11ShaderResourceView[] { null, null, null });
-            d3dContext.ComputeShaderSetConstantBuffers(0, new D3D11Buffer[] { });
+            //d3dContext.ComputeShaderSetConstantBuffers(0, new D3D11Buffer[] { });
         }
 
         public void PerEdgeTessellation(
@@ -616,13 +617,13 @@ namespace AdaptiveTessellationCS40
             {
                 if (this.m_pScatterVertexBuf == null || this.m_nCachedTessedVertices < num_tessed_vertices || this.m_nCachedTessedVertices > num_tessed_vertices * 2)
                 {
-                    D3D11Utils.DisposeAndNull(ref this.m_pScatterVertexBuf);
-                    D3D11Utils.DisposeAndNull(ref this.m_pScatterVertexBufSRV);
-                    D3D11Utils.DisposeAndNull(ref this.m_pScatterVertexBufUAV);
+                    DXUtils.DisposeAndNull(ref this.m_pScatterVertexBuf);
+                    DXUtils.DisposeAndNull(ref this.m_pScatterVertexBufSRV);
+                    DXUtils.DisposeAndNull(ref this.m_pScatterVertexBufUAV);
 
-                    D3D11Utils.DisposeAndNull(ref ppTessedVerticesBuf);
-                    D3D11Utils.DisposeAndNull(ref this.m_pTessedVerticesBufUAV);
-                    D3D11Utils.DisposeAndNull(ref this.m_pTessedVerticesBufSRV);
+                    DXUtils.DisposeAndNull(ref ppTessedVerticesBuf);
+                    DXUtils.DisposeAndNull(ref this.m_pTessedVerticesBufUAV);
+                    DXUtils.DisposeAndNull(ref this.m_pTessedVerticesBufSRV);
 
                     this.m_pScatterVertexBuf = d3dDevice.CreateBuffer(new D3D11BufferDesc
                     {
@@ -692,12 +693,12 @@ namespace AdaptiveTessellationCS40
 
                 if (this.m_pScatterIndexBuf == null || this.m_nCachedTessedIndices < num_tessed_indices)
                 {
-                    D3D11Utils.DisposeAndNull(ref this.m_pScatterIndexBuf);
-                    D3D11Utils.DisposeAndNull(ref this.m_pScatterIndexBufSRV);
-                    D3D11Utils.DisposeAndNull(ref this.m_pScatterIndexBufUAV);
+                    DXUtils.DisposeAndNull(ref this.m_pScatterIndexBuf);
+                    DXUtils.DisposeAndNull(ref this.m_pScatterIndexBufSRV);
+                    DXUtils.DisposeAndNull(ref this.m_pScatterIndexBufUAV);
 
-                    D3D11Utils.DisposeAndNull(ref ppTessedIndicesBuf);
-                    D3D11Utils.DisposeAndNull(ref this.m_pTessedIndicesBufUAV);
+                    DXUtils.DisposeAndNull(ref ppTessedIndicesBuf);
+                    DXUtils.DisposeAndNull(ref this.m_pTessedIndicesBufUAV);
 
                     this.m_pScatterIndexBuf = d3dDevice.CreateBuffer(new D3D11BufferDesc
                     {

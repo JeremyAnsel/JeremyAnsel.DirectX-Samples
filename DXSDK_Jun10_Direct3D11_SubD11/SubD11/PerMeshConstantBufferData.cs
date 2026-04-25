@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace SubD11
 {
-    [StructLayout(LayoutKind.Sequential)]
-    struct PerMeshConstantBufferData
+    unsafe struct PerMeshConstantBufferData
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.MaxBoneMatrices)]
-        public XMMatrix[] mConstBoneWorld;
+        public fixed float mConstBoneWorld[16 * Constants.MaxBoneMatrices];
 
         public static readonly uint Size = (uint)Marshal.SizeOf(typeof(PerMeshConstantBufferData));
     }

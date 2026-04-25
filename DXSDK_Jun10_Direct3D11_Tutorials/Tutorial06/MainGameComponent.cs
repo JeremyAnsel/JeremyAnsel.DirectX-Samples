@@ -3,6 +3,7 @@ using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.DXMath;
 using System.IO;
 using JeremyAnsel.DirectX.Dxgi;
+using JeremyAnsel.DirectX.DXCommon;
 
 namespace Tutorial06
 {
@@ -166,13 +167,13 @@ namespace Tutorial06
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.vertexShader);
-            D3D11Utils.DisposeAndNull(ref this.inputLayout);
-            D3D11Utils.DisposeAndNull(ref this.pixelShader);
-            D3D11Utils.DisposeAndNull(ref this.pixelShaderSolid);
-            D3D11Utils.DisposeAndNull(ref this.vertexBuffer);
-            D3D11Utils.DisposeAndNull(ref this.indexBuffer);
-            D3D11Utils.DisposeAndNull(ref this.constantBuffer);
+            DXUtils.DisposeAndNull(ref this.vertexShader);
+            DXUtils.DisposeAndNull(ref this.inputLayout);
+            DXUtils.DisposeAndNull(ref this.pixelShader);
+            DXUtils.DisposeAndNull(ref this.pixelShaderSolid);
+            DXUtils.DisposeAndNull(ref this.vertexBuffer);
+            DXUtils.DisposeAndNull(ref this.indexBuffer);
+            DXUtils.DisposeAndNull(ref this.constantBuffer);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -200,18 +201,13 @@ namespace Tutorial06
         {
             var context = this.deviceResources.D3DContext;
 
-            context.OutputMergerSetRenderTargets(new[] { this.deviceResources.D3DRenderTargetView }, this.deviceResources.D3DDepthStencilView);
-            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, new float[] { 0.0f, 0.125f, 0.3f, 1.0f });
+            context.OutputMergerSetRenderTargets(this.deviceResources.D3DRenderTargetView, this.deviceResources.D3DDepthStencilView);
+            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, 0.0f, 0.125f, 0.3f, 1.0f);
             context.ClearDepthStencilView(this.deviceResources.D3DDepthStencilView, D3D11ClearOptions.Depth, 1.0f, 0);
 
             context.InputAssemblerSetInputLayout(this.inputLayout);
 
-            context.InputAssemblerSetVertexBuffers(
-                0,
-                new[] { this.vertexBuffer },
-                new uint[] { SimpleVertex.Size },
-                new uint[] { 0 });
-
+            context.InputAssemblerSetVertexBuffers(0, this.vertexBuffer, SimpleVertex.Size, 0);
             context.InputAssemblerSetIndexBuffer(this.indexBuffer, DxgiFormat.R16UInt, 0);
             context.InputAssemblerSetPrimitiveTopology(D3D11PrimitiveTopology.TriangleList);
 
@@ -220,29 +216,19 @@ namespace Tutorial06
             cb.World = this.worldMatrix.Transpose();
             cb.View = this.viewMatrix.Transpose();
             cb.Projection = this.projectionMatrix.Transpose();
-
-            cb.LightDir = new XMFloat4[2];
-            cb.LightColor = new XMFloat4[2];
-
-            for (int i = 0; i < 2; i++)
-            {
-                cb.LightDir[i] = this.lightDirs[i];
-                cb.LightColor[i] = this.lightColors[i];
-            }
-
-            //cb.LightDir0 = this.lightDirs[0];
-            //cb.LightDir1 = this.lightDirs[1];
-            //cb.LightColor0 = this.lightColors[0];
-            //cb.LightColor1 = this.lightColors[1];
+            cb.LightDir0 = this.lightDirs[0];
+            cb.LightColor0 = this.lightColors[0];
+            cb.LightDir1 = this.lightDirs[1];
+            cb.LightColor1 = this.lightColors[1];
 
             cb.OutputColor = new XMFloat4(0, 0, 0, 0);
             context.UpdateSubresource(this.constantBuffer, 0, null, cb, 0, 0);
 
             // Render the cube
             context.VertexShaderSetShader(this.vertexShader, null);
-            context.VertexShaderSetConstantBuffers(0, new[] { this.constantBuffer });
+            context.VertexShaderSetConstantBuffers(0, this.constantBuffer);
             context.PixelShaderSetShader(this.pixelShader, null);
-            context.PixelShaderSetConstantBuffers(0, new[] { this.constantBuffer });
+            context.PixelShaderSetConstantBuffers(0, this.constantBuffer);
             context.DrawIndexed((uint)MainGameComponent.Indices.Length, 0, 0);
 
             // Render each light

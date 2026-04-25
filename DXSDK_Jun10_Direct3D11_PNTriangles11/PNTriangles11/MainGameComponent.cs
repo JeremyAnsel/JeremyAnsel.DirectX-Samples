@@ -1,20 +1,16 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.D3DCompiler;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
 using JeremyAnsel.DirectX.SdkMesh;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PNTriangles11
 {
-    class MainGameComponent : IGameComponent
+    unsafe class MainGameComponent : IGameComponent
     {
         private DeviceResources deviceResources;
 
@@ -265,7 +261,7 @@ namespace PNTriangles11
             var device = this.deviceResources.D3DDevice;
 
             // Release any existing shader
-            D3D11Utils.DisposeAndNull(ref this.g_pPNTrianglesHS);
+            DXUtils.DisposeAndNull(ref this.g_pPNTrianglesHS);
 
             // Create the shaders
             D3DShaderMacro[] ShaderMacros = new[]
@@ -338,17 +334,15 @@ namespace PNTriangles11
                     .Replace("#include \"AdaptiveTessellation.hlsl\"", AdaptiveTessellationContent);
             }
 
-            D3DCompile.Compile(
+            using D3DCompileResult result = D3DCompile.Compile(
                 this.g_HS_PNTrianglesContent,
                 "HS_PNTriangles",
                 ShaderMacros,
                 "HS_PNTriangles",
                 "hs_5_0",
-                D3DCompileOptions.OptimizationLevel3 | D3DCompileOptions.WarningsAreErrors,
-                out byte[] blob,
-                out _);
+                D3DCompileOptions.OptimizationLevel3 | D3DCompileOptions.WarningsAreErrors);
 
-            this.g_pPNTrianglesHS = device.CreateHullShader(blob, null);
+            this.g_pPNTrianglesHS = device.CreateHullShader(result.GetDataAsSpan(), null);
             this.g_pPNTrianglesHS.SetDebugName($"Hull (GUI settings {switches:X8})");
         }
 
@@ -360,22 +354,22 @@ namespace PNTriangles11
                 this.g_SceneMesh[iMeshType] = null;
             }
 
-            D3D11Utils.DisposeAndNull(ref this.g_pSceneVS);
-            D3D11Utils.DisposeAndNull(ref this.g_pSceneWithTessellationVS);
-            D3D11Utils.DisposeAndNull(ref this.g_pPNTrianglesHS);
-            D3D11Utils.DisposeAndNull(ref this.g_pPNTrianglesDS);
-            D3D11Utils.DisposeAndNull(ref this.g_pScenePS);
-            D3D11Utils.DisposeAndNull(ref this.g_pTexturedScenePS);
+            DXUtils.DisposeAndNull(ref this.g_pSceneVS);
+            DXUtils.DisposeAndNull(ref this.g_pSceneWithTessellationVS);
+            DXUtils.DisposeAndNull(ref this.g_pPNTrianglesHS);
+            DXUtils.DisposeAndNull(ref this.g_pPNTrianglesDS);
+            DXUtils.DisposeAndNull(ref this.g_pScenePS);
+            DXUtils.DisposeAndNull(ref this.g_pTexturedScenePS);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pcbPNTriangles);
+            DXUtils.DisposeAndNull(ref this.g_pcbPNTriangles);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pSceneVertexLayout);
+            DXUtils.DisposeAndNull(ref this.g_pSceneVertexLayout);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pSamplePoint);
-            D3D11Utils.DisposeAndNull(ref this.g_pSampleLinear);
+            DXUtils.DisposeAndNull(ref this.g_pSamplePoint);
+            DXUtils.DisposeAndNull(ref this.g_pSampleLinear);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pRasterizerStateWireframe);
-            D3D11Utils.DisposeAndNull(ref this.g_pRasterizerStateSolid);
+            DXUtils.DisposeAndNull(ref this.g_pRasterizerStateWireframe);
+            DXUtils.DisposeAndNull(ref this.g_pRasterizerStateSolid);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -453,8 +447,9 @@ namespace PNTriangles11
                 fScreenParams = new XMVector(this.deviceResources.BackBufferWidth, this.deviceResources.BackBufferHeight, 0.0f, 0.0f),
                 fGUIParams1 = new XMVector(this.BackFaceCullEpsilon, this.SilhoutteEpsilon > 0.99f ? 0.99f : this.SilhoutteEpsilon, this.RangeScale, this.EdgeSize),
                 fGUIParams2 = new XMVector(this.ResolutionScale, ((this.ViewFrustumCullEpsilon * 2.0f) - 1.0f) * this.g_v3AdaptiveTessParams[meshTypeIndex].Z, 0.0f, 0.0f),
-                f4ViewFrustumPlanes = f4ViewFrustumPlanes
             };
+
+            f4ViewFrustumPlanes.AsSpan(0, 4).CopyTo(new Span<XMVector>(pPNTrianglesCB.f4ViewFrustumPlanes, 4));
 
             context.UpdateSubresource(this.g_pcbPNTriangles, 0, null, pPNTrianglesCB, 0, 0);
             context.VertexShaderSetConstantBuffers(this.g_iPNTRIANGLESCBBind, new[] { this.g_pcbPNTriangles });

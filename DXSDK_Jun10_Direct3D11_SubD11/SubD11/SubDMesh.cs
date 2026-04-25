@@ -1,4 +1,5 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.SdkMesh;
@@ -17,7 +18,7 @@ namespace SubD11
     /// This class handles most of the loading and conversion for a subd mesh.
     /// It also creates and tracks buffers used by the mesh.
     /// </summary>
-    class SubDMesh
+    unsafe class SubDMesh
     {
         private const uint g_iBindPerSubset = 3;
 
@@ -175,14 +176,14 @@ namespace SubD11
 
             this.m_PolyMeshPieces.Clear();
 
-            D3D11Utils.DisposeAndNull(ref this.m_pPerSubsetCB);
+            DXUtils.DisposeAndNull(ref this.m_pPerSubsetCB);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pDefaultDiffuseSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pDefaultDiffuseTexture);
-            D3D11Utils.DisposeAndNull(ref this.g_pDefaultNormalSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pDefaultNormalTexture);
-            D3D11Utils.DisposeAndNull(ref this.g_pDefaultSpecularSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pDefaultSpecularTexture);
+            DXUtils.DisposeAndNull(ref this.g_pDefaultDiffuseSRV);
+            DXUtils.DisposeAndNull(ref this.g_pDefaultDiffuseTexture);
+            DXUtils.DisposeAndNull(ref this.g_pDefaultNormalSRV);
+            DXUtils.DisposeAndNull(ref this.g_pDefaultNormalTexture);
+            DXUtils.DisposeAndNull(ref this.g_pDefaultSpecularSRV);
+            DXUtils.DisposeAndNull(ref this.g_pDefaultSpecularTexture);
 
             this.m_pMeshFile?.Release();
             this.m_pMeshFile = null;
@@ -425,7 +426,7 @@ namespace SubD11
 
                     for (int i = 0; i < iNumPatches; i++)
                     {
-                        patchData[i] = Marshal.PtrToStructure<PatchData>(patchDataPtr + i * (int)PatchData.Size);
+                        patchData[i] = *(PatchData*)(patchDataPtr + i * (int)PatchData.Size);
                     }
 
                     //D3D11MappedSubResource patchDataMap = this.d3dDeviceContext.Map(pMesh.VertexBuffers[1].Buffer, 0, D3D11MapCpuPermission.Read, D3D11MapOptions.None);
@@ -434,7 +435,7 @@ namespace SubD11
                     //{
                     //    for (int i = 0; i < iNumPatches; i++)
                     //    {
-                    //        patchData[i] = Marshal.PtrToStructure<PatchData>(patchDataMap.Data + i * (int)PatchData.Size);
+                    //        patchData[i] = *(PatchData*)(patchDataMap.Data + i * (int)PatchData.Size);
                     //    }
                     //}
                     //finally

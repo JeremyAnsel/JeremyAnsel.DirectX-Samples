@@ -1,5 +1,6 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.Dds;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
@@ -12,7 +13,7 @@ using System.Runtime.InteropServices;
 
 namespace DeferredParticles
 {
-    class MainGameComponent : IGameComponent
+    unsafe class MainGameComponent : IGameComponent
     {
         public const int MaxBuildings = 5;
         public const int MaxFlashColors = 4;
@@ -535,34 +536,34 @@ namespace DeferredParticles
                 0);
 
             // Create constants buffers
-            this.g_instancedGlobalsConstantBuffer = device.CreateBuffer(new D3D11BufferDesc(InstancedGlobalsConstantBuffer.Size, D3D11BindOptions.ConstantBuffer));
+            this.g_instancedGlobalsConstantBuffer = device.CreateBuffer(new D3D11BufferDesc((uint)sizeof(InstancedGlobalsConstantBuffer), D3D11BindOptions.ConstantBuffer));
             this.g_perFrameConstantBuffer = device.CreateBuffer(new D3D11BufferDesc(PerFrameConstantBuffer.Size, D3D11BindOptions.ConstantBuffer));
-            this.g_glowLightsConstantBuffer = device.CreateBuffer(new D3D11BufferDesc(GlowLightsConstantBuffer.Size, D3D11BindOptions.ConstantBuffer));
+            this.g_glowLightsConstantBuffer = device.CreateBuffer(new D3D11BufferDesc((uint)sizeof(GlowLightsConstantBuffer), D3D11BindOptions.ConstantBuffer));
         }
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref g_CompositeParticlesPS);
-            D3D11Utils.DisposeAndNull(ref g_CompositeParticlesVS);
-            D3D11Utils.DisposeAndNull(ref g_MeshInstVS);
-            D3D11Utils.DisposeAndNull(ref g_MeshPS);
-            D3D11Utils.DisposeAndNull(ref g_MeshVS);
-            D3D11Utils.DisposeAndNull(ref g_RenderParticlesDeferredPS);
-            D3D11Utils.DisposeAndNull(ref g_RenderParticlesPS);
-            D3D11Utils.DisposeAndNull(ref g_RenderParticlesVS);
+            DXUtils.DisposeAndNull(ref g_CompositeParticlesPS);
+            DXUtils.DisposeAndNull(ref g_CompositeParticlesVS);
+            DXUtils.DisposeAndNull(ref g_MeshInstVS);
+            DXUtils.DisposeAndNull(ref g_MeshPS);
+            DXUtils.DisposeAndNull(ref g_MeshVS);
+            DXUtils.DisposeAndNull(ref g_RenderParticlesDeferredPS);
+            DXUtils.DisposeAndNull(ref g_RenderParticlesPS);
+            DXUtils.DisposeAndNull(ref g_RenderParticlesVS);
 
-            D3D11Utils.DisposeAndNull(ref g_sampler);
-            D3D11Utils.DisposeAndNull(ref g_EnableDepthDepthStencilState);
-            D3D11Utils.DisposeAndNull(ref g_DisableDepthDepthStencilState);
-            D3D11Utils.DisposeAndNull(ref g_DepthReadDepthStencilState);
-            D3D11Utils.DisposeAndNull(ref g_DeferredBlending);
-            D3D11Utils.DisposeAndNull(ref g_ForwardBlending);
-            D3D11Utils.DisposeAndNull(ref g_CompositeBlending);
-            D3D11Utils.DisposeAndNull(ref g_DisableBlending);
+            DXUtils.DisposeAndNull(ref g_sampler);
+            DXUtils.DisposeAndNull(ref g_EnableDepthDepthStencilState);
+            DXUtils.DisposeAndNull(ref g_DisableDepthDepthStencilState);
+            DXUtils.DisposeAndNull(ref g_DepthReadDepthStencilState);
+            DXUtils.DisposeAndNull(ref g_DeferredBlending);
+            DXUtils.DisposeAndNull(ref g_ForwardBlending);
+            DXUtils.DisposeAndNull(ref g_CompositeBlending);
+            DXUtils.DisposeAndNull(ref g_DisableBlending);
 
-            D3D11Utils.DisposeAndNull(ref g_pVertexLayout);
-            D3D11Utils.DisposeAndNull(ref g_pScreenQuadLayout);
-            D3D11Utils.DisposeAndNull(ref g_pMeshLayout);
+            DXUtils.DisposeAndNull(ref g_pVertexLayout);
+            DXUtils.DisposeAndNull(ref g_pScreenQuadLayout);
+            DXUtils.DisposeAndNull(ref g_pMeshLayout);
 
             g_WallMesh?.Release();
             for (uint i = 0; i < BreakableWall.NumChunks; i++)
@@ -570,13 +571,13 @@ namespace DeferredParticles
                 g_ChunkMesh[i]?.Release();
             }
 
-            D3D11Utils.DisposeAndNull(ref g_pScreenQuadVB);
-            D3D11Utils.DisposeAndNull(ref g_pParticleBuffer);
-            D3D11Utils.DisposeAndNull(ref g_pParticleTextureSRV);
+            DXUtils.DisposeAndNull(ref g_pScreenQuadVB);
+            DXUtils.DisposeAndNull(ref g_pParticleBuffer);
+            DXUtils.DisposeAndNull(ref g_pParticleTextureSRV);
 
-            D3D11Utils.DisposeAndNull(ref g_instancedGlobalsConstantBuffer);
-            D3D11Utils.DisposeAndNull(ref g_perFrameConstantBuffer);
-            D3D11Utils.DisposeAndNull(ref g_glowLightsConstantBuffer);
+            DXUtils.DisposeAndNull(ref g_instancedGlobalsConstantBuffer);
+            DXUtils.DisposeAndNull(ref g_perFrameConstantBuffer);
+            DXUtils.DisposeAndNull(ref g_glowLightsConstantBuffer);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -640,12 +641,12 @@ namespace DeferredParticles
 
         public void ReleaseWindowSizeDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref g_pOffscreenParticleTex);
-            D3D11Utils.DisposeAndNull(ref g_pOffscreenParticleSRV);
-            D3D11Utils.DisposeAndNull(ref g_pOffscreenParticleRTV);
-            D3D11Utils.DisposeAndNull(ref g_pOffscreenParticleColorTex);
-            D3D11Utils.DisposeAndNull(ref g_pOffscreenParticleColorSRV);
-            D3D11Utils.DisposeAndNull(ref g_pOffscreenParticleColorRTV);
+            DXUtils.DisposeAndNull(ref g_pOffscreenParticleTex);
+            DXUtils.DisposeAndNull(ref g_pOffscreenParticleSRV);
+            DXUtils.DisposeAndNull(ref g_pOffscreenParticleRTV);
+            DXUtils.DisposeAndNull(ref g_pOffscreenParticleColorTex);
+            DXUtils.DisposeAndNull(ref g_pOffscreenParticleColorSRV);
+            DXUtils.DisposeAndNull(ref g_pOffscreenParticleColorRTV);
         }
 
         public void Update(ITimer timer)
@@ -657,6 +658,11 @@ namespace DeferredParticles
 
             var device = deviceResources.D3DDevice;
             var context = deviceResources.D3DContext;
+
+            if (device is null || context is null)
+            {
+                return;
+            }
 
             g_time = (float)timer.TotalSeconds;
 
@@ -815,11 +821,12 @@ namespace DeferredParticles
             GlowLightsConstantBuffer cbGlowLights = new()
             {
                 g_NumGlowLights = (uint)NumActiveSystems,
-                g_vGlowLightPosIntensity = vGlowLightPosIntensity,
-                g_vGlowLightColor = vGlowLightColor,
                 g_vGlowLightAttenuation = g_vFlashAttenuation,
                 g_vMeshLightAttenuation = g_vMeshLightAttenuation
             };
+
+            vGlowLightPosIntensity.AsSpan(0, NumActiveSystems).CopyTo(new Span<XMVector>(cbGlowLights.g_vGlowLightPosIntensity.Buffer, NumActiveSystems));
+            vGlowLightColor.AsSpan(0, NumActiveSystems).CopyTo(new Span<XMVector>(cbGlowLights.g_vGlowLightColor.Buffer, NumActiveSystems));
 
             context.UpdateSubresource(g_glowLightsConstantBuffer, 0, null, cbGlowLights, 0, 0);
         }
@@ -887,10 +894,7 @@ namespace DeferredParticles
             context.InputAssemblerSetInputLayout(g_pMeshLayout);
             context.PixelShaderSetSamplers(0, new[] { g_sampler });
 
-            InstancedGlobalsConstantBuffer cbInstancedGlobals = new()
-            {
-                g_mWorldInst = new XMMatrix[MaxInstances]
-            };
+            InstancedGlobalsConstantBuffer cbInstancedGlobals = new();
 
             int NumMeshes = 0;
             int numrendered = 0;
@@ -904,7 +908,7 @@ namespace DeferredParticles
 
                 for (int i = 0; i < NumToRender; i++)
                 {
-                    cbInstancedGlobals.g_mWorldInst[i] = g_BaseMeshMatrices[numrendered + i].Transpose();
+                    ((XMMatrix*)cbInstancedGlobals.g_mWorldInst.Buffer)[i] = g_BaseMeshMatrices[numrendered + i].Transpose();
                 }
 
                 context.UpdateSubresource(g_instancedGlobalsConstantBuffer, 0, null, cbInstancedGlobals, 0, 0);
@@ -928,7 +932,7 @@ namespace DeferredParticles
 
                     for (int i = 0; i < NumToRender; i++)
                     {
-                        cbInstancedGlobals.g_mWorldInst[i] = g_ChunkMeshMatrices[c][numrendered + i].Transpose();
+                        ((XMMatrix*)cbInstancedGlobals.g_mWorldInst.Buffer)[i] = g_ChunkMeshMatrices[c][numrendered + i].Transpose();
                     }
 
                     context.UpdateSubresource(g_instancedGlobalsConstantBuffer, 0, null, cbInstancedGlobals, 0, 0);
@@ -1029,7 +1033,8 @@ namespace DeferredParticles
             context.ClearRenderTargetView(g_pOffscreenParticleColorRTV, color);
 
             // get the old render targets
-            context.OutputMergerGetRenderTargets(2, out D3D11RenderTargetView[] pOldRTV, out D3D11DepthStencilView pOldDSV);
+            D3D11RenderTargetView[] pOldRTV = new D3D11RenderTargetView[2];
+            context.OutputMergerGetRenderTargets(pOldRTV, out D3D11DepthStencilView pOldDSV);
 
             // Set the new render targets
             context.OutputMergerSetRenderTargets(new[] { g_pOffscreenParticleRTV, g_pOffscreenParticleColorRTV }, pOldDSV);
@@ -1040,9 +1045,9 @@ namespace DeferredParticles
 
             // restore the original render targets
             context.OutputMergerSetRenderTargets(pOldRTV, pOldDSV);
-            D3D11Utils.DisposeAndNull(ref pOldRTV[0]);
-            D3D11Utils.DisposeAndNull(ref pOldRTV[1]);
-            D3D11Utils.DisposeAndNull(ref pOldDSV);
+            DXUtils.DisposeAndNull(ref pOldRTV[0]);
+            DXUtils.DisposeAndNull(ref pOldRTV[1]);
+            DXUtils.DisposeAndNull(ref pOldDSV);
         }
 
         /// <summary>
@@ -1068,7 +1073,7 @@ namespace DeferredParticles
             context.Draw(4, 0);
 
             // Un-set this resource, as it's associated with an OM output
-            context.PixelShaderSetShaderResources(1, new D3D11ShaderResourceView[] { null });
+            context.PixelShaderSetShaderResources(1, (D3D11ShaderResourceView)null);
         }
 
         private void RenderParticlesToBufferTechnique()

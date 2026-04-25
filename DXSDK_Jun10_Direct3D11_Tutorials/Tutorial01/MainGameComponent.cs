@@ -44,8 +44,8 @@ namespace Tutorial01
         {
             var context = this.deviceResources.D3DContext;
 
-            context.OutputMergerSetRenderTargets(new[] { this.deviceResources.D3DRenderTargetView }, null);
-            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, new float[] { 0.0f, 0.125f, 0.3f, 1.0f });
+            context.OutputMergerSetRenderTargets(this.deviceResources.D3DRenderTargetView, null);
+            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, 0.0f, 0.125f, 0.3f, 1.0f);
         }
     }
 }

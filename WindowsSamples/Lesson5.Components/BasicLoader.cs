@@ -1,4 +1,5 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace Lesson5.Components
             }
             catch
             {
-                D3D11Utils.DisposeAndNull(ref shader);
+                DXUtils.DisposeAndNull(ref shader);
                 throw;
             }
         }
@@ -111,7 +112,7 @@ namespace Lesson5.Components
             }
             catch
             {
-                D3D11Utils.DisposeAndNull(ref texture2D);
+                DXUtils.DisposeAndNull(ref texture2D);
                 throw;
             }
 

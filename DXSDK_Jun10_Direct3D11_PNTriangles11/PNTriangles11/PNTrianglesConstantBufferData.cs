@@ -12,8 +12,7 @@ namespace PNTriangles11
     /// <summary>
     /// Constant buffer layout for transfering data to the PN-Triangles HLSL functions
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    struct PNTrianglesConstantBufferData
+    unsafe struct PNTrianglesConstantBufferData
     {
         // World matrix for object
         public XMMatrix f4x4World;
@@ -46,8 +45,7 @@ namespace PNTriangles11
         public XMVector fGUIParams2;
 
         // View frustum planes
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public XMVector[] f4ViewFrustumPlanes;
+        public fixed float f4ViewFrustumPlanes[4 * 4];
 
         public static readonly uint Size = (uint)Marshal.SizeOf(typeof(PNTrianglesConstantBufferData));
     }

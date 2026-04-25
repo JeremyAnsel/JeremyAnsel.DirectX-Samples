@@ -1,4 +1,5 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
@@ -91,14 +92,14 @@ namespace HDRToneMappingCS11
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.m_pEnvironmentMap);
-            D3D11Utils.DisposeAndNull(ref this.m_pEnvironmentRV);
-            D3D11Utils.DisposeAndNull(ref this.m_pSam);
-            D3D11Utils.DisposeAndNull(ref this.m_pVertexShader);
-            D3D11Utils.DisposeAndNull(ref this.m_pPixelShader);
-            D3D11Utils.DisposeAndNull(ref this.m_pVertexLayout);
-            D3D11Utils.DisposeAndNull(ref this.m_pcbVSPerObject);
-            D3D11Utils.DisposeAndNull(ref this.m_pDepthStencilState);
+            DXUtils.DisposeAndNull(ref this.m_pEnvironmentMap);
+            DXUtils.DisposeAndNull(ref this.m_pEnvironmentRV);
+            DXUtils.DisposeAndNull(ref this.m_pSam);
+            DXUtils.DisposeAndNull(ref this.m_pVertexShader);
+            DXUtils.DisposeAndNull(ref this.m_pPixelShader);
+            DXUtils.DisposeAndNull(ref this.m_pVertexLayout);
+            DXUtils.DisposeAndNull(ref this.m_pcbVSPerObject);
+            DXUtils.DisposeAndNull(ref this.m_pDepthStencilState);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -131,7 +132,7 @@ namespace HDRToneMappingCS11
 
         public void ReleaseWindowSizeDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.m_pVB);
+            DXUtils.DisposeAndNull(ref this.m_pVB);
         }
 
         public void Render(XMMatrix pmWorldViewProj)
@@ -160,7 +161,7 @@ namespace HDRToneMappingCS11
             context.PixelShaderSetSamplers(0, new[] { this.m_pSam });
             context.PixelShaderSetShaderResources(0, new[] { this.m_pEnvironmentRV });
 
-            context.OutputMergerGetDepthStencilState(out D3D11DepthStencilState pDepthStencilStateStored, out uint StencilRef);
+            D3D11DepthStencilState pDepthStencilStateStored = context.OutputMergerGetDepthStencilState(out uint StencilRef);
             context.OutputMergerSetDepthStencilState(this.m_pDepthStencilState, 0);
 
             context.Draw(4, 0);

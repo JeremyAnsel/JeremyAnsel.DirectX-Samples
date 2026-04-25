@@ -41,7 +41,7 @@ namespace GPUProfiler
 
                 context.End(queryEvent);
 
-                while (context.GetData(queryEvent))
+                while (!context.GetData(queryEvent))
                 {
                     System.Threading.Thread.Sleep(1);
                 }
@@ -50,21 +50,21 @@ namespace GPUProfiler
                 context.End(queryDisjoint);
 
                 long timestampStart;
-                while (context.GetData(queryStart, D3D11AsyncGetDataOptions.None, out timestampStart))
+                while (!context.GetData(queryStart, D3D11AsyncGetDataOptions.None, out timestampStart))
                 {
                     Console.WriteLine("timestampStart sleep");
                     System.Threading.Thread.Sleep(1);
                 }
 
                 long timestampEnd;
-                while (context.GetData(queryEnd, D3D11AsyncGetDataOptions.None, out timestampEnd))
+                while (!context.GetData(queryEnd, D3D11AsyncGetDataOptions.None, out timestampEnd))
                 {
                     Console.WriteLine("timestampEnd sleep");
                     System.Threading.Thread.Sleep(1);
                 }
 
                 D3D11QueryDataTimestampDisjoint disjointData;
-                while (context.GetData(queryDisjoint, D3D11AsyncGetDataOptions.None, out disjointData))
+                while (!context.GetData(queryDisjoint, D3D11AsyncGetDataOptions.None, out disjointData))
                 {
                     Console.WriteLine("disjointData sleep");
                     System.Threading.Thread.Sleep(1);

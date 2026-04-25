@@ -1,4 +1,5 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
@@ -14,7 +15,7 @@ using static System.Reflection.Metadata.BlobBuilder;
 
 namespace SubD11
 {
-    class MainGameComponent : IGameComponent
+    unsafe class MainGameComponent : IGameComponent
     {
         private DeviceResources deviceResources;
 
@@ -220,8 +221,6 @@ namespace SubD11
             var context = this.deviceResources.D3DContext;
 
             var data = new TangentStencilConstantBufferData();
-            data.TanM = new float[Constants.MaxValence * 64 * 4];
-            data.fCi = new float[Constants.MaxValence * 4];
 
             for (int v = 0; v < Constants.MaxValence; v++)
             {
@@ -249,24 +248,24 @@ namespace SubD11
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.g_pPatchLayout);
-            D3D11Utils.DisposeAndNull(ref this.g_pMeshLayout);
-            D3D11Utils.DisposeAndNull(ref this.g_pcbTangentStencilConstants);
-            D3D11Utils.DisposeAndNull(ref this.g_pcbPerMesh);
-            D3D11Utils.DisposeAndNull(ref this.g_pcbPerFrame);
+            DXUtils.DisposeAndNull(ref this.g_pPatchLayout);
+            DXUtils.DisposeAndNull(ref this.g_pMeshLayout);
+            DXUtils.DisposeAndNull(ref this.g_pcbTangentStencilConstants);
+            DXUtils.DisposeAndNull(ref this.g_pcbPerMesh);
+            DXUtils.DisposeAndNull(ref this.g_pcbPerFrame);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pPatchSkinningVS);
-            D3D11Utils.DisposeAndNull(ref this.g_pMeshSkinningVS);
-            D3D11Utils.DisposeAndNull(ref this.g_pSubDToBezierHS);
-            D3D11Utils.DisposeAndNull(ref this.g_pSubDToBezierHS4444);
-            D3D11Utils.DisposeAndNull(ref this.g_pBezierEvalDS);
-            D3D11Utils.DisposeAndNull(ref this.g_pSmoothPS);
-            D3D11Utils.DisposeAndNull(ref this.g_pSolidColorPS);
+            DXUtils.DisposeAndNull(ref this.g_pPatchSkinningVS);
+            DXUtils.DisposeAndNull(ref this.g_pMeshSkinningVS);
+            DXUtils.DisposeAndNull(ref this.g_pSubDToBezierHS);
+            DXUtils.DisposeAndNull(ref this.g_pSubDToBezierHS4444);
+            DXUtils.DisposeAndNull(ref this.g_pBezierEvalDS);
+            DXUtils.DisposeAndNull(ref this.g_pSmoothPS);
+            DXUtils.DisposeAndNull(ref this.g_pSolidColorPS);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pRasterizerStateSolid);
-            D3D11Utils.DisposeAndNull(ref this.g_pRasterizerStateWireframe);
-            D3D11Utils.DisposeAndNull(ref this.g_pSamplerStateHeightMap);
-            D3D11Utils.DisposeAndNull(ref this.g_pSamplerStateNormalMap);
+            DXUtils.DisposeAndNull(ref this.g_pRasterizerStateSolid);
+            DXUtils.DisposeAndNull(ref this.g_pRasterizerStateWireframe);
+            DXUtils.DisposeAndNull(ref this.g_pSamplerStateHeightMap);
+            DXUtils.DisposeAndNull(ref this.g_pSamplerStateNormalMap);
 
             this.g_SubDMesh?.Destroy();
         }
@@ -400,10 +399,7 @@ namespace SubD11
             for (int i = 0; i < PieceCount; i++)
             {
                 // Per frame cb update
-                PerMeshConstantBufferData data = new()
-                {
-                    mConstBoneWorld = new XMMatrix[Constants.MaxBoneMatrices]
-                };
+                PerMeshConstantBufferData data = new();
 
                 int MeshIndex = pMesh.GetPatchMeshIndex(i);
                 int NumTransforms = pMesh.GetNumInfluences(MeshIndex);
@@ -414,18 +410,18 @@ namespace SubD11
                 {
                     if (!s_bEnableAnimation)
                     {
-                        data.mConstBoneWorld[j] = XMMatrix.Identity;
+                        ((XMMatrix*)data.mConstBoneWorld)[j] = XMMatrix.Identity;
                     }
                     else
                     {
-                        data.mConstBoneWorld[j] = pMesh.GetInfluenceMatrix(MeshIndex, j).Transpose();
+                        ((XMMatrix*)data.mConstBoneWorld)[j] = pMesh.GetInfluenceMatrix(MeshIndex, j).Transpose();
                     }
                 }
 
                 if (NumTransforms == 0)
                 {
                     pMesh.GetPatchPieceTransform(i, out XMMatrix matTransform);
-                    data.mConstBoneWorld[0] = matTransform.Transpose();
+                    ((XMMatrix*)data.mConstBoneWorld)[0] = matTransform.Transpose();
                 }
 
                 context.UpdateSubresource(this.g_pcbPerMesh, 0, null, data, 0, 0);
@@ -440,10 +436,7 @@ namespace SubD11
             for (int i = 0; i < PieceCount; i++)
             {
                 // Per frame cb update
-                PerMeshConstantBufferData data = new()
-                {
-                    mConstBoneWorld = new XMMatrix[Constants.MaxBoneMatrices]
-                };
+                PerMeshConstantBufferData data = new();
 
                 int MeshIndex = pMesh.GetPatchMeshIndex(i);
                 int NumTransforms = pMesh.GetNumInfluences(MeshIndex);
@@ -454,18 +447,18 @@ namespace SubD11
                 {
                     if (!s_bEnableAnimation)
                     {
-                        data.mConstBoneWorld[j] = XMMatrix.Identity;
+                        ((XMMatrix*)data.mConstBoneWorld)[j] = XMMatrix.Identity;
                     }
                     else
                     {
-                        data.mConstBoneWorld[j] = pMesh.GetInfluenceMatrix(MeshIndex, j).Transpose();
+                        ((XMMatrix*)data.mConstBoneWorld)[j] = pMesh.GetInfluenceMatrix(MeshIndex, j).Transpose();
                     }
                 }
 
                 if (NumTransforms == 0)
                 {
                     pMesh.GetPatchPieceTransform(i, out XMMatrix matTransform);
-                    data.mConstBoneWorld[0] = matTransform.Transpose();
+                    ((XMMatrix*)data.mConstBoneWorld)[0] = matTransform.Transpose();
                 }
 
                 context.UpdateSubresource(this.g_pcbPerMesh, 0, null, data, 0, 0);
@@ -487,10 +480,7 @@ namespace SubD11
             for (int i = 0; i < PieceCount; i++)
             {
                 // Per frame cb update
-                PerMeshConstantBufferData data = new()
-                {
-                    mConstBoneWorld = new XMMatrix[Constants.MaxBoneMatrices]
-                };
+                PerMeshConstantBufferData data = new();
 
                 int MeshIndex = pMesh.GetPolyMeshIndex(i);
                 int NumTransforms = pMesh.GetNumInfluences(MeshIndex);
@@ -501,18 +491,18 @@ namespace SubD11
                 {
                     if (!s_bEnableAnimation)
                     {
-                        data.mConstBoneWorld[j] = XMMatrix.Identity;
+                        ((XMMatrix*)data.mConstBoneWorld)[j] = XMMatrix.Identity;
                     }
                     else
                     {
-                        data.mConstBoneWorld[j] = pMesh.GetInfluenceMatrix(MeshIndex, j).Transpose();
+                        ((XMMatrix*)data.mConstBoneWorld)[j] = pMesh.GetInfluenceMatrix(MeshIndex, j).Transpose();
                     }
                 }
 
                 if (NumTransforms == 0)
                 {
                     pMesh.GetPolyMeshPieceTransform(i, out XMMatrix matTransform);
-                    data.mConstBoneWorld[0] = matTransform.Transpose();
+                    ((XMMatrix*)data.mConstBoneWorld)[0] = matTransform.Transpose();
                 }
 
                 context.UpdateSubresource(this.g_pcbPerMesh, 0, null, data, 0, 0);

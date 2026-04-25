@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace FluidCS11
 {
-    [StructLayout(LayoutKind.Sequential)]
-    struct SimulationConstantBuffer
+    unsafe struct SimulationConstantBuffer
     {
         public uint NumParticles;
 
@@ -37,8 +36,7 @@ namespace FluidCS11
 
         public XMFloat4 GridDim;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public XMFloat4[] Planes;
+        public fixed float Planes[4 * 4];
 
         public static readonly uint Size = (uint)Marshal.SizeOf(typeof(SimulationConstantBuffer));
     }

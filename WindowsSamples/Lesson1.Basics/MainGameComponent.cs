@@ -45,8 +45,8 @@ namespace Lesson1.Basics
 
         public void Render()
         {
-            this.deviceResources.D3DContext.OutputMergerSetRenderTargets(new[] { this.deviceResources.D3DRenderTargetView }, null);
-            this.deviceResources.D3DContext.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, new float[] { 0.071f, 0.04f, 0.561f, 1.0f });
+            this.deviceResources.D3DContext.OutputMergerSetRenderTargets(this.deviceResources.D3DRenderTargetView, null);
+            this.deviceResources.D3DContext.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, 0.071f, 0.04f, 0.561f, 1.0f);
         }
     }
 }

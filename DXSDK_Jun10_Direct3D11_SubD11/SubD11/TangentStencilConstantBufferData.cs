@@ -8,19 +8,17 @@ using System.Threading.Tasks;
 namespace SubD11
 {
     [StructLayout(LayoutKind.Sequential)]
-    struct TangentStencilConstantBufferData
+    unsafe struct TangentStencilConstantBufferData
     {
         /// <summary>
         /// Tangent patch stencils precomputed by the application
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.MaxValence * 64 * 4)]
-        public float[] TanM;
+        public fixed float TanM[Constants.MaxValence * 64 * 4];
 
         /// <summary>
         /// Valence coefficients precomputed by the application
         /// </summary>
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.MaxValence * 4)]
-        public float[] fCi;
+        public fixed float fCi[Constants.MaxValence * 4];
 
         public static readonly uint Size = (uint)Marshal.SizeOf(typeof(TangentStencilConstantBufferData));
     }

@@ -1,4 +1,5 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.SdkMesh;
 using System;
@@ -59,13 +60,13 @@ namespace SubD11
 
         public void Destroy()
         {
-            D3D11Utils.DisposeAndNull(ref this.m_pPerPatchDataSRV);
-            D3D11Utils.DisposeAndNull(ref this.m_pMyExtraordinaryPatchData);
-            D3D11Utils.DisposeAndNull(ref this.m_pMyExtraordinaryPatchDataSRV);
-            D3D11Utils.DisposeAndNull(ref this.m_pMyRegularPatchData);
-            D3D11Utils.DisposeAndNull(ref this.m_pMyRegularPatchDataSRV);
-            D3D11Utils.DisposeAndNull(ref this.m_pMyRegularPatchIB);
-            D3D11Utils.DisposeAndNull(ref this.m_pMyExtraordinaryPatchIB);
+            DXUtils.DisposeAndNull(ref this.m_pPerPatchDataSRV);
+            DXUtils.DisposeAndNull(ref this.m_pMyExtraordinaryPatchData);
+            DXUtils.DisposeAndNull(ref this.m_pMyExtraordinaryPatchDataSRV);
+            DXUtils.DisposeAndNull(ref this.m_pMyRegularPatchData);
+            DXUtils.DisposeAndNull(ref this.m_pMyRegularPatchDataSRV);
+            DXUtils.DisposeAndNull(ref this.m_pMyRegularPatchIB);
+            DXUtils.DisposeAndNull(ref this.m_pMyExtraordinaryPatchIB);
         }
     }
 }

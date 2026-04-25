@@ -7,10 +7,9 @@ namespace HDRToneMappingCS11
     /// Constant buffer layout for transferring data to the CS for vertical convolution
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    struct FilterVerticalConstantBufferData
+    unsafe struct FilterVerticalConstantBufferData
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 15)]
-        public XMVector[] avSampleWeights;
+        public fixed float avSampleWeights[4 * 15];
 
         public XMUInt2 outputsize;
 

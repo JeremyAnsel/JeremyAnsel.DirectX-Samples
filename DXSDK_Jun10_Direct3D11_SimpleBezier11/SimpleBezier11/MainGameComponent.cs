@@ -1,11 +1,9 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace SimpleBezier11
 {
@@ -124,18 +122,18 @@ namespace SimpleBezier11
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.g_pVertexShader);
-            D3D11Utils.DisposeAndNull(ref this.g_pHullShaderInteger);
-            D3D11Utils.DisposeAndNull(ref this.g_pHullShaderFracEven);
-            D3D11Utils.DisposeAndNull(ref this.g_pHullShaderFracOdd);
-            D3D11Utils.DisposeAndNull(ref this.g_pDomainShader);
-            D3D11Utils.DisposeAndNull(ref this.g_pPixelShader);
-            D3D11Utils.DisposeAndNull(ref this.g_pSolidColorPS);
-            D3D11Utils.DisposeAndNull(ref this.g_pPatchLayout);
-            D3D11Utils.DisposeAndNull(ref this.g_pcbPerFrame);
-            D3D11Utils.DisposeAndNull(ref this.g_pRasterizerStateSolid);
-            D3D11Utils.DisposeAndNull(ref this.g_pRasterizerStateWireframe);
-            D3D11Utils.DisposeAndNull(ref this.g_pControlPointVB);
+            DXUtils.DisposeAndNull(ref this.g_pVertexShader);
+            DXUtils.DisposeAndNull(ref this.g_pHullShaderInteger);
+            DXUtils.DisposeAndNull(ref this.g_pHullShaderFracEven);
+            DXUtils.DisposeAndNull(ref this.g_pHullShaderFracOdd);
+            DXUtils.DisposeAndNull(ref this.g_pDomainShader);
+            DXUtils.DisposeAndNull(ref this.g_pPixelShader);
+            DXUtils.DisposeAndNull(ref this.g_pSolidColorPS);
+            DXUtils.DisposeAndNull(ref this.g_pPatchLayout);
+            DXUtils.DisposeAndNull(ref this.g_pcbPerFrame);
+            DXUtils.DisposeAndNull(ref this.g_pRasterizerStateSolid);
+            DXUtils.DisposeAndNull(ref this.g_pRasterizerStateWireframe);
+            DXUtils.DisposeAndNull(ref this.g_pControlPointVB);
         }
 
         public void CreateWindowSizeDependentResources()

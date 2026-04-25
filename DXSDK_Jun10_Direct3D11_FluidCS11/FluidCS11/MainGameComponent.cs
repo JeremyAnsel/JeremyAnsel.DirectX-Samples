@@ -1,4 +1,5 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
@@ -24,7 +25,7 @@ using System.Threading.Tasks;
 
 namespace FluidCS11
 {
-    class MainGameComponent : IGameComponent
+    unsafe class MainGameComponent : IGameComponent
     {
         private DeviceResources deviceResources;
 
@@ -139,7 +140,7 @@ namespace FluidCS11
             cb = this.deviceResources.D3DDevice.CreateBuffer(desc);
         }
 
-        private void CreateStructuredBuffer<T>(uint numElements, out D3D11Buffer buffer, out D3D11ShaderResourceView srv, out D3D11UnorderedAccessView uav, T[] initialData = null) where T : struct
+        private void CreateStructuredBuffer<T>(uint numElements, out D3D11Buffer buffer, out D3D11ShaderResourceView srv, out D3D11UnorderedAccessView uav, T[] initialData = null) where T : unmanaged
         {
             if (initialData is not null && initialData.Length != numElements)
             {
@@ -247,33 +248,33 @@ namespace FluidCS11
         {
             // Destroy the old buffers in case the number of particles has changed
 
-            D3D11Utils.DisposeAndNull(ref this.g_pParticles);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticlesSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticlesUAV);
+            DXUtils.DisposeAndNull(ref this.g_pParticles);
+            DXUtils.DisposeAndNull(ref this.g_pParticlesSRV);
+            DXUtils.DisposeAndNull(ref this.g_pParticlesUAV);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pSortedParticles);
-            D3D11Utils.DisposeAndNull(ref this.g_pSortedParticlesSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pSortedParticlesUAV);
+            DXUtils.DisposeAndNull(ref this.g_pSortedParticles);
+            DXUtils.DisposeAndNull(ref this.g_pSortedParticlesSRV);
+            DXUtils.DisposeAndNull(ref this.g_pSortedParticlesUAV);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleForces);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleForcesSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleForcesUAV);
+            DXUtils.DisposeAndNull(ref this.g_pParticleForces);
+            DXUtils.DisposeAndNull(ref this.g_pParticleForcesSRV);
+            DXUtils.DisposeAndNull(ref this.g_pParticleForcesUAV);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleDensity);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleDensitySRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleDensityUAV);
+            DXUtils.DisposeAndNull(ref this.g_pParticleDensity);
+            DXUtils.DisposeAndNull(ref this.g_pParticleDensitySRV);
+            DXUtils.DisposeAndNull(ref this.g_pParticleDensityUAV);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pGridSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pGridUAV);
-            D3D11Utils.DisposeAndNull(ref this.g_pGrid);
+            DXUtils.DisposeAndNull(ref this.g_pGridSRV);
+            DXUtils.DisposeAndNull(ref this.g_pGridUAV);
+            DXUtils.DisposeAndNull(ref this.g_pGrid);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pGridPingPongSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pGridPingPongUAV);
-            D3D11Utils.DisposeAndNull(ref this.g_pGridPingPong);
+            DXUtils.DisposeAndNull(ref this.g_pGridPingPongSRV);
+            DXUtils.DisposeAndNull(ref this.g_pGridPingPongUAV);
+            DXUtils.DisposeAndNull(ref this.g_pGridPingPong);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pGridIndicesSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pGridIndicesUAV);
-            D3D11Utils.DisposeAndNull(ref this.g_pGridIndices);
+            DXUtils.DisposeAndNull(ref this.g_pGridIndicesSRV);
+            DXUtils.DisposeAndNull(ref this.g_pGridIndicesUAV);
+            DXUtils.DisposeAndNull(ref this.g_pGridIndices);
 
             // Create the initial particle positions
             // This is only used to populate the GPU buffers on creation
@@ -332,55 +333,55 @@ namespace FluidCS11
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.g_pcbSimulationConstants);
-            D3D11Utils.DisposeAndNull(ref this.g_pcbRenderConstants);
-            D3D11Utils.DisposeAndNull(ref this.g_pSortCB);
+            DXUtils.DisposeAndNull(ref this.g_pcbSimulationConstants);
+            DXUtils.DisposeAndNull(ref this.g_pcbRenderConstants);
+            DXUtils.DisposeAndNull(ref this.g_pSortCB);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleVS);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleGS);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticlePS);
+            DXUtils.DisposeAndNull(ref this.g_pParticleVS);
+            DXUtils.DisposeAndNull(ref this.g_pParticleGS);
+            DXUtils.DisposeAndNull(ref this.g_pParticlePS);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pIntegrateCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pDensity_SimpleCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pForce_SimpleCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pDensity_SharedCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pForce_SharedCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pDensity_GridCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pForce_GridCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pBuildGridCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pClearGridIndicesCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pBuildGridIndicesCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pRearrangeParticlesCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pSortBitonic);
-            D3D11Utils.DisposeAndNull(ref this.g_pSortTranspose);
+            DXUtils.DisposeAndNull(ref this.g_pIntegrateCS);
+            DXUtils.DisposeAndNull(ref this.g_pDensity_SimpleCS);
+            DXUtils.DisposeAndNull(ref this.g_pForce_SimpleCS);
+            DXUtils.DisposeAndNull(ref this.g_pDensity_SharedCS);
+            DXUtils.DisposeAndNull(ref this.g_pForce_SharedCS);
+            DXUtils.DisposeAndNull(ref this.g_pDensity_GridCS);
+            DXUtils.DisposeAndNull(ref this.g_pForce_GridCS);
+            DXUtils.DisposeAndNull(ref this.g_pBuildGridCS);
+            DXUtils.DisposeAndNull(ref this.g_pClearGridIndicesCS);
+            DXUtils.DisposeAndNull(ref this.g_pBuildGridIndicesCS);
+            DXUtils.DisposeAndNull(ref this.g_pRearrangeParticlesCS);
+            DXUtils.DisposeAndNull(ref this.g_pSortBitonic);
+            DXUtils.DisposeAndNull(ref this.g_pSortTranspose);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pParticles);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticlesSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticlesUAV);
+            DXUtils.DisposeAndNull(ref this.g_pParticles);
+            DXUtils.DisposeAndNull(ref this.g_pParticlesSRV);
+            DXUtils.DisposeAndNull(ref this.g_pParticlesUAV);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pSortedParticles);
-            D3D11Utils.DisposeAndNull(ref this.g_pSortedParticlesSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pSortedParticlesUAV);
+            DXUtils.DisposeAndNull(ref this.g_pSortedParticles);
+            DXUtils.DisposeAndNull(ref this.g_pSortedParticlesSRV);
+            DXUtils.DisposeAndNull(ref this.g_pSortedParticlesUAV);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleForces);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleForcesSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleForcesUAV);
+            DXUtils.DisposeAndNull(ref this.g_pParticleForces);
+            DXUtils.DisposeAndNull(ref this.g_pParticleForcesSRV);
+            DXUtils.DisposeAndNull(ref this.g_pParticleForcesUAV);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleDensity);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleDensitySRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleDensityUAV);
+            DXUtils.DisposeAndNull(ref this.g_pParticleDensity);
+            DXUtils.DisposeAndNull(ref this.g_pParticleDensitySRV);
+            DXUtils.DisposeAndNull(ref this.g_pParticleDensityUAV);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pGridSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pGridUAV);
-            D3D11Utils.DisposeAndNull(ref this.g_pGrid);
+            DXUtils.DisposeAndNull(ref this.g_pGridSRV);
+            DXUtils.DisposeAndNull(ref this.g_pGridUAV);
+            DXUtils.DisposeAndNull(ref this.g_pGrid);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pGridPingPongSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pGridPingPongUAV);
-            D3D11Utils.DisposeAndNull(ref this.g_pGridPingPong);
+            DXUtils.DisposeAndNull(ref this.g_pGridPingPongSRV);
+            DXUtils.DisposeAndNull(ref this.g_pGridPingPongUAV);
+            DXUtils.DisposeAndNull(ref this.g_pGridPingPong);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pGridIndicesSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pGridIndicesUAV);
-            D3D11Utils.DisposeAndNull(ref this.g_pGridIndices);
+            DXUtils.DisposeAndNull(ref this.g_pGridIndicesSRV);
+            DXUtils.DisposeAndNull(ref this.g_pGridIndicesUAV);
+            DXUtils.DisposeAndNull(ref this.g_pGridIndices);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -528,7 +529,7 @@ namespace FluidCS11
 
             // Collision information for the map
             pData.WallStiffness = Constants.g_fWallStiffness;
-            pData.Planes = Constants.g_vPlanes;
+            Constants.g_vPlanes.AsSpan().CopyTo(new Span<XMFloat4>(pData.Planes, 4));
 
             context.UpdateSubresource(this.g_pcbSimulationConstants, 0, null, pData, 0, 0);
 

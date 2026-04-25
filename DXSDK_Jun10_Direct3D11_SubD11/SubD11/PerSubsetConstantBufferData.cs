@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace SubD11
 {
-    [StructLayout(LayoutKind.Sequential)]
     struct PerSubsetConstantBufferData
     {
         public int m_iPatchStartIndex;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-        private int[] m_Padding;
+        private int m_Padding1;
+        private int m_Padding2;
+        private int m_Padding3;
 
         public static readonly uint Size = (uint)Marshal.SizeOf(typeof(PerSubsetConstantBufferData));
     }

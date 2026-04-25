@@ -1,5 +1,6 @@
 ﻿using BasicMaths;
 using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -79,7 +80,7 @@ namespace Lesson5.Components
             }
             catch
             {
-                D3D11Utils.DisposeAndNull(ref vertexBuffer);
+                DXUtils.DisposeAndNull(ref vertexBuffer);
                 throw;
             }
 
@@ -152,7 +153,7 @@ namespace Lesson5.Components
             }
             catch
             {
-                D3D11Utils.DisposeAndNull(ref vertexBuffer);
+                DXUtils.DisposeAndNull(ref vertexBuffer);
                 throw;
             }
 
@@ -218,7 +219,7 @@ namespace Lesson5.Components
             }
             catch
             {
-                D3D11Utils.DisposeAndNull(ref vertexBuffer);
+                DXUtils.DisposeAndNull(ref vertexBuffer);
                 throw;
             }
 
@@ -286,7 +287,7 @@ namespace Lesson5.Components
             }
             catch
             {
-                D3D11Utils.DisposeAndNull(ref vertexBuffer);
+                DXUtils.DisposeAndNull(ref vertexBuffer);
                 throw;
             }
 
@@ -444,7 +445,7 @@ namespace Lesson5.Components
             }
             catch
             {
-                D3D11Utils.DisposeAndNull(ref vertexBuffer);
+                DXUtils.DisposeAndNull(ref vertexBuffer);
                 throw;
             }
 

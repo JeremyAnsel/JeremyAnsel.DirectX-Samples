@@ -3,12 +3,15 @@ using System.Runtime.InteropServices;
 
 namespace DeferredParticles
 {
-    [StructLayout(LayoutKind.Sequential)]
-    struct InstancedGlobalsConstantBuffer
+    unsafe struct InstancedGlobalsConstantBuffer
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MainGameComponent.MaxInstances)]
-        public XMMatrix[] g_mWorldInst;
+        public struct WorldInstBuffer
+        {
+            public fixed byte Buffer[TotalSize];
+            public const int Length = MainGameComponent.MaxInstances;
+            public const int TotalSize = sizeof(float) * 16 * Length;
+        }
 
-        public static readonly uint Size = (uint)Marshal.SizeOf(typeof(InstancedGlobalsConstantBuffer));
+        public WorldInstBuffer g_mWorldInst;
     }
 }

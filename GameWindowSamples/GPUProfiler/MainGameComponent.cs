@@ -47,8 +47,8 @@ namespace GPUProfiler
         {
             var context = deviceResources.D3DContext;
 
-            context.OutputMergerSetRenderTargets(new[] { this.deviceResources.D3DRenderTargetView }, null);
-            context.ClearRenderTargetView(deviceResources.D3DRenderTargetView, new float[] { 0.0f, 1.0f, 0.0f, 1.0f });
+            context.OutputMergerSetRenderTargets(this.deviceResources.D3DRenderTargetView, null);
+            context.ClearRenderTargetView(deviceResources.D3DRenderTargetView, 0.0f, 1.0f, 0.0f, 1.0f);
         }
     }
 }

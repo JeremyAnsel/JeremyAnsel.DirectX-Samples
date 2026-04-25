@@ -8,6 +8,7 @@ using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.Dxgi;
 using System.IO;
+using JeremyAnsel.DirectX.DXCommon;
 
 namespace OIT11
 {
@@ -128,11 +129,11 @@ namespace OIT11
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.vertexShader);
-            D3D11Utils.DisposeAndNull(ref this.vertexLayout);
-            D3D11Utils.DisposeAndNull(ref this.pixelShader);
-            D3D11Utils.DisposeAndNull(ref this.vertexBuffer);
-            D3D11Utils.DisposeAndNull(ref this.vertexShaderConstantBuffer);
+            DXUtils.DisposeAndNull(ref this.vertexShader);
+            DXUtils.DisposeAndNull(ref this.vertexLayout);
+            DXUtils.DisposeAndNull(ref this.pixelShader);
+            DXUtils.DisposeAndNull(ref this.vertexBuffer);
+            DXUtils.DisposeAndNull(ref this.vertexShaderConstantBuffer);
         }
 
         public void CreateWindowSizeDependentResources()

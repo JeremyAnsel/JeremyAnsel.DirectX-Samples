@@ -1,4 +1,5 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
@@ -117,12 +118,12 @@ namespace SimpleSample11
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.vertexShader);
-            D3D11Utils.DisposeAndNull(ref this.inputLayout);
-            D3D11Utils.DisposeAndNull(ref this.pixelShader);
-            D3D11Utils.DisposeAndNull(ref this.samplerLinear);
-            D3D11Utils.DisposeAndNull(ref this.perObjectConstantBuffer);
-            D3D11Utils.DisposeAndNull(ref this.perFrameConstantBuffer);
+            DXUtils.DisposeAndNull(ref this.vertexShader);
+            DXUtils.DisposeAndNull(ref this.inputLayout);
+            DXUtils.DisposeAndNull(ref this.pixelShader);
+            DXUtils.DisposeAndNull(ref this.samplerLinear);
+            DXUtils.DisposeAndNull(ref this.perObjectConstantBuffer);
+            DXUtils.DisposeAndNull(ref this.perFrameConstantBuffer);
 
             // Delete additional render resources here...
         }
@@ -147,8 +148,8 @@ namespace SimpleSample11
             var context = this.deviceResources.D3DContext;
 
             // Clear the render target and the depth stencil
-            context.OutputMergerSetRenderTargets(new[] { this.deviceResources.D3DRenderTargetView }, this.deviceResources.D3DDepthStencilView);
-            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, new float[] { 0.176f, 0.196f, 0.667f, 1.0f });
+            context.OutputMergerSetRenderTargets(this.deviceResources.D3DRenderTargetView, this.deviceResources.D3DDepthStencilView);
+            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, 0.176f, 0.196f, 0.667f, 1.0f);
             context.ClearDepthStencilView(this.deviceResources.D3DDepthStencilView, D3D11ClearOptions.Depth, 1.0f, 0);
 
             // Get the projection & view matrix from the camera class
@@ -171,13 +172,13 @@ namespace SimpleSample11
             pVSPerObject.MaterialDiffuseColor = new XMFloat4(0.7f, 0.7f, 0.7f, 1.0f);
             context.UpdateSubresource(this.perObjectConstantBuffer, 0, null, pVSPerObject, 0, 0);
 
-            context.VertexShaderSetConstantBuffers(0, new[] { this.perObjectConstantBuffer, this.perFrameConstantBuffer });
+            context.VertexShaderSetConstantBuffers(0, [this.perObjectConstantBuffer, this.perFrameConstantBuffer]);
 
             // Set render resources
             context.InputAssemblerSetInputLayout(this.inputLayout);
             context.VertexShaderSetShader(this.vertexShader, null);
             context.PixelShaderSetShader(this.pixelShader, null);
-            context.PixelShaderSetSamplers(0, new[] { this.samplerLinear });
+            context.PixelShaderSetSamplers(0, this.samplerLinear);
 
             // Render objects here...
         }

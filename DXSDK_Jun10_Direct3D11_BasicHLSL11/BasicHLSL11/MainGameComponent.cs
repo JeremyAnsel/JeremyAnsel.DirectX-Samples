@@ -1,4 +1,5 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
@@ -156,13 +157,13 @@ namespace BasicHLSL11
             this.mesh?.Release();
             this.mesh = null;
 
-            D3D11Utils.DisposeAndNull(ref this.vertexShader);
-            D3D11Utils.DisposeAndNull(ref this.inputLayout);
-            D3D11Utils.DisposeAndNull(ref this.pixelShader);
-            D3D11Utils.DisposeAndNull(ref this.sampler);
-            D3D11Utils.DisposeAndNull(ref this.constantBufferVSPerObject);
-            D3D11Utils.DisposeAndNull(ref this.constantBufferPSPerObject);
-            D3D11Utils.DisposeAndNull(ref this.constantBufferPSPerFrame);
+            DXUtils.DisposeAndNull(ref this.vertexShader);
+            DXUtils.DisposeAndNull(ref this.inputLayout);
+            DXUtils.DisposeAndNull(ref this.pixelShader);
+            DXUtils.DisposeAndNull(ref this.sampler);
+            DXUtils.DisposeAndNull(ref this.constantBufferVSPerObject);
+            DXUtils.DisposeAndNull(ref this.constantBufferPSPerObject);
+            DXUtils.DisposeAndNull(ref this.constantBufferPSPerFrame);
         }
 
         public void CreateWindowSizeDependentResources()

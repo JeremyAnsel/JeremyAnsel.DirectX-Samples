@@ -1,6 +1,7 @@
 ﻿using JeremyAnsel.DirectX.D2D1;
 using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.DWrite;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.GameWindow;
 using System;
@@ -46,7 +47,7 @@ namespace Direct2DAndDWrite
 
         public void ReleaseDeviceDependentResources()
         {
-            DWriteUtils.DisposeAndNull(ref this.textFormat);
+            DXUtils.DisposeAndNull(ref this.textFormat);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -78,11 +79,11 @@ namespace Direct2DAndDWrite
 
         public void ReleaseWindowSizeDependentResources()
         {
-            D2D1Utils.DisposeAndNull(ref this.bitmap);
-            D2D1Utils.DisposeAndNull(ref this.bitmapBrush);
+            DXUtils.DisposeAndNull(ref this.bitmap);
+            DXUtils.DisposeAndNull(ref this.bitmapBrush);
 
-            D2D1Utils.DisposeAndNull(ref this.textBrush);
-            DWriteUtils.DisposeAndNull(ref this.textLayout);
+            DXUtils.DisposeAndNull(ref this.textBrush);
+            DXUtils.DisposeAndNull(ref this.textLayout);
         }
 
         public void Update(ITimer timer)

@@ -336,10 +336,9 @@ namespace VarianceShadows11
             var device = this.deviceResources.D3DDevice;
             var context = this.deviceResources.D3DContext;
 
-            float[] ClearColor = new float[] { 0.0f, 0.55f, 0.55f, 1.0f };
             D3D11RenderTargetView pRTV = this.deviceResources.D3DRenderTargetView;
             D3D11DepthStencilView pDSV = this.deviceResources.D3DDepthStencilView;
-            context.ClearRenderTargetView(pRTV, ClearColor);
+            context.ClearRenderTargetView(pRTV, 0.0f, 0.55f, 0.55f, 1.0f);
             context.ClearDepthStencilView(pDSV, D3D11ClearOptions.Depth, 1.0f, 0);
 
             this.varianceShadow.InitFrame(device, this.selectedMesh);
@@ -355,8 +354,8 @@ namespace VarianceShadows11
 
             this.varianceShadow.RenderScene(context, pRTV, pDSV, this.selectedMesh, vp, this.VisualizeCascades);
 
-            context.RasterizerStageSetViewports(new D3D11Viewport[] { vp });
-            context.OutputMergerSetRenderTargets(new[] { pRTV }, pDSV);
+            context.RasterizerStageSetViewports(vp);
+            context.OutputMergerSetRenderTargets(pRTV, pDSV);
         }
     }
 }

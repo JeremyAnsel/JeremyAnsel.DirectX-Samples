@@ -1,5 +1,6 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.D3DCompiler;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.DXMath.Collision;
@@ -14,7 +15,7 @@ namespace VarianceShadows11
     // Initialize the Manager.  The manager performs all the work of caculating the render 
     // paramters of the shadow, creating the D3D resources, rendering the shadow, and rendering
     // the actual scene.
-    class VarianceShadowsManager
+    unsafe class VarianceShadowsManager
     {
         private static readonly XMVector HalfVector = new XMVector(0.5f, 0.5f, 0.5f, 0.5f);
         private static readonly XMVector MultiplySetzwToZero = new XMVector(1.0f, 1.0f, 0.0f, 0.0f);
@@ -176,31 +177,29 @@ namespace VarianceShadows11
             {
                 kernelDefines[0].Definition = iKernelSize.ToString(CultureInfo.InvariantCulture);
 
-                D3DCompile.Compile(
+                using (D3DCompileResult result = D3DCompile.Compile(
                     QuadShadersResources.Shader,
                     "QuadShaders",
                     kernelDefines,
                     "PSBlurX",
                     PsModel,
-                    D3DCompileOptions.OptimizationLevel3,
-                    out byte[] shaderBytecodeX,
-                    out _);
+                    D3DCompileOptions.OptimizationLevel3))
+                {
+                    this.m_ppsQuadBlurX[iBlurKernelIndex] = pd3dDevice.CreatePixelShader(result.GetDataAsSpan(), null);
+                    this.m_ppsQuadBlurX[iBlurKernelIndex].SetDebugName("2DQuadShaders - PSBlurX (" + iKernelSize.ToString(CultureInfo.InvariantCulture) + ")");
+                }
 
-                this.m_ppsQuadBlurX[iBlurKernelIndex] = pd3dDevice.CreatePixelShader(shaderBytecodeX, null);
-                this.m_ppsQuadBlurX[iBlurKernelIndex].SetDebugName("2DQuadShaders - PSBlurX (" + iKernelSize.ToString(CultureInfo.InvariantCulture) + ")");
-
-                D3DCompile.Compile(
+                using (D3DCompileResult result = D3DCompile.Compile(
                     QuadShadersResources.Shader,
                     "QuadShaders",
                     kernelDefines,
                     "PSBlurY",
                     PsModel,
-                    D3DCompileOptions.OptimizationLevel3,
-                    out byte[] shaderBytecodeY,
-                    out _);
-
-                this.m_ppsQuadBlurY[iBlurKernelIndex] = pd3dDevice.CreatePixelShader(shaderBytecodeY, null);
-                this.m_ppsQuadBlurY[iBlurKernelIndex].SetDebugName("2DQuadShaders - PSBlurY (" + iKernelSize.ToString(CultureInfo.InvariantCulture) + ")");
+                    D3DCompileOptions.OptimizationLevel3))
+                {
+                    this.m_ppsQuadBlurY[iBlurKernelIndex] = pd3dDevice.CreatePixelShader(result.GetDataAsSpan(), null);
+                    this.m_ppsQuadBlurY[iBlurKernelIndex].SetDebugName("2DQuadShaders - PSBlurY (" + iKernelSize.ToString(CultureInfo.InvariantCulture) + ")");
+                }
             }
 
             // In order to compile optimal versions of each shaders,compile out 64 versions of the same file.  
@@ -222,22 +221,21 @@ namespace VarianceShadows11
                 renderSceneDefines[1].Definition = "0";
                 renderSceneDefines[2].Definition = "0";
 
-                D3DCompile.Compile(
+                using (D3DCompileResult result = D3DCompile.Compile(
                     RenderCascadeSceneResources.Shader,
                     "RenderCascadeScene",
                     renderSceneDefines,
                     "VSMain",
                     VsModel,
-                    D3DCompileOptions.OptimizationLevel3,
-                    out byte[] vsShaderBytecode,
-                    out _);
-
-                this.m_pvsRenderScene[iCascadeIndex] = pd3dDevice.CreateVertexShader(vsShaderBytecode, null);
-                this.m_pvsRenderScene[iCascadeIndex].SetDebugName("RenderVarianceScene - VSMain (" + (iCascadeIndex + 1).ToString(CultureInfo.InvariantCulture) + ")");
-
-                if (renderSceneBytecode == null)
+                    D3DCompileOptions.OptimizationLevel3))
                 {
-                    renderSceneBytecode = vsShaderBytecode;
+                    this.m_pvsRenderScene[iCascadeIndex] = pd3dDevice.CreateVertexShader(result.GetDataAsSpan(), null);
+                    this.m_pvsRenderScene[iCascadeIndex].SetDebugName("RenderVarianceScene - VSMain (" + (iCascadeIndex + 1).ToString(CultureInfo.InvariantCulture) + ")");
+
+                    if (renderSceneBytecode == null)
+                    {
+                        renderSceneBytecode = result.GetData();
+                    }
                 }
 
                 for (int iBlendIndex = 0; iBlendIndex < 2; iBlendIndex++)
@@ -248,18 +246,17 @@ namespace VarianceShadows11
                         renderSceneDefines[1].Definition = iBlendIndex.ToString(CultureInfo.InvariantCulture);
                         renderSceneDefines[2].Definition = iIntervalIndex.ToString(CultureInfo.InvariantCulture);
 
-                        D3DCompile.Compile(
+                        using (D3DCompileResult result = D3DCompile.Compile(
                             RenderCascadeSceneResources.Shader,
                             "RenderCascadeScene",
                             renderSceneDefines,
                             "PSMain",
                             PsModel,
-                            D3DCompileOptions.OptimizationLevel3,
-                            out byte[] shaderBytecode,
-                            out _);
-
-                        this.m_ppsRenderSceneAllShaders[iCascadeIndex, iBlendIndex, iIntervalIndex] = pd3dDevice.CreatePixelShader(shaderBytecode, null);
-                        this.m_ppsRenderSceneAllShaders[iCascadeIndex, iBlendIndex, iIntervalIndex].SetDebugName(string.Format(CultureInfo.InvariantCulture, "RenderVarianceScene - PSMain [{0},{1},{2}]", iCascadeIndex + 1, iBlendIndex, iIntervalIndex));
+                            D3DCompileOptions.OptimizationLevel3))
+                        {
+                            this.m_ppsRenderSceneAllShaders[iCascadeIndex, iBlendIndex, iIntervalIndex] = pd3dDevice.CreatePixelShader(result.GetDataAsSpan(), null);
+                            this.m_ppsRenderSceneAllShaders[iCascadeIndex, iBlendIndex, iIntervalIndex].SetDebugName(string.Format(CultureInfo.InvariantCulture, "RenderVarianceScene - PSMain [{0},{1},{2}]", iCascadeIndex + 1, iBlendIndex, iIntervalIndex));
+                        }
                     }
                 }
             }
@@ -307,57 +304,57 @@ namespace VarianceShadows11
 
         public void DestroyAndDeallocateShadowResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.m_pVertexLayoutMesh);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamLinear);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamShadowPoint);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamShadowLinear);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamShadowAnisotropic2);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamShadowAnisotropic4);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamShadowAnisotropic8);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamShadowAnisotropic16);
+            DXUtils.DisposeAndNull(ref this.m_pVertexLayoutMesh);
+            DXUtils.DisposeAndNull(ref this.m_pSamLinear);
+            DXUtils.DisposeAndNull(ref this.m_pSamShadowPoint);
+            DXUtils.DisposeAndNull(ref this.m_pSamShadowLinear);
+            DXUtils.DisposeAndNull(ref this.m_pSamShadowAnisotropic2);
+            DXUtils.DisposeAndNull(ref this.m_pSamShadowAnisotropic4);
+            DXUtils.DisposeAndNull(ref this.m_pSamShadowAnisotropic8);
+            DXUtils.DisposeAndNull(ref this.m_pSamShadowAnisotropic16);
 
-            D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceTextureArray);
+            DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceTextureArray);
 
             for (int index = 0; index < CascadeConfig.MaxCascades; index++)
             {
-                D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceRTVArrayAll[index]);
-                D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceSRVArrayAll[index]);
+                DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceRTVArrayAll[index]);
+                DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceSRVArrayAll[index]);
             }
 
-            D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceSRVArraySingle);
+            DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceSRVArraySingle);
 
-            D3D11Utils.DisposeAndNull(ref this.m_pTemporaryShadowDepthBufferTexture);
-            D3D11Utils.DisposeAndNull(ref this.m_pTemporaryShadowDepthBufferDSV);
+            DXUtils.DisposeAndNull(ref this.m_pTemporaryShadowDepthBufferTexture);
+            DXUtils.DisposeAndNull(ref this.m_pTemporaryShadowDepthBufferDSV);
 
-            D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapTempBlurTexture);
-            D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapTempBlurRTV);
-            D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapTempBlurSRV);
+            DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapTempBlurTexture);
+            DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapTempBlurRTV);
+            DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapTempBlurSRV);
 
-            D3D11Utils.DisposeAndNull(ref this.m_pcbGlobalConstantBuffer);
+            DXUtils.DisposeAndNull(ref this.m_pcbGlobalConstantBuffer);
 
-            D3D11Utils.DisposeAndNull(ref this.m_prsShadow);
-            D3D11Utils.DisposeAndNull(ref this.m_prsScene);
+            DXUtils.DisposeAndNull(ref this.m_prsShadow);
+            DXUtils.DisposeAndNull(ref this.m_prsScene);
 
-            D3D11Utils.DisposeAndNull(ref this.m_pvsQuadBlur);
+            DXUtils.DisposeAndNull(ref this.m_pvsQuadBlur);
 
             for (int index = 0; index < CascadeConfig.MaxBlurLevels; index++)
             {
-                D3D11Utils.DisposeAndNull(ref this.m_ppsQuadBlurX[index]);
-                D3D11Utils.DisposeAndNull(ref this.m_ppsQuadBlurY[index]);
+                DXUtils.DisposeAndNull(ref this.m_ppsQuadBlurX[index]);
+                DXUtils.DisposeAndNull(ref this.m_ppsQuadBlurY[index]);
             }
 
-            D3D11Utils.DisposeAndNull(ref this.m_pvsRenderVarianceShadow);
-            D3D11Utils.DisposeAndNull(ref this.m_ppsRenderVarianceShadow);
+            DXUtils.DisposeAndNull(ref this.m_pvsRenderVarianceShadow);
+            DXUtils.DisposeAndNull(ref this.m_ppsRenderVarianceShadow);
 
             for (int iCascadeIndex = 0; iCascadeIndex < CascadeConfig.MaxCascades; iCascadeIndex++)
             {
-                D3D11Utils.DisposeAndNull(ref this.m_pvsRenderScene[iCascadeIndex]);
+                DXUtils.DisposeAndNull(ref this.m_pvsRenderScene[iCascadeIndex]);
 
                 for (int iBlendIndex = 0; iBlendIndex < 2; iBlendIndex++)
                 {
                     for (int iIntervalIndex = 0; iIntervalIndex < 2; iIntervalIndex++)
                     {
-                        D3D11Utils.DisposeAndNull(ref this.m_ppsRenderSceneAllShaders[iCascadeIndex, iBlendIndex, iIntervalIndex]);
+                        DXUtils.DisposeAndNull(ref this.m_ppsRenderSceneAllShaders[iCascadeIndex, iBlendIndex, iIntervalIndex]);
                     }
                 }
             }
@@ -375,13 +372,13 @@ namespace VarianceShadows11
 
             this.m_CopyOfCascadeConfig = this.m_pCascadeConfig.ShallowCopy();
 
-            D3D11Utils.DisposeAndNull(ref this.m_pSamLinear);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamShadowPoint);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamShadowLinear);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamShadowAnisotropic16);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamShadowAnisotropic8);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamShadowAnisotropic4);
-            D3D11Utils.DisposeAndNull(ref this.m_pSamShadowAnisotropic2);
+            DXUtils.DisposeAndNull(ref this.m_pSamLinear);
+            DXUtils.DisposeAndNull(ref this.m_pSamShadowPoint);
+            DXUtils.DisposeAndNull(ref this.m_pSamShadowLinear);
+            DXUtils.DisposeAndNull(ref this.m_pSamShadowAnisotropic16);
+            DXUtils.DisposeAndNull(ref this.m_pSamShadowAnisotropic8);
+            DXUtils.DisposeAndNull(ref this.m_pSamShadowAnisotropic4);
+            DXUtils.DisposeAndNull(ref this.m_pSamShadowAnisotropic2);
 
             this.m_pSamLinear = pd3dDevice.CreateSamplerState(new D3D11SamplerDesc(
                 D3D11Filter.MinMagMipLinear,
@@ -451,22 +448,22 @@ namespace VarianceShadows11
             this.m_RenderOneTileVP.TopLeftX = 0.0f;
             this.m_RenderOneTileVP.TopLeftY = 0.0f;
 
-            D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceTextureArray);
+            DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceTextureArray);
 
             for (int index = 0; index < CascadeConfig.MaxCascades; index++)
             {
-                D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceRTVArrayAll[index]);
-                D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceSRVArrayAll[index]);
+                DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceRTVArrayAll[index]);
+                DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceSRVArrayAll[index]);
             }
 
-            D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceSRVArraySingle);
+            DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapVarianceSRVArraySingle);
 
-            D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapTempBlurTexture);
-            D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapTempBlurRTV);
-            D3D11Utils.DisposeAndNull(ref this.m_pCascadedShadowMapTempBlurSRV);
+            DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapTempBlurTexture);
+            DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapTempBlurRTV);
+            DXUtils.DisposeAndNull(ref this.m_pCascadedShadowMapTempBlurSRV);
 
-            D3D11Utils.DisposeAndNull(ref this.m_pTemporaryShadowDepthBufferTexture);
-            D3D11Utils.DisposeAndNull(ref this.m_pTemporaryShadowDepthBufferDSV);
+            DXUtils.DisposeAndNull(ref this.m_pTemporaryShadowDepthBufferTexture);
+            DXUtils.DisposeAndNull(ref this.m_pTemporaryShadowDepthBufferDSV);
 
             DxgiFormat shadowBufferFormat;
             switch (this.m_CopyOfCascadeConfig.ShadowBufferFormat)
@@ -1120,8 +1117,8 @@ namespace VarianceShadows11
             for (int iCurrentCascade = 0; iCurrentCascade < this.m_CopyOfCascadeConfig.CascadeLevels; iCurrentCascade++)
             {
                 pd3dDeviceContext.ClearDepthStencilView(this.m_pTemporaryShadowDepthBufferDSV, D3D11ClearOptions.Depth, 1.0f, 0);
-                pd3dDeviceContext.OutputMergerSetRenderTargets(new[] { this.m_pCascadedShadowMapVarianceRTVArrayAll[iCurrentCascade] }, this.m_pTemporaryShadowDepthBufferDSV);
-                pd3dDeviceContext.RasterizerStageSetViewports(new[] { this.m_RenderOneTileVP });
+                pd3dDeviceContext.OutputMergerSetRenderTargets(this.m_pCascadedShadowMapVarianceRTVArrayAll[iCurrentCascade], this.m_pTemporaryShadowDepthBufferDSV);
+                pd3dDeviceContext.RasterizerStageSetViewports(this.m_RenderOneTileVP);
 
                 //XMMatrix mWorld = this.m_pLightCamera->GetWorldMatrix();
                 //XMMatrix mProj = this.m_pLightCamera->GetProjMatrix();
@@ -1143,7 +1140,7 @@ namespace VarianceShadows11
                 pd3dDeviceContext.VertexShaderSetShader(this.m_pvsRenderVarianceShadow, null);
                 pd3dDeviceContext.PixelShaderSetShader(this.m_ppsRenderVarianceShadow, null);
                 pd3dDeviceContext.GeometryShaderSetShader(null, null);
-                pd3dDeviceContext.VertexShaderSetConstantBuffers(0, new[] { this.m_pcbGlobalConstantBuffer });
+                pd3dDeviceContext.VertexShaderSetConstantBuffers(0, this.m_pcbGlobalConstantBuffer);
                 pMesh.Render(0, 1, -1);
             }
 
@@ -1152,7 +1149,7 @@ namespace VarianceShadows11
 
             pd3dDeviceContext.InputAssemblerSetPrimitiveTopology(D3D11PrimitiveTopology.TriangleStrip);
             pd3dDeviceContext.VertexShaderSetShader(this.m_pvsQuadBlur, null);
-            pd3dDeviceContext.PixelShaderSetSamplers(5, new[] { this.m_pSamShadowPoint });
+            pd3dDeviceContext.PixelShaderSetSamplers(5, this.m_pSamShadowPoint);
 
             if (this.ShadowBlurSize > 1)
             {
@@ -1160,15 +1157,15 @@ namespace VarianceShadows11
 
                 for (int iCurrentCascade = 0; iCurrentCascade < this.m_CopyOfCascadeConfig.CascadeLevels; iCurrentCascade++)
                 {
-                    pd3dDeviceContext.PixelShaderSetShaderResources(5, new D3D11ShaderResourceView[] { null });
-                    pd3dDeviceContext.OutputMergerSetRenderTargets(new[] { this.m_pCascadedShadowMapTempBlurRTV }, null);
-                    pd3dDeviceContext.PixelShaderSetShaderResources(5, new[] { this.m_pCascadedShadowMapVarianceSRVArrayAll[iCurrentCascade] });
+                    pd3dDeviceContext.PixelShaderSetShaderResources(5, (D3D11ShaderResourceView)null);
+                    pd3dDeviceContext.OutputMergerSetRenderTargets(this.m_pCascadedShadowMapTempBlurRTV, null);
+                    pd3dDeviceContext.PixelShaderSetShaderResources(5, this.m_pCascadedShadowMapVarianceSRVArrayAll[iCurrentCascade]);
                     pd3dDeviceContext.PixelShaderSetShader(this.m_ppsQuadBlurX[iKernelShader], null);
                     pd3dDeviceContext.Draw(4, 0);
 
-                    pd3dDeviceContext.PixelShaderSetShaderResources(5, new D3D11ShaderResourceView[] { null });
-                    pd3dDeviceContext.OutputMergerSetRenderTargets(new[] { this.m_pCascadedShadowMapVarianceRTVArrayAll[iCurrentCascade] }, null);
-                    pd3dDeviceContext.PixelShaderSetShaderResources(5, new[] { this.m_pCascadedShadowMapTempBlurSRV });
+                    pd3dDeviceContext.PixelShaderSetShaderResources(5, (D3D11ShaderResourceView)null);
+                    pd3dDeviceContext.OutputMergerSetRenderTargets(this.m_pCascadedShadowMapVarianceRTVArrayAll[iCurrentCascade], null);
+                    pd3dDeviceContext.PixelShaderSetShaderResources(5, this.m_pCascadedShadowMapTempBlurSRV);
                     pd3dDeviceContext.PixelShaderSetShader(this.m_ppsQuadBlurY[iKernelShader], null);
                     pd3dDeviceContext.Draw(4, 0);
                 }
@@ -1177,9 +1174,9 @@ namespace VarianceShadows11
             // TODO
             //pd3dDeviceContext.RasterizerStageSetState(null);
             pd3dDeviceContext.RasterizerStageSetState(rs);
-            D3D11Utils.DisposeAndNull(ref rs);
+            DXUtils.DisposeAndNull(ref rs);
 
-            pd3dDeviceContext.OutputMergerSetRenderTargets(new D3D11RenderTargetView[] { null }, null);
+            pd3dDeviceContext.OutputMergerSetRenderTargets((D3D11RenderTargetView)null, null);
         }
 
         public void RenderScene(
@@ -1193,8 +1190,8 @@ namespace VarianceShadows11
             // We have a seperate render state for the actual rasterization because of different depth biases and Cull modes.
             pd3dDeviceContext.RasterizerStageSetState(this.m_prsScene);
             // 
-            pd3dDeviceContext.OutputMergerSetRenderTargets(new[] { prtvBackBuffer }, pdsvBackBuffer);
-            pd3dDeviceContext.RasterizerStageSetViewports(new[] { dxutViewPort });
+            pd3dDeviceContext.OutputMergerSetRenderTargets(prtvBackBuffer, pdsvBackBuffer);
+            pd3dDeviceContext.RasterizerStageSetViewports(dxutViewPort);
             pd3dDeviceContext.InputAssemblerSetInputLayout(this.m_pVertexLayoutMesh);
 
             XMMatrix matCameraProj = this._settings.ActiveCameraProjection;
@@ -1230,27 +1227,23 @@ namespace VarianceShadows11
             XMMatrix matTextureTranslation = XMMatrix.Translation(0.5f, 0.5f, 0.0f);
             //XMMatrix scaleToTile = XMMatrix.Scaling(1.0f / this.m_pCascadeConfig.CascadeLevels, 1.0f, 1.0f);
 
-            pcbAllShadowConstants.m_vCascadeScale = new XMVector[8];
-            pcbAllShadowConstants.m_vCascadeOffset = new XMVector[8];
-
             for (int index = 0; index < this.m_CopyOfCascadeConfig.CascadeLevels; index++)
             {
                 XMMatrix mShadowTexture = this.m_matShadowProj[index] * matTextureScale * matTextureTranslation;
 
-                pcbAllShadowConstants.m_vCascadeScale[index].X = mShadowTexture.M11;
-                pcbAllShadowConstants.m_vCascadeScale[index].Y = mShadowTexture.M22;
-                pcbAllShadowConstants.m_vCascadeScale[index].Z = mShadowTexture.M33;
-                pcbAllShadowConstants.m_vCascadeScale[index].W = 1;
+                ((XMVector*)pcbAllShadowConstants.m_vCascadeScale)[index].X = mShadowTexture.M11;
+                ((XMVector*)pcbAllShadowConstants.m_vCascadeScale)[index].Y = mShadowTexture.M22;
+                ((XMVector*)pcbAllShadowConstants.m_vCascadeScale)[index].Z = mShadowTexture.M33;
+                ((XMVector*)pcbAllShadowConstants.m_vCascadeScale)[index].W = 1;
 
-                pcbAllShadowConstants.m_vCascadeOffset[index].X = mShadowTexture.M41;
-                pcbAllShadowConstants.m_vCascadeOffset[index].Y = mShadowTexture.M42;
-                pcbAllShadowConstants.m_vCascadeOffset[index].Z = mShadowTexture.M43;
-                pcbAllShadowConstants.m_vCascadeOffset[index].W = 0;
+                ((XMVector*)pcbAllShadowConstants.m_vCascadeOffset)[index].X = mShadowTexture.M41;
+                ((XMVector*)pcbAllShadowConstants.m_vCascadeOffset)[index].Y = mShadowTexture.M42;
+                ((XMVector*)pcbAllShadowConstants.m_vCascadeOffset)[index].Z = mShadowTexture.M43;
+                ((XMVector*)pcbAllShadowConstants.m_vCascadeOffset)[index].W = 0;
             }
 
             // Copy intervals for the depth interval selection method.
-            pcbAllShadowConstants.m_fCascadeFrustumsEyeSpaceDepths = new float[CascadeConfig.MaxCascades];
-            this.m_fCascadePartitionsFrustum.AsSpan().CopyTo(pcbAllShadowConstants.m_fCascadeFrustumsEyeSpaceDepths);
+            this.m_fCascadePartitionsFrustum.AsSpan().CopyTo(new Span<float>(pcbAllShadowConstants.m_fCascadeFrustumsEyeSpaceDepths, 8));
 
             // The border padding values keep the pixel shader from reading the borders during PCF filtering.
             pcbAllShadowConstants.m_fMaxBorderPadding = (this.m_pCascadeConfig.BufferSize - 1.0f) / this.m_pCascadeConfig.BufferSize;
@@ -1267,33 +1260,33 @@ namespace VarianceShadows11
 
             pd3dDeviceContext.UpdateSubresource(this.m_pcbGlobalConstantBuffer, 0, null, pcbAllShadowConstants, 0, 0);
 
-            pd3dDeviceContext.PixelShaderSetSamplers(0, new[] { this.m_pSamLinear });
-            pd3dDeviceContext.PixelShaderSetSamplers(1, new[] { this.m_pSamLinear });
+            pd3dDeviceContext.PixelShaderSetSamplers(0, this.m_pSamLinear);
+            pd3dDeviceContext.PixelShaderSetSamplers(1, this.m_pSamLinear);
 
             switch (this.ShadowFilter)
             {
                 case ShadowFilter.Anisotropic16x:
-                    pd3dDeviceContext.PixelShaderSetSamplers(5, new[] { this.m_pSamShadowAnisotropic16 });
+                    pd3dDeviceContext.PixelShaderSetSamplers(5, this.m_pSamShadowAnisotropic16);
                     break;
 
                 case ShadowFilter.Anisotropic8x:
-                    pd3dDeviceContext.PixelShaderSetSamplers(5, new[] { this.m_pSamShadowAnisotropic8 });
+                    pd3dDeviceContext.PixelShaderSetSamplers(5, this.m_pSamShadowAnisotropic8);
                     break;
 
                 case ShadowFilter.Anisotropic4x:
-                    pd3dDeviceContext.PixelShaderSetSamplers(5, new[] { this.m_pSamShadowAnisotropic4 });
+                    pd3dDeviceContext.PixelShaderSetSamplers(5, this.m_pSamShadowAnisotropic4);
                     break;
 
                 case ShadowFilter.Anisotropic2x:
-                    pd3dDeviceContext.PixelShaderSetSamplers(5, new[] { this.m_pSamShadowAnisotropic2 });
+                    pd3dDeviceContext.PixelShaderSetSamplers(5, this.m_pSamShadowAnisotropic2);
                     break;
 
                 case ShadowFilter.Linear:
-                    pd3dDeviceContext.PixelShaderSetSamplers(5, new[] { this.m_pSamShadowLinear });
+                    pd3dDeviceContext.PixelShaderSetSamplers(5, this.m_pSamShadowLinear);
                     break;
 
                 case ShadowFilter.Point:
-                    pd3dDeviceContext.PixelShaderSetSamplers(5, new[] { this.m_pSamShadowPoint });
+                    pd3dDeviceContext.PixelShaderSetSamplers(5, this.m_pSamShadowPoint);
                     break;
             }
 
@@ -1310,10 +1303,10 @@ namespace VarianceShadows11
                     (int)this.SelectedCascadeSelection],
                 null);
 
-            pd3dDeviceContext.PixelShaderSetShaderResources(5, new[] { this.m_pCascadedShadowMapVarianceSRVArraySingle });
+            pd3dDeviceContext.PixelShaderSetShaderResources(5, this.m_pCascadedShadowMapVarianceSRVArraySingle);
 
-            pd3dDeviceContext.VertexShaderSetConstantBuffers(0, new[] { this.m_pcbGlobalConstantBuffer });
-            pd3dDeviceContext.PixelShaderSetConstantBuffers(0, new[] { this.m_pcbGlobalConstantBuffer });
+            pd3dDeviceContext.VertexShaderSetConstantBuffers(0, this.m_pcbGlobalConstantBuffer);
+            pd3dDeviceContext.PixelShaderSetConstantBuffers(0, this.m_pcbGlobalConstantBuffer);
 
             pMesh.Render(0, 1, -1);
 

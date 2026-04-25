@@ -3,23 +3,32 @@ using System.Runtime.InteropServices;
 
 namespace DeferredParticles
 {
-    [StructLayout(LayoutKind.Sequential)]
-    struct GlowLightsConstantBuffer
+    unsafe struct GlowLightsConstantBuffer
     {
         public uint g_NumGlowLights;
 
         private XMUInt3 unused0;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MainGameComponent.MaxFlashLights)]
-        public XMVector[] g_vGlowLightPosIntensity;
+        public struct GlowLightPosIntensityBuffer
+        {
+            public fixed byte Buffer[TotalSize];
+            public const int Length = MainGameComponent.MaxFlashLights;
+            public const int TotalSize = sizeof(float) * 4 * Length;
+        }
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MainGameComponent.MaxFlashLights)]
-        public XMVector[] g_vGlowLightColor;
+        public GlowLightPosIntensityBuffer g_vGlowLightPosIntensity;
+
+        public struct GlowLightColorBuffer
+        {
+            public fixed byte Buffer[TotalSize];
+            public const int Length = MainGameComponent.MaxFlashLights;
+            public const int TotalSize = sizeof(float) * 4 * Length;
+        }
+
+        public GlowLightColorBuffer g_vGlowLightColor;
 
         public XMVector g_vGlowLightAttenuation;
 
         public XMVector g_vMeshLightAttenuation;
-
-        public static readonly uint Size = (uint)Marshal.SizeOf(typeof(GlowLightsConstantBuffer));
     }
 }

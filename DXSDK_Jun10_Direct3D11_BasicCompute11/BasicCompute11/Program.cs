@@ -14,6 +14,7 @@
 //#define TEST_DOUBLE
 
 using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.GameWindow;
 using System;
@@ -150,7 +151,7 @@ namespace BasicCompute11
                 }
                 finally
                 {
-                    D3D11Utils.ReleaseAndNull(ref debugbuf);
+                    DXUtils.DisposeAndNull(ref debugbuf);
                 }
             }
             catch (Exception ex)
@@ -216,7 +217,7 @@ namespace BasicCompute11
         }
 
         static D3D11Buffer CreateStructuredBuffer<T>(D3D11Device pDevice, T[] pInitData)
-            where T : struct
+            where T : unmanaged
         {
             var desc = D3D11BufferDesc.From(pInitData, D3D11BindOptions.UnorderedAccess | D3D11BindOptions.ShaderResource);
             desc.MiscOptions = D3D11ResourceMiscOptions.BufferStructured;
@@ -226,7 +227,7 @@ namespace BasicCompute11
         }
 
         static D3D11Buffer CreateRawBuffer<T>(D3D11Device pDevice, T[] pInitData)
-            where T : struct
+            where T : unmanaged
         {
             var desc = D3D11BufferDesc.From(pInitData, D3D11BindOptions.UnorderedAccess | D3D11BindOptions.ShaderResource | D3D11BindOptions.IndexBuffer | D3D11BindOptions.VertexBuffer);
             desc.MiscOptions = D3D11ResourceMiscOptions.BufferAllowRawViews;
@@ -325,13 +326,13 @@ namespace BasicCompute11
 
         static void CleanupResources()
         {
-            D3D11Utils.ReleaseAndNull(ref g_pBuf0SRV);
-            D3D11Utils.ReleaseAndNull(ref g_pBuf1SRV);
-            D3D11Utils.ReleaseAndNull(ref g_pBufResultUAV);
-            D3D11Utils.ReleaseAndNull(ref g_pBuf0);
-            D3D11Utils.ReleaseAndNull(ref g_pBuf1);
-            D3D11Utils.ReleaseAndNull(ref g_pBufResult);
-            D3D11Utils.ReleaseAndNull(ref g_pCS);
+            DXUtils.DisposeAndNull(ref g_pBuf0SRV);
+            DXUtils.DisposeAndNull(ref g_pBuf1SRV);
+            DXUtils.DisposeAndNull(ref g_pBufResultUAV);
+            DXUtils.DisposeAndNull(ref g_pBuf0);
+            DXUtils.DisposeAndNull(ref g_pBuf1);
+            DXUtils.DisposeAndNull(ref g_pBufResult);
+            DXUtils.DisposeAndNull(ref g_pCS);
 
             deviceResources?.Release();
             deviceResources = null;

@@ -8,16 +8,13 @@ using System.Threading.Tasks;
 
 namespace SubD11
 {
-    [StructLayout(LayoutKind.Sequential)]
-    struct SubDControlPoint
+    unsafe struct SubDControlPoint
     {
         public XMFloat3 m_vPosition;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public byte[] m_Weights;
+        public fixed byte m_Weights[4];
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public byte[] m_Bones;
+        public fixed byte m_Bones[4];
 
         // Normal is not used for patch computation.
         public XMFloat3 m_vNormal;

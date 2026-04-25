@@ -3,8 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Tutorial06
 {
-    [StructLayout(LayoutKind.Sequential)]
-    struct ConstantBufferData
+    unsafe struct ConstantBufferData
     {
         public XMFloat4X4 World;
 
@@ -12,19 +11,13 @@ namespace Tutorial06
 
         public XMFloat4X4 Projection;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-        public XMFloat4[] LightDir;
+        public XMFloat4 LightDir0;
 
-        //public XMFloat4 LightDir0;
+        public XMFloat4 LightDir1;
 
-        //public XMFloat4 LightDir1;
+        public XMFloat4 LightColor0;
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-        public XMFloat4[] LightColor;
-
-        //public XMFloat4 LightColor0;
-
-        //public XMFloat4 LightColor1;
+        public XMFloat4 LightColor1;
 
         public XMFloat4 OutputColor;
 

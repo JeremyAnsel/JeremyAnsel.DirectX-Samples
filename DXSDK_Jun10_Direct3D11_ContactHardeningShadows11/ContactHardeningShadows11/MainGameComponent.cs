@@ -1,4 +1,5 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
@@ -227,17 +228,17 @@ namespace ContactHardeningShadows11
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.g_pShadowMapDepthStencilTexture);
-            D3D11Utils.DisposeAndNull(ref this.g_pDepthTextureSRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pDepthStencilTextureDSV);
+            DXUtils.DisposeAndNull(ref this.g_pShadowMapDepthStencilTexture);
+            DXUtils.DisposeAndNull(ref this.g_pDepthTextureSRV);
+            DXUtils.DisposeAndNull(ref this.g_pDepthStencilTextureDSV);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pSamplePoint);
-            D3D11Utils.DisposeAndNull(ref this.g_pSampleLinear);
-            D3D11Utils.DisposeAndNull(ref this.g_pSamplePointCmp);
-            D3D11Utils.DisposeAndNull(ref this.g_pBlendStateNoBlend);
-            D3D11Utils.DisposeAndNull(ref this.g_pBlendStateColorWritesOff);
+            DXUtils.DisposeAndNull(ref this.g_pSamplePoint);
+            DXUtils.DisposeAndNull(ref this.g_pSampleLinear);
+            DXUtils.DisposeAndNull(ref this.g_pSamplePointCmp);
+            DXUtils.DisposeAndNull(ref this.g_pBlendStateNoBlend);
+            DXUtils.DisposeAndNull(ref this.g_pBlendStateColorWritesOff);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pcbConstants);
+            DXUtils.DisposeAndNull(ref this.g_pcbConstants);
 
             this.g_SceneMesh?.Release();
             this.g_SceneMesh = null;
@@ -245,10 +246,10 @@ namespace ContactHardeningShadows11
             this.g_Poles?.Release();
             this.g_Poles = null;
 
-            D3D11Utils.DisposeAndNull(ref this.g_pSceneVS);
-            D3D11Utils.DisposeAndNull(ref this.g_pSceneVertexLayout);
-            D3D11Utils.DisposeAndNull(ref this.g_pScenePS);
-            D3D11Utils.DisposeAndNull(ref this.g_pShadowMapVS);
+            DXUtils.DisposeAndNull(ref this.g_pSceneVS);
+            DXUtils.DisposeAndNull(ref this.g_pSceneVertexLayout);
+            DXUtils.DisposeAndNull(ref this.g_pScenePS);
+            DXUtils.DisposeAndNull(ref this.g_pShadowMapVS);
         }
 
         public void CreateWindowSizeDependentResources()

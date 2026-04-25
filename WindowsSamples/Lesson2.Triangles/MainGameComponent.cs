@@ -1,5 +1,6 @@
 ﻿using BasicMaths;
 using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.GameWindow;
 using System;
@@ -83,11 +84,11 @@ namespace Lesson2.Triangles
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.vertexShader);
-            D3D11Utils.DisposeAndNull(ref this.inputLayout);
-            D3D11Utils.DisposeAndNull(ref this.pixelShader);
-            D3D11Utils.DisposeAndNull(ref this.vertexBuffer);
-            D3D11Utils.DisposeAndNull(ref this.indexBuffer);
+            DXUtils.DisposeAndNull(ref this.vertexShader);
+            DXUtils.DisposeAndNull(ref this.inputLayout);
+            DXUtils.DisposeAndNull(ref this.pixelShader);
+            DXUtils.DisposeAndNull(ref this.vertexBuffer);
+            DXUtils.DisposeAndNull(ref this.indexBuffer);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -106,17 +107,12 @@ namespace Lesson2.Triangles
         {
             var context = this.deviceResources.D3DContext;
 
-            context.OutputMergerSetRenderTargets(new[] { this.deviceResources.D3DRenderTargetView }, null);
-            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, new float[] { 0.071f, 0.04f, 0.561f, 1.0f });
+            context.OutputMergerSetRenderTargets(this.deviceResources.D3DRenderTargetView, null);
+            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, 0.071f, 0.04f, 0.561f, 1.0f);
 
             context.InputAssemblerSetInputLayout(this.inputLayout);
 
-            context.InputAssemblerSetVertexBuffers(
-                0,
-                new[] { this.vertexBuffer },
-                new uint[] { (uint)Marshal.SizeOf<Float2>() },
-                new uint[] { 0 });
-
+            context.InputAssemblerSetVertexBuffers(0, this.vertexBuffer, (uint)DXMarshal.SizeOf<Float2>(), 0);
             context.InputAssemblerSetIndexBuffer(this.indexBuffer, DxgiFormat.R16UInt, 0);
             context.InputAssemblerSetPrimitiveTopology(D3D11PrimitiveTopology.TriangleList);
 

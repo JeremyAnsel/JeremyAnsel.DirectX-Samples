@@ -1,15 +1,9 @@
 ﻿using JeremyAnsel.DirectX.DXMath;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FixedFuncEmu
 {
-    [StructLayout(LayoutKind.Sequential)]
-    struct ConstantBufferPerFrameData
+    unsafe struct ConstantBufferPerFrameData
     {
         public ConstantBufferPerFrameData()
         {
@@ -17,11 +11,9 @@ namespace FixedFuncEmu
 
         // cbLights
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
-        public XMVector[] g_clipplanes = new XMVector[3];
+        public fixed float g_clipplanes[4 * 3];
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
-        public SceneLight[] g_lights = new SceneLight[8];
+        public fixed float g_lights[4 * 5 * 8];
 
         // cbPerFrame
 

@@ -6,14 +6,11 @@ namespace HDRToneMappingCS11
     /// <summary>
     /// Constant buffer layout for transferring data to the PS for bloom effect
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    struct BloomPSConstantBufferData
+    unsafe struct BloomPSConstantBufferData
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 15)]
-        public XMVector[] avSampleOffsets;
+        public fixed float avSampleOffsets[4 * 15];
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 15)]
-        public XMVector[] avSampleWeights;
+        public fixed float avSampleWeights[4 * 15];
 
         public static readonly uint Size = (uint)Marshal.SizeOf(typeof(BloomPSConstantBufferData));
     }

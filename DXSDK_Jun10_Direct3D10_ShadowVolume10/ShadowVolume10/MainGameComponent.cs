@@ -1,4 +1,5 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
@@ -319,30 +320,30 @@ namespace ShadowVolume10
             this.mesh?.Release();
             this.mesh = null;
 
-            D3D11Utils.DisposeAndNull(ref this.constantBuffer);
+            DXUtils.DisposeAndNull(ref this.constantBuffer);
 
-            D3D11Utils.DisposeAndNull(ref this.GSShadowmain);
-            D3D11Utils.DisposeAndNull(ref this.PSAmbientmain);
-            D3D11Utils.DisposeAndNull(ref this.PSScenemain);
-            D3D11Utils.DisposeAndNull(ref this.PSShadowmain);
-            D3D11Utils.DisposeAndNull(ref this.VSScenemain);
-            D3D11Utils.DisposeAndNull(ref this.VSShadowmain);
+            DXUtils.DisposeAndNull(ref this.GSShadowmain);
+            DXUtils.DisposeAndNull(ref this.PSAmbientmain);
+            DXUtils.DisposeAndNull(ref this.PSScenemain);
+            DXUtils.DisposeAndNull(ref this.PSShadowmain);
+            DXUtils.DisposeAndNull(ref this.VSScenemain);
+            DXUtils.DisposeAndNull(ref this.VSShadowmain);
 
-            D3D11Utils.DisposeAndNull(ref this.inputLayout);
+            DXUtils.DisposeAndNull(ref this.inputLayout);
 
-            D3D11Utils.DisposeAndNull(ref this.sampler);
+            DXUtils.DisposeAndNull(ref this.sampler);
 
-            D3D11Utils.DisposeAndNull(ref this.DisableFrameBufferBlendState);
-            D3D11Utils.DisposeAndNull(ref this.NoBlendingBlendState);
-            D3D11Utils.DisposeAndNull(ref this.AdditiveBlendingBlendState);
-            D3D11Utils.DisposeAndNull(ref this.SrcAlphaBlendingBlendState);
+            DXUtils.DisposeAndNull(ref this.DisableFrameBufferBlendState);
+            DXUtils.DisposeAndNull(ref this.NoBlendingBlendState);
+            DXUtils.DisposeAndNull(ref this.AdditiveBlendingBlendState);
+            DXUtils.DisposeAndNull(ref this.SrcAlphaBlendingBlendState);
 
-            D3D11Utils.DisposeAndNull(ref this.EnableDepthDepthStencilState);
-            D3D11Utils.DisposeAndNull(ref this.TwoSidedStencilDepthStencilState);
-            D3D11Utils.DisposeAndNull(ref this.RenderNonShadowsDepthStencilState);
+            DXUtils.DisposeAndNull(ref this.EnableDepthDepthStencilState);
+            DXUtils.DisposeAndNull(ref this.TwoSidedStencilDepthStencilState);
+            DXUtils.DisposeAndNull(ref this.RenderNonShadowsDepthStencilState);
 
-            D3D11Utils.DisposeAndNull(ref this.DisableCullingRasterizerState);
-            D3D11Utils.DisposeAndNull(ref this.EnableCullingRasterizerState);
+            DXUtils.DisposeAndNull(ref this.DisableCullingRasterizerState);
+            DXUtils.DisposeAndNull(ref this.EnableCullingRasterizerState);
         }
 
         /// <summary>

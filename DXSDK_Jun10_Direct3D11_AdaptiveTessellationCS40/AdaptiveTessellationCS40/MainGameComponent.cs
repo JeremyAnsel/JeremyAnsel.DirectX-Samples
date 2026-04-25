@@ -1,4 +1,5 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
@@ -157,15 +158,15 @@ namespace AdaptiveTessellationCS40
         {
             this.tessellator.ReleaseDeviceDependentResources();
 
-            D3D11Utils.DisposeAndNull(ref this.g_pBaseVB);
-            D3D11Utils.DisposeAndNull(ref this.g_pTessedVB);
-            D3D11Utils.DisposeAndNull(ref this.g_pTessedIB);
-            D3D11Utils.DisposeAndNull(ref this.g_pBaseVBLayout);
-            D3D11Utils.DisposeAndNull(ref this.g_pVSCB);
-            D3D11Utils.DisposeAndNull(ref this.g_pVS);
-            D3D11Utils.DisposeAndNull(ref this.g_pBaseVS);
-            D3D11Utils.DisposeAndNull(ref this.g_pPS);
-            D3D11Utils.DisposeAndNull(ref this.g_pRasWireFrame);
+            DXUtils.DisposeAndNull(ref this.g_pBaseVB);
+            DXUtils.DisposeAndNull(ref this.g_pTessedVB);
+            DXUtils.DisposeAndNull(ref this.g_pTessedIB);
+            DXUtils.DisposeAndNull(ref this.g_pBaseVBLayout);
+            DXUtils.DisposeAndNull(ref this.g_pVSCB);
+            DXUtils.DisposeAndNull(ref this.g_pVS);
+            DXUtils.DisposeAndNull(ref this.g_pBaseVS);
+            DXUtils.DisposeAndNull(ref this.g_pPS);
+            DXUtils.DisposeAndNull(ref this.g_pRasWireFrame);
         }
 
         public void CreateWindowSizeDependentResources()

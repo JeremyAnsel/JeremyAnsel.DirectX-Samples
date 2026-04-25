@@ -4,6 +4,7 @@ using JeremyAnsel.DirectX.DXMath;
 using System.IO;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.Dds;
+using JeremyAnsel.DirectX.DXCommon;
 
 namespace Tutorial07
 {
@@ -190,16 +191,16 @@ namespace Tutorial07
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.vertexShader);
-            D3D11Utils.DisposeAndNull(ref this.inputLayout);
-            D3D11Utils.DisposeAndNull(ref this.pixelShader);
-            D3D11Utils.DisposeAndNull(ref this.vertexBuffer);
-            D3D11Utils.DisposeAndNull(ref this.indexBuffer);
-            D3D11Utils.DisposeAndNull(ref this.constantBufferNeverChanges);
-            D3D11Utils.DisposeAndNull(ref this.constantBufferChangesOnResize);
-            D3D11Utils.DisposeAndNull(ref this.constantBufferChangesEveryFrame);
-            D3D11Utils.DisposeAndNull(ref this.textureView);
-            D3D11Utils.DisposeAndNull(ref this.sampler);
+            DXUtils.DisposeAndNull(ref this.vertexShader);
+            DXUtils.DisposeAndNull(ref this.inputLayout);
+            DXUtils.DisposeAndNull(ref this.pixelShader);
+            DXUtils.DisposeAndNull(ref this.vertexBuffer);
+            DXUtils.DisposeAndNull(ref this.indexBuffer);
+            DXUtils.DisposeAndNull(ref this.constantBufferNeverChanges);
+            DXUtils.DisposeAndNull(ref this.constantBufferChangesOnResize);
+            DXUtils.DisposeAndNull(ref this.constantBufferChangesEveryFrame);
+            DXUtils.DisposeAndNull(ref this.textureView);
+            DXUtils.DisposeAndNull(ref this.sampler);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -237,30 +238,22 @@ namespace Tutorial07
             cb.MeshColor = this.meshColor;
             context.UpdateSubresource(this.constantBufferChangesEveryFrame, 0, null, cb, 0, 0);
 
-            context.OutputMergerSetRenderTargets(new[] { this.deviceResources.D3DRenderTargetView }, this.deviceResources.D3DDepthStencilView);
-            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, new float[] { 0.0f, 0.125f, 0.3f, 1.0f });
+            context.OutputMergerSetRenderTargets(this.deviceResources.D3DRenderTargetView, this.deviceResources.D3DDepthStencilView);
+            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, 0.0f, 0.125f, 0.3f, 1.0f);
             context.ClearDepthStencilView(this.deviceResources.D3DDepthStencilView, D3D11ClearOptions.Depth, 1.0f, 0);
 
             context.InputAssemblerSetInputLayout(this.inputLayout);
 
-            context.InputAssemblerSetVertexBuffers(
-                0,
-                new[] { this.vertexBuffer },
-                new uint[] { SimpleVertex.Size },
-                new uint[] { 0 });
-
+            context.InputAssemblerSetVertexBuffers(0, this.vertexBuffer, SimpleVertex.Size, 0);
             context.InputAssemblerSetIndexBuffer(this.indexBuffer, DxgiFormat.R16UInt, 0);
             context.InputAssemblerSetPrimitiveTopology(D3D11PrimitiveTopology.TriangleList);
 
             context.VertexShaderSetShader(this.vertexShader, null);
-            context.VertexShaderSetConstantBuffers(0, new[] {
-                this.constantBufferNeverChanges,
-                this.constantBufferChangesOnResize,
-                this.constantBufferChangesEveryFrame });
+            context.VertexShaderSetConstantBuffers(0, [this.constantBufferNeverChanges, this.constantBufferChangesOnResize, this.constantBufferChangesEveryFrame]);
             context.PixelShaderSetShader(this.pixelShader, null);
-            context.PixelShaderSetConstantBuffers(2, new[] { this.constantBufferChangesEveryFrame });
-            context.PixelShaderSetShaderResources(0, new[] { this.textureView });
-            context.PixelShaderSetSamplers(0, new[] { this.sampler });
+            context.PixelShaderSetConstantBuffers(2, this.constantBufferChangesEveryFrame);
+            context.PixelShaderSetShaderResources(0, this.textureView);
+            context.PixelShaderSetSamplers(0, this.sampler);
             context.DrawIndexed((uint)MainGameComponent.Indices.Length, 0, 0);
         }
     }

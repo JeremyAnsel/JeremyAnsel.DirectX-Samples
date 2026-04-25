@@ -1,4 +1,5 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.DXMath.Collision;
@@ -158,12 +159,12 @@ namespace Collision
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.vertexShader);
-            D3D11Utils.DisposeAndNull(ref this.inputLayout);
-            D3D11Utils.DisposeAndNull(ref this.pixelShader);
-            D3D11Utils.DisposeAndNull(ref this.vertexBuffer);
-            D3D11Utils.DisposeAndNull(ref this.indexBuffer);
-            D3D11Utils.DisposeAndNull(ref this.constantBuffer);
+            DXUtils.DisposeAndNull(ref this.vertexShader);
+            DXUtils.DisposeAndNull(ref this.inputLayout);
+            DXUtils.DisposeAndNull(ref this.pixelShader);
+            DXUtils.DisposeAndNull(ref this.vertexBuffer);
+            DXUtils.DisposeAndNull(ref this.indexBuffer);
+            DXUtils.DisposeAndNull(ref this.constantBuffer);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -514,17 +515,17 @@ namespace Collision
         {
             var context = this.deviceResources.D3DContext;
 
-            context.OutputMergerSetRenderTargets(new[] { this.deviceResources.D3DRenderTargetView }, this.deviceResources.D3DDepthStencilView);
-            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, new XMUByteN4(45, 50, 170, 255).ToVector());
+            context.OutputMergerSetRenderTargets(this.deviceResources.D3DRenderTargetView, this.deviceResources.D3DDepthStencilView);
+            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, new XMUByteN4(45, 50, 170, 255).ToVector().AsSpan());
             context.ClearDepthStencilView(this.deviceResources.D3DDepthStencilView, D3D11ClearOptions.Depth, 1.0f, 0);
 
             context.InputAssemblerSetInputLayout(this.inputLayout);
-            context.InputAssemblerSetVertexBuffers(0, new[] { this.vertexBuffer }, new uint[] { 12 }, new uint[] { 0 });
+            context.InputAssemblerSetVertexBuffers(0, this.vertexBuffer, 12, 0);
             context.InputAssemblerSetIndexBuffer(this.indexBuffer, DxgiFormat.R16UInt, 0);
             context.VertexShaderSetShader(this.vertexShader, null);
-            context.VertexShaderSetConstantBuffers(0, new[] { this.constantBuffer });
+            context.VertexShaderSetConstantBuffers(0, this.constantBuffer);
             context.PixelShaderSetShader(this.pixelShader, null);
-            context.PixelShaderSetConstantBuffers(0, new[] { this.constantBuffer });
+            context.PixelShaderSetConstantBuffers(0, this.constantBuffer);
 
             this.RenderObjects();
         }
@@ -600,14 +601,14 @@ namespace Collision
         {
             var context = this.deviceResources.D3DContext;
 
-            var vertices = new XMFloat3[4];
+            Span<XMFloat3> vertices = stackalloc XMFloat3[4];
             vertices[0] = pointA;
             vertices[1] = pointB;
             vertices[2] = pointC;
             vertices[3] = pointA;
 
             Debug.Assert(vertices.Length <= MaxVertices);
-            context.UpdateSubresource(this.vertexBuffer, 0, new D3D11Box(0, 0, 0, (uint)vertices.Length * 12, 1, 1), vertices, 0, 0);
+            context.UpdateSubresource<XMFloat3>(this.vertexBuffer, 0, new D3D11Box(0, 0, 0, (uint)vertices.Length * 12, 1, 1), vertices, 0, 0);
 
             var cb = new ConstantBufferData
             {
@@ -625,7 +626,7 @@ namespace Collision
         {
             var context = this.deviceResources.D3DContext;
 
-            var vertices = new XMFloat3[3];
+            Span<XMFloat3> vertices = stackalloc XMFloat3[3];
             vertices[0] = origin;
 
             XMVector rayOrigin = origin;
@@ -658,7 +659,7 @@ namespace Collision
             vertices[2] = XMVector.Add(rayDirection, rayOrigin);
 
             Debug.Assert(vertices.Length <= MaxVertices);
-            context.UpdateSubresource(this.vertexBuffer, 0, new D3D11Box(0, 0, 0, (uint)vertices.Length * 12, 1, 1), vertices, 0, 0);
+            context.UpdateSubresource<XMFloat3>(this.vertexBuffer, 0, new D3D11Box(0, 0, 0, (uint)vertices.Length * 12, 1, 1), vertices, 0, 0);
 
             var cb = new ConstantBufferData
             {
@@ -677,7 +678,7 @@ namespace Collision
             var context = this.deviceResources.D3DContext;
 
             const int RingSegments = 32;
-            var vertices = new XMFloat3[RingSegments + 1];
+            Span<XMFloat3> vertices = stackalloc XMFloat3[RingSegments + 1];
 
             XMVector vOrigin = origin;
             XMVector vMajor = majorAxis;
@@ -711,7 +712,7 @@ namespace Collision
             vertices[RingSegments] = vertices[0];
 
             Debug.Assert(vertices.Length <= MaxVertices);
-            context.UpdateSubresource(this.vertexBuffer, 0, new D3D11Box(0, 0, 0, (uint)vertices.Length * 12, 1, 1), vertices, 0, 0);
+            context.UpdateSubresource<XMFloat3>(this.vertexBuffer, 0, new D3D11Box(0, 0, 0, (uint)vertices.Length * 12, 1, 1), vertices, 0, 0);
 
             var cb = new ConstantBufferData
             {
@@ -739,7 +740,7 @@ namespace Collision
         {
             var context = this.deviceResources.D3DContext;
 
-            var cubeVertices = new XMVector[8]
+            Span<XMVector> cubeVertices = stackalloc XMVector[8]
             {
                 new XMVector(-1, -1, -1, 0),
                 new XMVector(1, -1, -1, 0),
@@ -751,7 +752,7 @@ namespace Collision
                 new XMVector(-1, 1, 1, 0)
             };
 
-            var indices = new ushort[24]
+            Span<ushort> indices = stackalloc ushort[24]
             {
                 0, 1,
                 1, 2,
@@ -767,17 +768,16 @@ namespace Collision
                 3, 7
             };
 
-            var vertices = new XMFloat3[cubeVertices.Length];
+            Span<XMFloat3> vertices = stackalloc XMFloat3[cubeVertices.Length];
             for (int i = 0; i < cubeVertices.Length; i++)
             {
                 vertices[i] = XMVector3.Transform(cubeVertices[i], world);
             }
 
             Debug.Assert(vertices.Length <= MaxVertices);
-            context.UpdateSubresource(this.vertexBuffer, 0, new D3D11Box(0, 0, 0, (uint)vertices.Length * 12, 1, 1), vertices, 0, 0);
 
             Debug.Assert(indices.Length <= MaxIndices);
-            context.UpdateSubresource(this.indexBuffer, 0, new D3D11Box(0, 0, 0, (uint)indices.Length * 2, 1, 1), indices, 0, 0);
+            context.UpdateSubresource<ushort>(this.indexBuffer, 0, new D3D11Box(0, 0, 0, (uint)indices.Length * 2, 1, 1), indices, 0, 0);
 
             var cb = new ConstantBufferData
             {
@@ -820,7 +820,7 @@ namespace Collision
             float topSlope = frustum.TopSlope;
             float bottomSlope = frustum.BottomSlope;
 
-            var cornerPoints = new XMFloat3[8]
+            Span<XMFloat3> cornerPoints = stackalloc XMFloat3[8]
             {
                 new XMFloat3(rightSlope * near, topSlope * near, near),
                 new XMFloat3(leftSlope * near, topSlope * near, near),
@@ -840,7 +840,7 @@ namespace Collision
                 cornerPoints[i] = XMVector3.Transform(cornerPoints[i], mat) + origin;
             }
 
-            var vertices = new XMFloat3[12 * 2]
+            Span<XMFloat3> vertices = stackalloc XMFloat3[12 * 2]
             {
                 cornerPoints[0], cornerPoints[1],
                 cornerPoints[1], cornerPoints[2],
@@ -857,7 +857,7 @@ namespace Collision
             };
 
             Debug.Assert(vertices.Length <= MaxVertices);
-            context.UpdateSubresource(this.vertexBuffer, 0, new D3D11Box(0, 0, 0, (uint)vertices.Length * 12, 1, 1), vertices, 0, 0);
+            context.UpdateSubresource<XMFloat3>(this.vertexBuffer, 0, new D3D11Box(0, 0, 0, (uint)vertices.Length * 12, 1, 1), vertices, 0, 0);
 
             var cb = new ConstantBufferData
             {
@@ -880,7 +880,7 @@ namespace Collision
 
             int iLineCount = iXDivisions + iYDivisions + 2;
 
-            var vertices = new XMFloat3[iLineCount * 2];
+            Span<XMFloat3> vertices = stackalloc XMFloat3[iLineCount * 2];
 
             XMVector vX = xAxis;
             XMVector vY = yAxis;
@@ -907,7 +907,7 @@ namespace Collision
             }
 
             Debug.Assert(vertices.Length <= MaxVertices);
-            context.UpdateSubresource(this.vertexBuffer, 0, new D3D11Box(0, 0, 0, (uint)vertices.Length * 12, 1, 1), vertices, 0, 0);
+            context.UpdateSubresource<XMFloat3>(this.vertexBuffer, 0, new D3D11Box(0, 0, 0, (uint)vertices.Length * 12, 1, 1), vertices, 0, 0);
 
             var cb = new ConstantBufferData
             {

@@ -1,11 +1,7 @@
-﻿using JeremyAnsel.DirectX.GameWindow;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JeremyAnsel.DirectX.D3D11;
+﻿using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.DXMath;
+using JeremyAnsel.DirectX.GameWindow;
 
 namespace OIT11
 {
@@ -89,7 +85,8 @@ namespace OIT11
 
             //this.scene.Render();
 
-            context.OutputMergerGetRenderTargets(1, out D3D11RenderTargetView[] origRTV, out D3D11DepthStencilView origDSV);
+            D3D11RenderTargetView[] origRTV = new D3D11RenderTargetView[1];
+            context.OutputMergerGetRenderTargets(origRTV, out D3D11DepthStencilView origDSV);
 
             this.oit.SetScene(this.scene);
             this.oit.SetRenderTarget(origRTV[0], origDSV);
@@ -101,8 +98,8 @@ namespace OIT11
 
             context.OutputMergerSetRenderTargets(origRTV, origDSV);
 
-            D3D11Utils.DisposeAndNull(ref origRTV[0]);
-            D3D11Utils.DisposeAndNull(ref origDSV);
+            DXUtils.DisposeAndNull(ref origRTV[0]);
+            DXUtils.DisposeAndNull(ref origDSV);
         }
     }
 }

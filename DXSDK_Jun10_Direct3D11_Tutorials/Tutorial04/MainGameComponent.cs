@@ -3,6 +3,7 @@ using JeremyAnsel.DirectX.D3D11;
 using System.IO;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
+using JeremyAnsel.DirectX.DXCommon;
 
 namespace Tutorial04
 {
@@ -128,12 +129,12 @@ namespace Tutorial04
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.vertexShader);
-            D3D11Utils.DisposeAndNull(ref this.inputLayout);
-            D3D11Utils.DisposeAndNull(ref this.pixelShader);
-            D3D11Utils.DisposeAndNull(ref this.vertexBuffer);
-            D3D11Utils.DisposeAndNull(ref this.indexBuffer);
-            D3D11Utils.DisposeAndNull(ref this.constantBuffer);
+            DXUtils.DisposeAndNull(ref this.vertexShader);
+            DXUtils.DisposeAndNull(ref this.inputLayout);
+            DXUtils.DisposeAndNull(ref this.pixelShader);
+            DXUtils.DisposeAndNull(ref this.vertexBuffer);
+            DXUtils.DisposeAndNull(ref this.indexBuffer);
+            DXUtils.DisposeAndNull(ref this.constantBuffer);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -155,8 +156,8 @@ namespace Tutorial04
         {
             var context = this.deviceResources.D3DContext;
 
-            context.OutputMergerSetRenderTargets(new[] { this.deviceResources.D3DRenderTargetView }, this.deviceResources.D3DDepthStencilView);
-            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, new float[] { 0.0f, 0.125f, 0.3f, 1.0f });
+            context.OutputMergerSetRenderTargets(this.deviceResources.D3DRenderTargetView, this.deviceResources.D3DDepthStencilView);
+            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, 0.0f, 0.125f, 0.3f, 1.0f);
             context.ClearDepthStencilView(this.deviceResources.D3DDepthStencilView, D3D11ClearOptions.Depth, 1.0f, 0);
 
             // Update variables
@@ -168,17 +169,12 @@ namespace Tutorial04
 
             context.InputAssemblerSetInputLayout(this.inputLayout);
 
-            context.InputAssemblerSetVertexBuffers(
-                0,
-                new[] { this.vertexBuffer },
-                new uint[] { SimpleVertex.Size },
-                new uint[] { 0 });
-
+            context.InputAssemblerSetVertexBuffers(0, this.vertexBuffer, SimpleVertex.Size, 0);
             context.InputAssemblerSetIndexBuffer(this.indexBuffer, DxgiFormat.R16UInt, 0);
             context.InputAssemblerSetPrimitiveTopology(D3D11PrimitiveTopology.TriangleList);
 
             context.VertexShaderSetShader(this.vertexShader, null);
-            context.VertexShaderSetConstantBuffers(0, new[] { this.constantBuffer });
+            context.VertexShaderSetConstantBuffers(0, this.constantBuffer);
 
             context.PixelShaderSetShader(this.pixelShader, null);
 

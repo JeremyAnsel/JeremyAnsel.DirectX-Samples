@@ -47,8 +47,8 @@ namespace WpfHost
 
         public void Render()
         {
-            this.deviceResources.D3DContext.OutputMergerSetRenderTargets(new[] { this.deviceResources.D3DRenderTargetView }, null);
-            this.deviceResources.D3DContext.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, this.ClearColor);
+            this.deviceResources.D3DContext.OutputMergerSetRenderTargets(this.deviceResources.D3DRenderTargetView, null);
+            this.deviceResources.D3DContext.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, this.ClearColor.AsSpan());
         }
     }
 }

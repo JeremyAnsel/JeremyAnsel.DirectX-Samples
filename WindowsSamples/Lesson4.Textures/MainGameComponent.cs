@@ -1,5 +1,6 @@
 ﻿using BasicMaths;
 using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.GameWindow;
 using System;
@@ -203,14 +204,14 @@ namespace Lesson4.Textures
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.vertexShader);
-            D3D11Utils.DisposeAndNull(ref this.inputLayout);
-            D3D11Utils.DisposeAndNull(ref this.pixelShader);
-            D3D11Utils.DisposeAndNull(ref this.vertexBuffer);
-            D3D11Utils.DisposeAndNull(ref this.indexBuffer);
-            D3D11Utils.DisposeAndNull(ref this.constantBuffer);
-            D3D11Utils.DisposeAndNull(ref this.textureView);
-            D3D11Utils.DisposeAndNull(ref this.sampler);
+            DXUtils.DisposeAndNull(ref this.vertexShader);
+            DXUtils.DisposeAndNull(ref this.inputLayout);
+            DXUtils.DisposeAndNull(ref this.pixelShader);
+            DXUtils.DisposeAndNull(ref this.vertexBuffer);
+            DXUtils.DisposeAndNull(ref this.indexBuffer);
+            DXUtils.DisposeAndNull(ref this.constantBuffer);
+            DXUtils.DisposeAndNull(ref this.textureView);
+            DXUtils.DisposeAndNull(ref this.sampler);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -253,18 +254,13 @@ namespace Lesson4.Textures
 
             context.UpdateSubresource(this.constantBuffer, 0, null, this.constantBufferData, 0, 0);
 
-            context.OutputMergerSetRenderTargets(new[] { this.deviceResources.D3DRenderTargetView }, this.deviceResources.D3DDepthStencilView);
-            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, new float[] { 0.071f, 0.04f, 0.561f, 1.0f });
+            context.OutputMergerSetRenderTargets(this.deviceResources.D3DRenderTargetView, this.deviceResources.D3DDepthStencilView);
+            context.ClearRenderTargetView(this.deviceResources.D3DRenderTargetView, 0.071f, 0.04f, 0.561f, 1.0f);
             context.ClearDepthStencilView(this.deviceResources.D3DDepthStencilView, D3D11ClearOptions.Depth, 1.0f, 0);
 
             context.InputAssemblerSetInputLayout(this.inputLayout);
 
-            context.InputAssemblerSetVertexBuffers(
-                0,
-                new[] { this.vertexBuffer },
-                new uint[] { BasicVertex.Size },
-                new uint[] { 0 });
-
+            context.InputAssemblerSetVertexBuffers(0, this.vertexBuffer, BasicVertex.Size, 0);
             context.InputAssemblerSetIndexBuffer(this.indexBuffer, DxgiFormat.R16UInt, 0);
             context.InputAssemblerSetPrimitiveTopology(D3D11PrimitiveTopology.TriangleList);
 

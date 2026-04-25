@@ -5,6 +5,7 @@
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,11 +33,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="3.0.47" />
-    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="3.0.61" />
-    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="2.0.19" />
-    <PackageReference Include="JeremyAnsel.DirectX.SdkMesh" Version="2.0.20" />
-    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="3.0.61" />
+    <PackageReference Include="JeremyAnsel.DirectX.DXMath" Version="4.0.59" />
+    <PackageReference Include="JeremyAnsel.DirectX.GameWindow" Version="4.0.70" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkCamera" Version="3.0.24" />
+    <PackageReference Include="JeremyAnsel.DirectX.SdkMesh" Version="3.0.25" />
+    <PackageReference Include="JeremyAnsel.DirectX.Window.Wpf" Version="4.0.70" />
     <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="2.0.32" />
   </ItemGroup>
 

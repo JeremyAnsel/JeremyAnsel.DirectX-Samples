@@ -1,19 +1,16 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.Dds;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
 using JeremyAnsel.DirectX.SdkMesh;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FixedFuncEmu
 {
-    class MainGameComponent : IGameComponent
+    unsafe class MainGameComponent : IGameComponent
     {
         private const int MaxBalls = 10;
 
@@ -198,12 +195,12 @@ namespace FixedFuncEmu
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.constantBufferPerView);
-            D3D11Utils.DisposeAndNull(ref this.constantBufferPerFrame);
-            D3D11Utils.DisposeAndNull(ref this.g_pScreenQuadVB);
-            D3D11Utils.DisposeAndNull(ref this.g_pVertexLayout);
-            D3D11Utils.DisposeAndNull(ref this.g_pScreenTexRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pProjectedTexRV);
+            DXUtils.DisposeAndNull(ref this.constantBufferPerView);
+            DXUtils.DisposeAndNull(ref this.constantBufferPerFrame);
+            DXUtils.DisposeAndNull(ref this.g_pScreenQuadVB);
+            DXUtils.DisposeAndNull(ref this.g_pVertexLayout);
+            DXUtils.DisposeAndNull(ref this.g_pScreenTexRV);
+            DXUtils.DisposeAndNull(ref this.g_pProjectedTexRV);
 
             this.g_ballMesh?.Release();
             this.g_ballMesh = null;
@@ -212,16 +209,16 @@ namespace FixedFuncEmu
             this.g_holeMesh?.Release();
             this.g_holeMesh = null;
 
-            D3D11Utils.DisposeAndNull(ref this.g_VSScenemain);
-            D3D11Utils.DisposeAndNull(ref this.g_PSScenemain);
-            D3D11Utils.DisposeAndNull(ref this.g_GSFlatmain);
-            D3D11Utils.DisposeAndNull(ref this.g_GSPointmain);
-            D3D11Utils.DisposeAndNull(ref this.g_VSScreenSpacemain);
-            D3D11Utils.DisposeAndNull(ref this.g_PSAlphaTestmain);
+            DXUtils.DisposeAndNull(ref this.g_VSScenemain);
+            DXUtils.DisposeAndNull(ref this.g_PSScenemain);
+            DXUtils.DisposeAndNull(ref this.g_GSFlatmain);
+            DXUtils.DisposeAndNull(ref this.g_GSPointmain);
+            DXUtils.DisposeAndNull(ref this.g_VSScreenSpacemain);
+            DXUtils.DisposeAndNull(ref this.g_PSAlphaTestmain);
 
-            D3D11Utils.DisposeAndNull(ref this.g_samLinear);
-            D3D11Utils.DisposeAndNull(ref this.g_EnableDepth);
-            D3D11Utils.DisposeAndNull(ref this.g_DisableDepth);
+            DXUtils.DisposeAndNull(ref this.g_samLinear);
+            DXUtils.DisposeAndNull(ref this.g_EnableDepth);
+            DXUtils.DisposeAndNull(ref this.g_DisableDepth);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -351,8 +348,6 @@ namespace FixedFuncEmu
 
             ConstantBufferPerFrameData cb = new()
             {
-                g_clipplanes = this.g_clipplanes,
-                g_lights = this.g_lights,
                 g_pointSize = 3.0f,
                 g_fogMode = (int)FogMode.Linear,
                 g_fogStart = 12.0f,
@@ -360,6 +355,9 @@ namespace FixedFuncEmu
                 g_fogDensity = 0.05f,
                 g_fogColor = new XMVector(0.7f, 1.0f, 1.0f, 1.0f)
             };
+
+            this.g_clipplanes.AsSpan().CopyTo(new Span<XMVector>(cb.g_clipplanes, 3));
+            this.g_lights.AsSpan().CopyTo(new Span<SceneLight>(cb.g_lights, 8));
 
             XMMatrix mView = this.ViewTransform;
             XMMatrix mProj = this.ProjectionTransform;

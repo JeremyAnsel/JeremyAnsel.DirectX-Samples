@@ -7,14 +7,11 @@ using System.Threading.Tasks;
 
 namespace SubD11
 {
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    struct PatchData
+    unsafe struct PatchData
     {
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public byte[] val;
+        public fixed byte val[4];
 
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-        public byte[] pre;
+        public fixed byte pre[4];
 
         public static readonly uint Size = (uint)Marshal.SizeOf(typeof(PatchData));
     }

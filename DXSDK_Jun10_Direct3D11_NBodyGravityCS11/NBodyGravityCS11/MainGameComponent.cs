@@ -1,5 +1,6 @@
 ﻿using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.Dds;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
@@ -152,19 +153,19 @@ namespace NBodyGravityCS11
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.g_pRenderParticlesVS);
-            D3D11Utils.DisposeAndNull(ref this.g_pRenderParticlesGS);
-            D3D11Utils.DisposeAndNull(ref this.g_pRenderParticlesPS);
-            D3D11Utils.DisposeAndNull(ref this.g_pCalcCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleVertexLayout);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleBuffer);
+            DXUtils.DisposeAndNull(ref this.g_pRenderParticlesVS);
+            DXUtils.DisposeAndNull(ref this.g_pRenderParticlesGS);
+            DXUtils.DisposeAndNull(ref this.g_pRenderParticlesPS);
+            DXUtils.DisposeAndNull(ref this.g_pCalcCS);
+            DXUtils.DisposeAndNull(ref this.g_pParticleVertexLayout);
+            DXUtils.DisposeAndNull(ref this.g_pParticleBuffer);
             this.ReleaseParticlePosVeloBuffers();
-            D3D11Utils.DisposeAndNull(ref this.g_pcbGS);
-            D3D11Utils.DisposeAndNull(ref this.g_pcbCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticleTexRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pSampleStateLinear);
-            D3D11Utils.DisposeAndNull(ref this.g_pBlendingStateParticle);
-            D3D11Utils.DisposeAndNull(ref this.g_pDepthStencilState);
+            DXUtils.DisposeAndNull(ref this.g_pcbGS);
+            DXUtils.DisposeAndNull(ref this.g_pcbCS);
+            DXUtils.DisposeAndNull(ref this.g_pParticleTexRV);
+            DXUtils.DisposeAndNull(ref this.g_pSampleStateLinear);
+            DXUtils.DisposeAndNull(ref this.g_pBlendingStateParticle);
+            DXUtils.DisposeAndNull(ref this.g_pDepthStencilState);
         }
 
         private void CreateParticleBuffer()
@@ -273,12 +274,12 @@ namespace NBodyGravityCS11
 
         private void ReleaseParticlePosVeloBuffers()
         {
-            D3D11Utils.DisposeAndNull(ref this.g_pParticlePosVelo0);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticlePosVelo1);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticlePosVeloRV0);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticlePosVeloRV1);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticlePosVeloUAV0);
-            D3D11Utils.DisposeAndNull(ref this.g_pParticlePosVeloUAV1);
+            DXUtils.DisposeAndNull(ref this.g_pParticlePosVelo0);
+            DXUtils.DisposeAndNull(ref this.g_pParticlePosVelo1);
+            DXUtils.DisposeAndNull(ref this.g_pParticlePosVeloRV0);
+            DXUtils.DisposeAndNull(ref this.g_pParticlePosVeloRV1);
+            DXUtils.DisposeAndNull(ref this.g_pParticlePosVeloUAV0);
+            DXUtils.DisposeAndNull(ref this.g_pParticlePosVeloUAV1);
         }
 
         private static void LoadParticles(Random rand, Particle[] pParticles, int startIndex, XMFloat3 center, XMFloat4 velocity, float spread, int numParticles)
@@ -382,8 +383,8 @@ namespace NBodyGravityCS11
         {
             var context = this.deviceResources.D3DContext;
 
-            context.OutputMergerGetBlendState(out D3D11BlendState pBlendState0, out float[] BlendFactor0, out uint SampleMask0);
-            context.OutputMergerGetDepthStencilState(out D3D11DepthStencilState pDepthStencilState0, out uint StencilRef0);
+            D3D11BlendState pBlendState0 = context.OutputMergerGetBlendState(out float[] BlendFactor0, out uint SampleMask0);
+            D3D11DepthStencilState pDepthStencilState0 = context.OutputMergerGetDepthStencilState(out uint StencilRef0);
 
             context.VertexShaderSetShader(this.g_pRenderParticlesVS, null);
             context.GeometryShaderSetShader(this.g_pRenderParticlesGS, null);
@@ -429,8 +430,8 @@ namespace NBodyGravityCS11
             context.OutputMergerSetBlendState(pBlendState0, BlendFactor0, SampleMask0);
             context.OutputMergerSetDepthStencilState(pDepthStencilState0, StencilRef0);
 
-            D3D11Utils.DisposeAndNull(ref pBlendState0);
-            D3D11Utils.DisposeAndNull(ref pDepthStencilState0);
+            DXUtils.DisposeAndNull(ref pBlendState0);
+            DXUtils.DisposeAndNull(ref pDepthStencilState0);
         }
 
         private static void Swap<T>(ref T x, ref T y)

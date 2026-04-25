@@ -6,6 +6,7 @@
 //        and below for how to change this type
 
 using JeremyAnsel.DirectX.D3D11;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.GameWindow;
 using System;
@@ -67,13 +68,13 @@ namespace AdaptiveTessellationCS40
 
         public void ReleaseDeviceDependentResources()
         {
-            D3D11Utils.DisposeAndNull(ref this.m_pAuxBuf);
-            D3D11Utils.DisposeAndNull(ref this.m_pAuxBufRV);
-            D3D11Utils.DisposeAndNull(ref this.m_pAuxBufUAV);
+            DXUtils.DisposeAndNull(ref this.m_pAuxBuf);
+            DXUtils.DisposeAndNull(ref this.m_pAuxBufRV);
+            DXUtils.DisposeAndNull(ref this.m_pAuxBufUAV);
 
-            D3D11Utils.DisposeAndNull(ref this.m_pScanCS);
-            D3D11Utils.DisposeAndNull(ref this.m_pScan2CS);
-            D3D11Utils.DisposeAndNull(ref this.m_pScan3CS);
+            DXUtils.DisposeAndNull(ref this.m_pScanCS);
+            DXUtils.DisposeAndNull(ref this.m_pScan2CS);
+            DXUtils.DisposeAndNull(ref this.m_pScan3CS);
         }
 
         // Both scan input and scanned output are in the buffer resource referred by p0SRV and p0UAV.
@@ -120,7 +121,7 @@ namespace AdaptiveTessellationCS40
             // Unbind resources for CS
             d3dImmediateContext.ComputeShaderSetUnorderedAccessViews(0, new D3D11UnorderedAccessView[] { null }, new[] { 0u });
             d3dImmediateContext.ComputeShaderSetShaderResources(0, new D3D11ShaderResourceView[] { null, null });
-            d3dImmediateContext.ComputeShaderSetConstantBuffers(0, new D3D11Buffer[] { });
+            //d3dImmediateContext.ComputeShaderSetConstantBuffers(0, new D3D11Buffer[] { });
         }
     }
 }

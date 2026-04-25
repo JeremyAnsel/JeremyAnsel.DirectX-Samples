@@ -4,6 +4,7 @@
 
 using JeremyAnsel.DirectX.D3D11;
 using JeremyAnsel.DirectX.Dds;
+using JeremyAnsel.DirectX.DXCommon;
 using JeremyAnsel.DirectX.Dxgi;
 using JeremyAnsel.DirectX.DXMath;
 using JeremyAnsel.DirectX.GameWindow;
@@ -13,7 +14,7 @@ using System.Runtime.InteropServices;
 
 namespace HDRToneMappingCS11
 {
-    class MainGameComponent : IGameComponent
+    unsafe class MainGameComponent : IGameComponent
     {
         // Number of stages in the 3x3 down-scaling for post-processing in PS
         private const int NumToneMapTextures = 5;
@@ -288,30 +289,30 @@ namespace HDRToneMappingCS11
         {
             this.g_Skybox.ReleaseDeviceDependentResources();
 
-            D3D11Utils.DisposeAndNull(ref this.g_pFinalPassPS);
-            D3D11Utils.DisposeAndNull(ref this.g_pFinalPassForCPUReductionPS);
-            D3D11Utils.DisposeAndNull(ref this.g_pReduceTo1DCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pReduceToSingleCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pBrightPassAndHorizFilterCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pVertFilterCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pHorizFilterCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pDownScale2x2LumPS);
-            D3D11Utils.DisposeAndNull(ref this.g_pDownScale3x3PS);
-            D3D11Utils.DisposeAndNull(ref this.g_pOldFinalPassPS);
-            D3D11Utils.DisposeAndNull(ref this.g_pDownScale3x3BrightPassPS);
-            D3D11Utils.DisposeAndNull(ref this.g_pBloomPS);
-            D3D11Utils.DisposeAndNull(ref this.g_pDumpBufferPS);
+            DXUtils.DisposeAndNull(ref this.g_pFinalPassPS);
+            DXUtils.DisposeAndNull(ref this.g_pFinalPassForCPUReductionPS);
+            DXUtils.DisposeAndNull(ref this.g_pReduceTo1DCS);
+            DXUtils.DisposeAndNull(ref this.g_pReduceToSingleCS);
+            DXUtils.DisposeAndNull(ref this.g_pBrightPassAndHorizFilterCS);
+            DXUtils.DisposeAndNull(ref this.g_pVertFilterCS);
+            DXUtils.DisposeAndNull(ref this.g_pHorizFilterCS);
+            DXUtils.DisposeAndNull(ref this.g_pDownScale2x2LumPS);
+            DXUtils.DisposeAndNull(ref this.g_pDownScale3x3PS);
+            DXUtils.DisposeAndNull(ref this.g_pOldFinalPassPS);
+            DXUtils.DisposeAndNull(ref this.g_pDownScale3x3BrightPassPS);
+            DXUtils.DisposeAndNull(ref this.g_pBloomPS);
+            DXUtils.DisposeAndNull(ref this.g_pDumpBufferPS);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pcbCS);
-            D3D11Utils.DisposeAndNull(ref this.g_pcbBloom);
-            D3D11Utils.DisposeAndNull(ref this.g_pcbFilterCS);
+            DXUtils.DisposeAndNull(ref this.g_pcbCS);
+            DXUtils.DisposeAndNull(ref this.g_pcbBloom);
+            DXUtils.DisposeAndNull(ref this.g_pcbFilterCS);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pSampleStateLinear);
-            D3D11Utils.DisposeAndNull(ref this.g_pSampleStatePoint);
+            DXUtils.DisposeAndNull(ref this.g_pSampleStateLinear);
+            DXUtils.DisposeAndNull(ref this.g_pSampleStatePoint);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pScreenQuadVB);
-            D3D11Utils.DisposeAndNull(ref this.g_pQuadVS);
-            D3D11Utils.DisposeAndNull(ref this.g_pQuadLayout);
+            DXUtils.DisposeAndNull(ref this.g_pScreenQuadVB);
+            DXUtils.DisposeAndNull(ref this.g_pQuadVS);
+            DXUtils.DisposeAndNull(ref this.g_pQuadLayout);
         }
 
         public void CreateWindowSizeDependentResources()
@@ -573,54 +574,54 @@ namespace HDRToneMappingCS11
         {
             this.g_Skybox.ReleaseWindowSizeDependentResources();
 
-            D3D11Utils.DisposeAndNull(ref this.g_pTexRender);
-            D3D11Utils.DisposeAndNull(ref this.g_pTexRenderMS);
-            D3D11Utils.DisposeAndNull(ref this.g_pMSDS);
-            D3D11Utils.DisposeAndNull(ref this.g_pTexBlurred);
-            D3D11Utils.DisposeAndNull(ref this.g_pTexRenderRTV);
-            D3D11Utils.DisposeAndNull(ref this.g_pMSRTV);
-            D3D11Utils.DisposeAndNull(ref this.g_pMSDSV);
-            D3D11Utils.DisposeAndNull(ref this.g_pTexBlurredRTV);
-            D3D11Utils.DisposeAndNull(ref this.g_pTexRenderRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pTexBlurredRV);
+            DXUtils.DisposeAndNull(ref this.g_pTexRender);
+            DXUtils.DisposeAndNull(ref this.g_pTexRenderMS);
+            DXUtils.DisposeAndNull(ref this.g_pMSDS);
+            DXUtils.DisposeAndNull(ref this.g_pTexBlurred);
+            DXUtils.DisposeAndNull(ref this.g_pTexRenderRTV);
+            DXUtils.DisposeAndNull(ref this.g_pMSRTV);
+            DXUtils.DisposeAndNull(ref this.g_pMSDSV);
+            DXUtils.DisposeAndNull(ref this.g_pTexBlurredRTV);
+            DXUtils.DisposeAndNull(ref this.g_pTexRenderRV);
+            DXUtils.DisposeAndNull(ref this.g_pTexBlurredRV);
 
-            D3D11Utils.DisposeAndNull(ref this.g_pBufferReduction0);
-            D3D11Utils.DisposeAndNull(ref this.g_pBufferReduction1);
-            D3D11Utils.DisposeAndNull(ref this.g_pBufferBlur0);
-            D3D11Utils.DisposeAndNull(ref this.g_pBufferBlur1);
-            D3D11Utils.DisposeAndNull(ref this.g_pBufferCPURead);
-            D3D11Utils.DisposeAndNull(ref this.g_pReductionUAView0);
-            D3D11Utils.DisposeAndNull(ref this.g_pReductionUAView1);
-            D3D11Utils.DisposeAndNull(ref this.g_pBlurUAView0);
-            D3D11Utils.DisposeAndNull(ref this.g_pBlurUAView1);
-            D3D11Utils.DisposeAndNull(ref this.g_pReductionRV0);
-            D3D11Utils.DisposeAndNull(ref this.g_pReductionRV1);
-            D3D11Utils.DisposeAndNull(ref this.g_pBlurRV0);
-            D3D11Utils.DisposeAndNull(ref this.g_pBlurRV1);
+            DXUtils.DisposeAndNull(ref this.g_pBufferReduction0);
+            DXUtils.DisposeAndNull(ref this.g_pBufferReduction1);
+            DXUtils.DisposeAndNull(ref this.g_pBufferBlur0);
+            DXUtils.DisposeAndNull(ref this.g_pBufferBlur1);
+            DXUtils.DisposeAndNull(ref this.g_pBufferCPURead);
+            DXUtils.DisposeAndNull(ref this.g_pReductionUAView0);
+            DXUtils.DisposeAndNull(ref this.g_pReductionUAView1);
+            DXUtils.DisposeAndNull(ref this.g_pBlurUAView0);
+            DXUtils.DisposeAndNull(ref this.g_pBlurUAView1);
+            DXUtils.DisposeAndNull(ref this.g_pReductionRV0);
+            DXUtils.DisposeAndNull(ref this.g_pReductionRV1);
+            DXUtils.DisposeAndNull(ref this.g_pBlurRV0);
+            DXUtils.DisposeAndNull(ref this.g_pBlurRV1);
 
             for (int i = 0; i < NumToneMapTextures; i++)
             {
                 // Tone mapping calculation textures
-                D3D11Utils.DisposeAndNull(ref this.g_apTexToneMap[i]);
-                D3D11Utils.DisposeAndNull(ref this.g_apTexToneMapRV[i]);
-                D3D11Utils.DisposeAndNull(ref this.g_apTexToneMapRTV[i]);
+                DXUtils.DisposeAndNull(ref this.g_apTexToneMap[i]);
+                DXUtils.DisposeAndNull(ref this.g_apTexToneMapRV[i]);
+                DXUtils.DisposeAndNull(ref this.g_apTexToneMapRTV[i]);
             }
 
             for (int i = 0; i < NumBloomTextures; i++)
             {
                 // Blooming effect intermediate texture
-                D3D11Utils.DisposeAndNull(ref this.g_apTexBloom[i]);
-                D3D11Utils.DisposeAndNull(ref this.g_apTexBloomRV[i]);
-                D3D11Utils.DisposeAndNull(ref this.g_apTexBloomRTV[i]);
+                DXUtils.DisposeAndNull(ref this.g_apTexBloom[i]);
+                DXUtils.DisposeAndNull(ref this.g_apTexBloomRV[i]);
+                DXUtils.DisposeAndNull(ref this.g_apTexBloomRTV[i]);
 
-                D3D11Utils.DisposeAndNull(ref this.g_apBufBloom[i]);
-                D3D11Utils.DisposeAndNull(ref this.g_apBufBloomRV[i]);
-                D3D11Utils.DisposeAndNull(ref this.g_apBufBloomUAV[i]);
+                DXUtils.DisposeAndNull(ref this.g_apBufBloom[i]);
+                DXUtils.DisposeAndNull(ref this.g_apBufBloomRV[i]);
+                DXUtils.DisposeAndNull(ref this.g_apBufBloomUAV[i]);
             }
 
-            D3D11Utils.DisposeAndNull(ref this.g_pTexBrightPassRV);
-            D3D11Utils.DisposeAndNull(ref this.g_pTexBrightPassRTV);
-            D3D11Utils.DisposeAndNull(ref this.g_pTexBrightPass);
+            DXUtils.DisposeAndNull(ref this.g_pTexBrightPassRV);
+            DXUtils.DisposeAndNull(ref this.g_pTexBrightPassRTV);
+            DXUtils.DisposeAndNull(ref this.g_pTexBrightPass);
         }
 
         public void Update(ITimer timer)
@@ -924,7 +925,7 @@ namespace HDRToneMappingCS11
             return g;
         }
 
-        private static void GetSampleOffsets_Bloom_D3D11(uint dwD3DTexSize, float[] afTexCoordOffset, XMVector[] avColorWeight, float fDeviation, float fMultiplier)
+        private static void GetSampleOffsets_Bloom_D3D11(uint dwD3DTexSize, float* afTexCoordOffset, XMVector* avColorWeight, float fDeviation, float fMultiplier)
         {
             int i = 0;
             float tu = 1.0f / dwD3DTexSize;
@@ -952,7 +953,7 @@ namespace HDRToneMappingCS11
             }
         }
 
-        private static void GetSampleWeights_D3D11(XMVector[] avColorWeight, float fDeviation, float fMultiplier)
+        private static void GetSampleWeights_D3D11(XMVector* avColorWeight, float fDeviation, float fMultiplier)
         {
             // Fill the center texel
             float weight = 1.0f * GaussianDistribution(0, 0, fDeviation);
@@ -988,19 +989,15 @@ namespace HDRToneMappingCS11
             int i = 0;
 
             // Horizontal Blur
-            BloomPSConstantBufferData pcbBloom = new()
-            {
-                avSampleOffsets = new XMVector[15],
-                avSampleWeights = new XMVector[15]
-            };
+            BloomPSConstantBufferData pcbBloom = new();
 
-            float[] afSampleOffsets = new float[15];
+            float* afSampleOffsets = stackalloc float[15];
 
-            GetSampleOffsets_Bloom_D3D11(dwWidth, afSampleOffsets, pcbBloom.avSampleWeights, 3.0f, 1.25f);
+            GetSampleOffsets_Bloom_D3D11(dwWidth, afSampleOffsets, (XMVector*)pcbBloom.avSampleWeights, 3.0f, 1.25f);
 
             for (i = 0; i < 15; i++)
             {
-                pcbBloom.avSampleOffsets[i] = new(afSampleOffsets[i], 0.0f, 0.0f, 0.0f);
+                ((XMVector*)pcbBloom.avSampleOffsets)[i] = new XMVector(afSampleOffsets[i], 0.0f, 0.0f, 0.0f);
             }
 
             context.UpdateSubresource(this.g_pcbBloom, 0, null, pcbBloom, 0, 0);
@@ -1014,10 +1011,10 @@ namespace HDRToneMappingCS11
             context.PixelShaderSetShaderResources(0, new D3D11ShaderResourceView[] { null, null, null, null });
 
             // Vertical Blur
-            GetSampleOffsets_Bloom_D3D11(dwHeight, afSampleOffsets, pcbBloom.avSampleWeights, 3.0f, 1.25f);
+            GetSampleOffsets_Bloom_D3D11(dwHeight, afSampleOffsets, (XMVector*)pcbBloom.avSampleWeights, 3.0f, 1.25f);
             for (i = 0; i < 15; i++)
             {
-                pcbBloom.avSampleOffsets[i] = new(0.0f, afSampleOffsets[i], 0.0f, 0.0f);
+                ((XMVector*)pcbBloom.avSampleOffsets)[i] = new XMVector(0.0f, afSampleOffsets[i], 0.0f, 0.0f);
             }
 
             context.UpdateSubresource(this.g_pcbBloom, 0, null, pcbBloom, 0, 0);
@@ -1072,7 +1069,7 @@ namespace HDRToneMappingCS11
             uint X,
             uint Y,
             uint Z)
-            where T : struct
+            where T : unmanaged
         {
             var context = this.deviceResources.D3DContext;
 
@@ -1080,7 +1077,7 @@ namespace HDRToneMappingCS11
             context.ComputeShaderSetShaderResources(0, pShaderResourceViews);
             context.ComputeShaderSetUnorderedAccessViews(0, new[] { pUnorderedAccessView }, new uint[] { 0 });
 
-            if (pCBCS)
+            if (pCBCS is not null)
             {
                 context.UpdateSubresource(pCBCS, 0, null, pCSData, 0, 0);
                 context.ComputeShaderSetConstantBuffers(0, new[] { pCBCS });
@@ -1215,12 +1212,9 @@ namespace HDRToneMappingCS11
             var context = this.deviceResources.D3DContext;
 
             // Bright pass and horizontal blur
-            FilterHorizontalConstantBufferData cbFilterHorizontal = new()
-            {
-                avSampleWeights = new XMVector[15]
-            };
+            FilterHorizontalConstantBufferData cbFilterHorizontal = new();
 
-            GetSampleWeights_D3D11(cbFilterHorizontal.avSampleWeights, 3.0f, 1.25f);
+            GetSampleWeights_D3D11((XMVector*)cbFilterHorizontal.avSampleWeights, 3.0f, 1.25f);
 
             cbFilterHorizontal.outputwidth = pBackBufferDesc.Width / 8;
 #if CS_FULL_PIXEL_REDUCITON
@@ -1240,10 +1234,7 @@ namespace HDRToneMappingCS11
                 pBackBufferDesc.Height / 8, 1);
 
             // Vertical blur
-            FilterVerticalConstantBufferData cbFilterVertical = new()
-            {
-                avSampleWeights = new XMVector[15]
-            };
+            FilterVerticalConstantBufferData cbFilterVertical = new();
 
             cbFilterVertical.outputsize = new(pBackBufferDesc.Width / 8, pBackBufferDesc.Height / 8);
             cbFilterVertical.inputsize = new(pBackBufferDesc.Width / 8, pBackBufferDesc.Height / 8);
@@ -1265,12 +1256,9 @@ namespace HDRToneMappingCS11
         /// <param name="pBackBufferDesc"></param>
         private void FullScrBlurCS(in D3D11Texture2DDesc pBackBufferDesc)
         {
-            FilterVerticalConstantBufferData cbFilterVertical = new()
-            {
-                avSampleWeights = new XMVector[15]
-            };
+            FilterVerticalConstantBufferData cbFilterVertical = new();
 
-            GetSampleWeights_D3D11(cbFilterVertical.avSampleWeights, 3.0f, 1.25f);
+            GetSampleWeights_D3D11((XMVector*)cbFilterVertical.avSampleWeights, 3.0f, 1.25f);
 
             cbFilterVertical.outputsize = new(pBackBufferDesc.Width, pBackBufferDesc.Height);
             cbFilterVertical.inputsize = new(pBackBufferDesc.Width, pBackBufferDesc.Height);
